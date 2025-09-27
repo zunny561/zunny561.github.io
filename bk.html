@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berpikir Komputasional - Informatika Kelas 12</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .active-tab {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .quiz-correct {
+            background-color: #10b981;
+            color: white;
+        }
+        .quiz-incorrect {
+            background-color: #ef4444;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-6 shadow-lg">
+        <div class="container mx-auto px-6">
+            <h1 class="text-3xl font-bold text-center">🧠 Berpikir Komputasional</h1>
+            <p class="text-center mt-2 text-blue-100">Mata Pelajaran Informatika - Fase F Kelas 12 SMA</p>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="bg-white shadow-md sticky top-0 z-10">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-wrap justify-center space-x-2 py-4">
+                <button onclick="showTab('pengantar')" id="tab-pengantar" class="tab-btn px-4 py-2 rounded-lg font-medium transition-all duration-300 active-tab">
+                    📚 Pengantar
+                </button>
+                <button onclick="showTab('dekomposisi')" id="tab-dekomposisi" class="tab-btn px-4 py-2 rounded-lg font-medium transition-all duration-300 bg-gray-100 hover:bg-gray-200">
+                    🔧 Dekomposisi
+                </button>
+                <button onclick="showTab('abstraksi')" id="tab-abstraksi" class="tab-btn px-4 py-2 rounded-lg font-medium transition-all duration-300 bg-gray-100 hover:bg-gray-200">
+                    🎯 Abstraksi
+                </button>
+                <button onclick="showTab('pola')" id="tab-pola" class="tab-btn px-4 py-2 rounded-lg font-medium transition-all duration-300 bg-gray-100 hover:bg-gray-200">
+                    🔍 Pengenalan Pola
+                </button>
+                <button onclick="showTab('algoritma')" id="tab-algoritma" class="tab-btn px-4 py-2 rounded-lg font-medium transition-all duration-300 bg-gray-100 hover:bg-gray-200">
+                    ⚡ Algoritma
+                </button>
+                <button onclick="showTab('latihan')" id="tab-latihan" class="tab-btn px-4 py-2 rounded-lg font-medium transition-all duration-300 bg-gray-100 hover:bg-gray-200">
+                    📝 Latihan Soal
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content Container -->
+    <div class="container mx-auto px-6 py-8">
+        
+        <!-- Tab: Pengantar -->
+        <div id="content-pengantar" class="tab-content fade-in">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <span class="bg-blue-100 p-2 rounded-lg mr-3">📚</span>
+                    Pengantar Berpikir Komputasional
+                </h2>
+                
+                <div class="prose max-w-none">
+                    <p class="text-gray-700 text-lg leading-relaxed mb-6">
+                        Berpikir komputasional adalah proses pemecahan masalah yang menggunakan konsep-konsep dasar ilmu komputer. 
+                        Ini bukan hanya tentang programming, tetapi cara berpikir sistematis yang dapat diterapkan dalam berbagai bidang kehidupan.
+                    </p>
+                    
+                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border-l-4 border-blue-500 mb-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">🎯 Tujuan Pembelajaran</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start"><span class="text-green-500 mr-2">✓</span>Memahami konsep dasar berpikir komputasional</li>
+                            <li class="flex items-start"><span class="text-green-500 mr-2">✓</span>Menguasai empat pilar berpikir komputasional</li>
+                            <li class="flex items-start"><span class="text-green-500 mr-2">✓</span>Menerapkan berpikir komputasional dalam kehidupan sehari-hari</li>
+                            <li class="flex items-start"><span class="text-green-500 mr-2">✓</span>Mengembangkan kemampuan pemecahan masalah sistematis</li>
+                        </ul>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-yellow-50 p-6 rounded-lg border border-yellow-200">
+                            <h4 class="font-semibold text-gray-800 mb-3 flex items-center">
+                                <span class="text-2xl mr-2">🌟</span>Mengapa Penting?
+                            </h4>
+                            <ul class="text-gray-700 space-y-2">
+                                <li>• Meningkatkan kemampuan problem solving</li>
+                                <li>• Mengembangkan pemikiran logis dan sistematis</li>
+                                <li>• Mempersiapkan era digital dan AI</li>
+                                <li>• Dapat diterapkan di berbagai bidang</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-green-50 p-6 rounded-lg border border-green-200">
+                            <h4 class="font-semibold text-gray-800 mb-3 flex items-center">
+                                <span class="text-2xl mr-2">🚀</span>Aplikasi Nyata
+                            </h4>
+                            <ul class="text-gray-700 space-y-2">
+                                <li>• Perencanaan perjalanan wisata</li>
+                                <li>• Mengatur jadwal harian</li>
+                                <li>• Memasak dengan resep</li>
+                                <li>• Menyelesaikan tugas sekolah</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4 Pilar Overview -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow duration-300">
+                    <div class="text-4xl mb-3">🔧</div>
+                    <h3 class="font-semibold text-gray-800 mb-2">Dekomposisi</h3>
+                    <p class="text-gray-600 text-sm">Memecah masalah besar menjadi bagian-bagian kecil</p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow duration-300">
+                    <div class="text-4xl mb-3">🎯</div>
+                    <h3 class="font-semibold text-gray-800 mb-2">Abstraksi</h3>
+                    <p class="text-gray-600 text-sm">Fokus pada hal-hal penting, abaikan detail yang tidak relevan</p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow duration-300">
+                    <div class="text-4xl mb-3">🔍</div>
+                    <h3 class="font-semibold text-gray-800 mb-2">Pengenalan Pola</h3>
+                    <p class="text-gray-600 text-sm">Mencari kesamaan dan pola dalam masalah</p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow duration-300">
+                    <div class="text-4xl mb-3">⚡</div>
+                    <h3 class="font-semibold text-gray-800 mb-2">Algoritma</h3>
+                    <p class="text-gray-600 text-sm">Membuat langkah-langkah sistematis untuk menyelesaikan masalah</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Dekomposisi -->
+        <div id="content-dekomposisi" class="tab-content hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <span class="bg-orange-100 p-2 rounded-lg mr-3">🔧</span>
+                    Dekomposisi (Decomposition)
+                </h2>
+                
+                <div class="mb-8">
+                    <div class="bg-orange-50 p-6 rounded-lg border-l-4 border-orange-500 mb-6">
+                        <h3 class="text-xl font-semibold mb-3">📖 Definisi</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Dekomposisi adalah proses memecah masalah yang kompleks menjadi bagian-bagian yang lebih kecil dan mudah dikelola. 
+                            Seperti memecah puzzle besar menjadi potongan-potongan kecil yang bisa diselesaikan satu per satu.
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-lg font-semibold mb-4 text-gray-800">🎯 Langkah-langkah Dekomposisi:</h4>
+                            <ol class="space-y-3">
+                                <li class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 mt-0.5">1</span>
+                                    <span class="text-gray-700">Identifikasi masalah utama</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 mt-0.5">2</span>
+                                    <span class="text-gray-700">Pecah menjadi sub-masalah</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 mt-0.5">3</span>
+                                    <span class="text-gray-700">Pecah lagi jika masih kompleks</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 mt-0.5">4</span>
+                                    <span class="text-gray-700">Selesaikan satu per satu</span>
+                                </li>
+                            </ol>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <h4 class="text-lg font-semibold mb-4 text-gray-800">💡 Contoh: Membuat Nasi Goreng</h4>
+                            <div class="space-y-2 text-sm">
+                                <div class="bg-white p-3 rounded border-l-4 border-blue-400">
+                                    <strong>Masalah Utama:</strong> Membuat nasi goreng
+                                </div>
+                                <div class="bg-white p-3 rounded border-l-4 border-green-400">
+                                    <strong>Sub-masalah:</strong>
+                                    <ul class="mt-2 space-y-1 ml-4">
+                                        <li>• Persiapan bahan</li>
+                                        <li>• Persiapan bumbu</li>
+                                        <li>• Proses memasak</li>
+                                        <li>• Penyajian</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contoh Interaktif -->
+                <div class="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-lg">
+                    <h4 class="text-lg font-semibold mb-4 text-gray-800">🎮 Latihan Interaktif: Dekomposisi Masalah</h4>
+                    <div class="mb-4">
+                        <p class="text-gray-700 mb-3"><strong>Masalah:</strong> Merencanakan liburan ke Bali selama 5 hari</p>
+                        <button onclick="showDecomposition()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            Tampilkan Dekomposisi
+                        </button>
+                    </div>
+                    
+                    <div id="decomposition-result" class="hidden mt-4">
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div class="bg-white p-4 rounded-lg shadow">
+                                <h5 class="font-semibold text-blue-600 mb-2">📋 Perencanaan</h5>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Tentukan budget</li>
+                                    <li>• Pilih tanggal</li>
+                                    <li>• Riset destinasi</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow">
+                                <h5 class="font-semibold text-green-600 mb-2">🎫 Booking</h5>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Pesan tiket pesawat</li>
+                                    <li>• Book hotel</li>
+                                    <li>• Sewa transportasi</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow">
+                                <h5 class="font-semibold text-purple-600 mb-2">🎒 Persiapan</h5>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Packing barang</li>
+                                    <li>• Siapkan dokumen</li>
+                                    <li>• Buat itinerary harian</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Abstraksi -->
+        <div id="content-abstraksi" class="tab-content hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <span class="bg-purple-100 p-2 rounded-lg mr-3">🎯</span>
+                    Abstraksi (Abstraction)
+                </h2>
+                
+                <div class="mb-8">
+                    <div class="bg-purple-50 p-6 rounded-lg border-l-4 border-purple-500 mb-6">
+                        <h3 class="text-xl font-semibold mb-3">📖 Definisi</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Abstraksi adalah proses menyaring informasi untuk fokus pada aspek-aspek penting sambil mengabaikan detail yang tidak relevan. 
+                            Seperti peta yang hanya menunjukkan jalan utama tanpa menggambar setiap pohon di sepanjang jalan.
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8 mb-8">
+                        <div>
+                            <h4 class="text-lg font-semibold mb-4 text-gray-800">🔍 Jenis-jenis Abstraksi:</h4>
+                            <div class="space-y-4">
+                                <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                                    <h5 class="font-semibold text-blue-700">Data Abstraction</h5>
+                                    <p class="text-sm text-gray-600 mt-1">Menyederhanakan representasi data</p>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+                                    <h5 class="font-semibold text-green-700">Procedural Abstraction</h5>
+                                    <p class="text-sm text-gray-600 mt-1">Menyederhanakan proses atau langkah</p>
+                                </div>
+                                <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                                    <h5 class="font-semibold text-yellow-700">Functional Abstraction</h5>
+                                    <p class="text-sm text-gray-600 mt-1">Fokus pada fungsi, bukan implementasi</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <h4 class="text-lg font-semibold mb-4 text-gray-800">💡 Contoh: Menggunakan ATM</h4>
+                            <div class="space-y-3">
+                                <div class="bg-white p-3 rounded border-l-4 border-red-400">
+                                    <strong class="text-red-600">Yang Kita Lihat:</strong>
+                                    <p class="text-sm mt-1">Masukkan kartu → PIN → Pilih menu → Ambil uang</p>
+                                </div>
+                                <div class="bg-white p-3 rounded border-l-4 border-gray-400">
+                                    <strong class="text-gray-600">Yang Tersembunyi:</strong>
+                                    <p class="text-sm mt-1">Koneksi database, enkripsi, validasi bank, protokol keamanan, dll.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contoh Interaktif -->
+                    <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-lg">
+                        <h4 class="text-lg font-semibold mb-4 text-gray-800">🎮 Latihan: Identifikasi Abstraksi</h4>
+                        <div class="mb-4">
+                            <p class="text-gray-700 mb-3"><strong>Skenario:</strong> Memesan makanan melalui aplikasi online</p>
+                            <button onclick="showAbstraction()" class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg transition-colors">
+                                Analisis Abstraksi
+                            </button>
+                        </div>
+                        
+                        <div id="abstraction-result" class="hidden mt-4">
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-white p-4 rounded-lg shadow">
+                                    <h5 class="font-semibold text-green-600 mb-2">✅ Yang Penting (Abstraksi)</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• Pilih restoran</li>
+                                        <li>• Pilih menu</li>
+                                        <li>• Masukkan alamat</li>
+                                        <li>• Bayar</li>
+                                        <li>• Tunggu pengiriman</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg shadow">
+                                    <h5 class="font-semibold text-gray-600 mb-2">❌ Detail yang Diabaikan</h5>
+                                    <ul class="text-sm space-y-1">
+                                        <li>• Algoritma pencarian restoran</li>
+                                        <li>• Sistem pembayaran digital</li>
+                                        <li>• GPS tracking driver</li>
+                                        <li>• Database management</li>
+                                        <li>• Server infrastructure</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Pengenalan Pola -->
+        <div id="content-pola" class="tab-content hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <span class="bg-green-100 p-2 rounded-lg mr-3">🔍</span>
+                    Pengenalan Pola (Pattern Recognition)
+                </h2>
+                
+                <div class="mb-8">
+                    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-500 mb-6">
+                        <h3 class="text-xl font-semibold mb-3">📖 Definisi</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Pengenalan pola adalah kemampuan untuk mengidentifikasi kesamaan, tren, atau keteraturan dalam data atau situasi. 
+                            Ini membantu kita menggunakan solusi yang sudah ada untuk masalah serupa.
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
+                            <h4 class="font-semibold text-blue-700 mb-3">🔄 Pola Berulang</h4>
+                            <p class="text-sm text-gray-600">Kejadian yang terjadi secara berulang dengan interval tertentu</p>
+                            <div class="mt-3 text-xs bg-white p-2 rounded">
+                                <strong>Contoh:</strong> Jadwal bus, siklus cuaca, rutinitas harian
+                            </div>
+                        </div>
+                        
+                        <div class="bg-yellow-50 p-6 rounded-lg border border-yellow-200">
+                            <h4 class="font-semibold text-yellow-700 mb-3">📈 Pola Tren</h4>
+                            <p class="text-sm text-gray-600">Perubahan yang menunjukkan arah atau kecenderungan tertentu</p>
+                            <div class="mt-3 text-xs bg-white p-2 rounded">
+                                <strong>Contoh:</strong> Kenaikan harga, pertumbuhan populasi, tren fashion
+                            </div>
+                        </div>
+                        
+                        <div class="bg-purple-50 p-6 rounded-lg border border-purple-200">
+                            <h4 class="font-semibold text-purple-700 mb-3">🎯 Pola Klasifikasi</h4>
+                            <p class="text-sm text-gray-600">Pengelompokan berdasarkan karakteristik yang sama</p>
+                            <div class="mt-3 text-xs bg-white p-2 rounded">
+                                <strong>Contoh:</strong> Jenis musik, kategori film, tipe kepribadian
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contoh Praktis -->
+                    <div class="bg-gradient-to-r from-green-50 to-blue-50 p-6 rounded-lg mb-6">
+                        <h4 class="text-lg font-semibold mb-4 text-gray-800">💡 Contoh Pengenalan Pola dalam Kehidupan</h4>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="space-y-4">
+                                <div class="bg-white p-4 rounded-lg shadow-sm">
+                                    <h5 class="font-semibold text-green-600 mb-2">🚗 Pola Lalu Lintas</h5>
+                                    <p class="text-sm text-gray-600">Mengenali jam sibuk untuk menghindari kemacetan</p>
+                                    <div class="mt-2 text-xs bg-gray-100 p-2 rounded">
+                                        <strong>Pola:</strong> Macet pagi (07:00-09:00), sore (17:00-19:00)
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white p-4 rounded-lg shadow-sm">
+                                    <h5 class="font-semibold text-blue-600 mb-2">📚 Pola Belajar</h5>
+                                    <p class="text-sm text-gray-600">Mengenali waktu produktif untuk belajar</p>
+                                    <div class="mt-2 text-xs bg-gray-100 p-2 rounded">
+                                        <strong>Pola:</strong> Konsentrasi tinggi pagi hari, menurun sore hari
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-4">
+                                <div class="bg-white p-4 rounded-lg shadow-sm">
+                                    <h5 class="font-semibold text-purple-600 mb-2">🛒 Pola Belanja</h5>
+                                    <p class="text-sm text-gray-600">Mengenali waktu diskon dan promo</p>
+                                    <div class="mt-2 text-xs bg-gray-100 p-2 rounded">
+                                        <strong>Pola:</strong> Diskon akhir bulan, flash sale tengah malam
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white p-4 rounded-lg shadow-sm">
+                                    <h5 class="font-semibold text-red-600 mb-2">🌤️ Pola Cuaca</h5>
+                                    <p class="text-sm text-gray-600">Mengenali pola musim untuk persiapan</p>
+                                    <div class="mt-2 text-xs bg-gray-100 p-2 rounded">
+                                        <strong>Pola:</strong> Hujan Nov-Mar, kemarau Apr-Okt
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Latihan Interaktif -->
+                    <div class="bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-lg">
+                        <h4 class="text-lg font-semibold mb-4 text-gray-800">🎮 Latihan: Temukan Pola</h4>
+                        <div class="mb-4">
+                            <p class="text-gray-700 mb-3"><strong>Deret Angka:</strong> 2, 4, 8, 16, ?, 64</p>
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <button onclick="checkPattern(24)" class="pattern-btn bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded text-sm transition-colors">24</button>
+                                <button onclick="checkPattern(32)" class="pattern-btn bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded text-sm transition-colors">32</button>
+                                <button onclick="checkPattern(30)" class="pattern-btn bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded text-sm transition-colors">30</button>
+                                <button onclick="checkPattern(28)" class="pattern-btn bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded text-sm transition-colors">28</button>
+                            </div>
+                            <div id="pattern-result" class="hidden mt-3 p-3 rounded-lg"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Algoritma -->
+        <div id="content-algoritma" class="tab-content hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <span class="bg-red-100 p-2 rounded-lg mr-3">⚡</span>
+                    Algoritma (Algorithm)
+                </h2>
+                
+                <div class="mb-8">
+                    <div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-500 mb-6">
+                        <h3 class="text-xl font-semibold mb-3">📖 Definisi</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Algoritma adalah serangkaian langkah-langkah sistematis dan logis untuk menyelesaikan masalah atau mencapai tujuan tertentu. 
+                            Seperti resep masakan yang memberikan instruksi step-by-step.
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8 mb-8">
+                        <div>
+                            <h4 class="text-lg font-semibold mb-4 text-gray-800">✅ Karakteristik Algoritma yang Baik:</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-start">
+                                    <span class="bg-green-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 mt-0.5">✓</span>
+                                    <div>
+                                        <strong class="text-gray-800">Jelas (Clear)</strong>
+                                        <p class="text-sm text-gray-600">Setiap langkah mudah dipahami</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="bg-green-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 mt-0.5">✓</span>
+                                    <div>
+                                        <strong class="text-gray-800">Terbatas (Finite)</strong>
+                                        <p class="text-sm text-gray-600">Memiliki titik awal dan akhir</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="bg-green-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 mt-0.5">✓</span>
+                                    <div>
+                                        <strong class="text-gray-800">Efektif (Effective)</strong>
+                                        <p class="text-sm text-gray-600">Menghasilkan output yang benar</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="bg-green-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 mt-0.5">✓</span>
+                                    <div>
+                                        <strong class="text-gray-800">Efisien (Efficient)</strong>
+                                        <p class="text-sm text-gray-600">Menggunakan sumber daya minimal</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <h4 class="text-lg font-semibold mb-4 text-gray-800">💡 Contoh: Algoritma Membuat Teh</h4>
+                            <ol class="space-y-2 text-sm">
+                                <li class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs mr-2 mt-0.5">1</span>
+                                    <span>Siapkan cangkir, teh celup, gula</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs mr-2 mt-0.5">2</span>
+                                    <span>Didihkan air 200ml</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs mr-2 mt-0.5">3</span>
+                                    <span>Tuang air panas ke cangkir</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs mr-2 mt-0.5">4</span>
+                                    <span>Masukkan teh celup, tunggu 3 menit</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs mr-2 mt-0.5">5</span>
+                                    <span>Angkat teh celup</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs mr-2 mt-0.5">6</span>
+                                    <span>Tambahkan gula sesuai selera</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs mr-2 mt-0.5">7</span>
+                                    <span>Aduk hingga rata</span>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Jenis Algoritma -->
+                    <div class="mb-8">
+                        <h4 class="text-lg font-semibold mb-4 text-gray-800">🔄 Jenis-jenis Struktur Algoritma:</h4>
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
+                                <h5 class="font-semibold text-blue-700 mb-3">📝 Sekuensial</h5>
+                                <p class="text-sm text-gray-600 mb-3">Langkah-langkah berurutan dari awal hingga akhir</p>
+                                <div class="bg-white p-3 rounded text-xs">
+                                    <strong>Contoh:</strong><br>
+                                    1. Bangun tidur<br>
+                                    2. Mandi<br>
+                                    3. Sarapan<br>
+                                    4. Berangkat sekolah
+                                </div>
+                            </div>
+                            
+                            <div class="bg-green-50 p-6 rounded-lg border border-green-200">
+                                <h5 class="font-semibold text-green-700 mb-3">🔀 Percabangan</h5>
+                                <p class="text-sm text-gray-600 mb-3">Ada pilihan berdasarkan kondisi tertentu</p>
+                                <div class="bg-white p-3 rounded text-xs">
+                                    <strong>Contoh:</strong><br>
+                                    Jika hujan → bawa payung<br>
+                                    Jika tidak hujan → tidak bawa payung
+                                </div>
+                            </div>
+                            
+                            <div class="bg-purple-50 p-6 rounded-lg border border-purple-200">
+                                <h5 class="font-semibold text-purple-700 mb-3">🔁 Perulangan</h5>
+                                <p class="text-sm text-gray-600 mb-3">Langkah yang diulang sampai kondisi terpenuhi</p>
+                                <div class="bg-white p-3 rounded text-xs">
+                                    <strong>Contoh:</strong><br>
+                                    Ulangi membaca sampai paham<br>
+                                    Latihan soal sampai bisa
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pseudocode Section -->
+                    <div class="mb-8">
+                        <h4 class="text-lg font-semibold mb-4 text-gray-800">📝 Pseudocode (Kode Semu)</h4>
+                        <div class="bg-indigo-50 p-6 rounded-lg border-l-4 border-indigo-500 mb-6">
+                            <h5 class="font-semibold text-indigo-700 mb-3">📖 Apa itu Pseudocode?</h5>
+                            <p class="text-gray-700 text-sm leading-relaxed">
+                                Pseudocode adalah cara penulisan algoritma menggunakan bahasa yang mirip dengan bahasa pemrograman, 
+                                tetapi menggunakan bahasa natural yang mudah dipahami. Ini adalah jembatan antara algoritma dalam bahasa sehari-hari 
+                                dengan kode pemrograman sesungguhnya.
+                            </p>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div class="bg-white p-6 rounded-lg shadow-md border">
+                                <h5 class="font-semibold text-gray-800 mb-3">✅ Aturan Penulisan Pseudocode:</h5>
+                                <ul class="text-sm space-y-2 text-gray-700">
+                                    <li class="flex items-start"><span class="text-green-500 mr-2">•</span>Gunakan kata kunci yang jelas (START, END, IF, WHILE, dll)</li>
+                                    <li class="flex items-start"><span class="text-green-500 mr-2">•</span>Tulis satu instruksi per baris</li>
+                                    <li class="flex items-start"><span class="text-green-500 mr-2">•</span>Gunakan indentasi untuk menunjukkan struktur</li>
+                                    <li class="flex items-start"><span class="text-green-500 mr-2">•</span>Hindari sintaks bahasa pemrograman spesifik</li>
+                                    <li class="flex items-start"><span class="text-green-500 mr-2">•</span>Fokus pada logika, bukan detail implementasi</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-white p-6 rounded-lg shadow-md border">
+                                <h5 class="font-semibold text-gray-800 mb-3">🔑 Kata Kunci Umum:</h5>
+                                <div class="text-sm space-y-2">
+                                    <div class="bg-blue-50 p-2 rounded"><strong>START/BEGIN:</strong> Mulai algoritma</div>
+                                    <div class="bg-blue-50 p-2 rounded"><strong>END:</strong> Akhir algoritma</div>
+                                    <div class="bg-green-50 p-2 rounded"><strong>INPUT:</strong> Menerima data</div>
+                                    <div class="bg-green-50 p-2 rounded"><strong>OUTPUT:</strong> Menampilkan hasil</div>
+                                    <div class="bg-yellow-50 p-2 rounded"><strong>IF-THEN-ELSE:</strong> Percabangan</div>
+                                    <div class="bg-purple-50 p-2 rounded"><strong>WHILE/FOR:</strong> Perulangan</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contoh Pseudocode -->
+                        <div class="bg-gradient-to-r from-indigo-50 to-blue-50 p-6 rounded-lg">
+                            <h5 class="font-semibold text-gray-800 mb-4">💡 Contoh Pseudocode: Menentukan Kelulusan Siswa</h5>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-white p-4 rounded-lg border">
+                                    <h6 class="font-semibold text-blue-600 mb-2">📝 Pseudocode:</h6>
+                                    <pre class="text-sm text-gray-700 bg-gray-50 p-3 rounded overflow-x-auto"><code>START
+INPUT nama_siswa
+INPUT nilai_matematika
+INPUT nilai_bahasa
+INPUT nilai_ipa
+
+rata_rata = (nilai_matematika + nilai_bahasa + nilai_ipa) / 3
+
+IF rata_rata >= 75 THEN
+    OUTPUT nama_siswa + " LULUS"
+    OUTPUT "Rata-rata: " + rata_rata
+ELSE
+    OUTPUT nama_siswa + " TIDAK LULUS"
+    OUTPUT "Rata-rata: " + rata_rata
+    OUTPUT "Perlu remedial"
+END IF
+
+END</code></pre>
+                                </div>
+                                
+                                <div class="bg-white p-4 rounded-lg border">
+                                    <h6 class="font-semibold text-green-600 mb-2">🎯 Penjelasan:</h6>
+                                    <ul class="text-sm space-y-2 text-gray-700">
+                                        <li><strong>Baris 1-5:</strong> Input data siswa dan nilai</li>
+                                        <li><strong>Baris 7:</strong> Hitung rata-rata</li>
+                                        <li><strong>Baris 9-15:</strong> Percabangan berdasarkan rata-rata</li>
+                                        <li><strong>Baris 10-12:</strong> Jika lulus (≥75)</li>
+                                        <li><strong>Baris 13-16:</strong> Jika tidak lulus (<75)</li>
+                                        <li><strong>Baris 18:</strong> Akhir program</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flowchart Section -->
+                    <div class="mb-8">
+                        <h4 class="text-lg font-semibold mb-4 text-gray-800">📊 Flowchart (Diagram Alir)</h4>
+                        <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-500 mb-6">
+                            <h5 class="font-semibold text-green-700 mb-3">📖 Apa itu Flowchart?</h5>
+                            <p class="text-gray-700 text-sm leading-relaxed">
+                                Flowchart adalah representasi visual dari algoritma menggunakan simbol-simbol geometri yang dihubungkan dengan garis alur. 
+                                Flowchart memudahkan pemahaman logika program dan alur eksekusi.
+                            </p>
+                        </div>
+
+                        <!-- Simbol Flowchart -->
+                        <div class="mb-6">
+                            <h5 class="font-semibold text-gray-800 mb-4">🔷 Simbol-simbol Flowchart:</h5>
+                            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                <div class="bg-white p-4 rounded-lg shadow-sm border text-center">
+                                    <div class="w-16 h-10 bg-green-200 rounded-full mx-auto mb-2 flex items-center justify-center">
+                                        <span class="text-xs font-bold">START</span>
+                                    </div>
+                                    <h6 class="font-semibold text-sm">Terminal</h6>
+                                    <p class="text-xs text-gray-600">Mulai/Selesai</p>
+                                </div>
+                                
+                                <div class="bg-white p-4 rounded-lg shadow-sm border text-center">
+                                    <div class="w-16 h-10 bg-blue-200 mx-auto mb-2 flex items-center justify-center">
+                                        <span class="text-xs font-bold">PROSES</span>
+                                    </div>
+                                    <h6 class="font-semibold text-sm">Process</h6>
+                                    <p class="text-xs text-gray-600">Pemrosesan</p>
+                                </div>
+                                
+                                <div class="bg-white p-4 rounded-lg shadow-sm border text-center">
+                                    <div class="w-16 h-10 bg-yellow-200 mx-auto mb-2 flex items-center justify-center transform -skew-x-12">
+                                        <span class="text-xs font-bold transform skew-x-12">INPUT</span>
+                                    </div>
+                                    <h6 class="font-semibold text-sm">Input/Output</h6>
+                                    <p class="text-xs text-gray-600">Data I/O</p>
+                                </div>
+                                
+                                <div class="bg-white p-4 rounded-lg shadow-sm border text-center">
+                                    <div class="w-16 h-10 bg-red-200 mx-auto mb-2 flex items-center justify-center transform rotate-45">
+                                        <span class="text-xs font-bold transform -rotate-45">IF?</span>
+                                    </div>
+                                    <h6 class="font-semibold text-sm">Decision</h6>
+                                    <p class="text-xs text-gray-600">Keputusan</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contoh Flowchart -->
+                        <div class="bg-gradient-to-r from-green-50 to-teal-50 p-6 rounded-lg">
+                            <h5 class="font-semibold text-gray-800 mb-4">💡 Contoh Flowchart: Menentukan Bilangan Genap/Ganjil</h5>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-white p-6 rounded-lg border">
+                                    <h6 class="font-semibold text-green-600 mb-4 text-center">📊 Flowchart Visual</h6>
+                                    <div class="flex flex-col items-center space-y-3 text-sm">
+                                        <!-- START -->
+                                        <div class="w-20 h-8 bg-green-200 rounded-full flex items-center justify-center font-bold">
+                                            START
+                                        </div>
+                                        <div class="w-0.5 h-4 bg-gray-400"></div>
+                                        
+                                        <!-- INPUT -->
+                                        <div class="w-24 h-8 bg-yellow-200 flex items-center justify-center font-bold transform -skew-x-12">
+                                            <span class="transform skew-x-12">INPUT angka</span>
+                                        </div>
+                                        <div class="w-0.5 h-4 bg-gray-400"></div>
+                                        
+                                        <!-- DECISION -->
+                                        <div class="w-20 h-20 bg-red-200 flex items-center justify-center font-bold transform rotate-45 relative">
+                                            <span class="transform -rotate-45 text-xs">angka % 2 = 0?</span>
+                                        </div>
+                                        
+                                        <!-- Branches -->
+                                        <div class="flex justify-between w-full max-w-xs">
+                                            <div class="flex flex-col items-center">
+                                                <span class="text-xs font-bold text-green-600 mb-2">YA</span>
+                                                <div class="w-16 h-8 bg-blue-200 flex items-center justify-center font-bold text-xs">
+                                                    "GENAP"
+                                                </div>
+                                            </div>
+                                            <div class="flex flex-col items-center">
+                                                <span class="text-xs font-bold text-red-600 mb-2">TIDAK</span>
+                                                <div class="w-16 h-8 bg-blue-200 flex items-center justify-center font-bold text-xs">
+                                                    "GANJIL"
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="w-0.5 h-4 bg-gray-400"></div>
+                                        
+                                        <!-- END -->
+                                        <div class="w-20 h-8 bg-green-200 rounded-full flex items-center justify-center font-bold">
+                                            END
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white p-6 rounded-lg border">
+                                    <h6 class="font-semibold text-blue-600 mb-4">📝 Pseudocode Equivalent:</h6>
+                                    <pre class="text-sm text-gray-700 bg-gray-50 p-3 rounded overflow-x-auto"><code>START
+
+INPUT angka
+
+IF angka % 2 = 0 THEN
+    OUTPUT "GENAP"
+ELSE
+    OUTPUT "GANJIL"
+END IF
+
+END</code></pre>
+                                    
+                                    <div class="mt-4 p-3 bg-blue-50 rounded text-sm">
+                                        <strong>💡 Penjelasan:</strong>
+                                        <ul class="mt-2 space-y-1 text-gray-700">
+                                            <li>• Simbol oval: START dan END</li>
+                                            <li>• Simbol jajar genjang: INPUT</li>
+                                            <li>• Simbol belah ketupat: Keputusan</li>
+                                            <li>• Simbol persegi panjang: Proses/Output</li>
+                                            <li>• Panah: Alur eksekusi</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Perbandingan Metode -->
+                    <div class="mb-8">
+                        <h4 class="text-lg font-semibold mb-4 text-gray-800">⚖️ Perbandingan Metode Representasi Algoritma</h4>
+                        <div class="overflow-x-auto">
+                            <table class="w-full bg-white rounded-lg shadow-md border">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-4 py-3 text-left font-semibold text-gray-800">Aspek</th>
+                                        <th class="px-4 py-3 text-left font-semibold text-blue-600">Bahasa Natural</th>
+                                        <th class="px-4 py-3 text-left font-semibold text-indigo-600">Pseudocode</th>
+                                        <th class="px-4 py-3 text-left font-semibold text-green-600">Flowchart</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-sm">
+                                    <tr class="border-t">
+                                        <td class="px-4 py-3 font-semibold">Kemudahan Pemahaman</td>
+                                        <td class="px-4 py-3">Sangat mudah untuk pemula</td>
+                                        <td class="px-4 py-3">Mudah, mirip bahasa pemrograman</td>
+                                        <td class="px-4 py-3">Visual, mudah diikuti alurnya</td>
+                                    </tr>
+                                    <tr class="border-t bg-gray-50">
+                                        <td class="px-4 py-3 font-semibold">Presisi</td>
+                                        <td class="px-4 py-3">Kurang presisi, bisa ambigu</td>
+                                        <td class="px-4 py-3">Presisi, struktur jelas</td>
+                                        <td class="px-4 py-3">Sangat presisi, alur jelas</td>
+                                    </tr>
+                                    <tr class="border-t">
+                                        <td class="px-4 py-3 font-semibold">Konversi ke Kode</td>
+                                        <td class="px-4 py-3">Sulit, perlu interpretasi</td>
+                                        <td class="px-4 py-3">Mudah, hampir siap coding</td>
+                                        <td class="px-4 py-3">Sedang, perlu konversi</td>
+                                    </tr>
+                                    <tr class="border-t bg-gray-50">
+                                        <td class="px-4 py-3 font-semibold">Waktu Pembuatan</td>
+                                        <td class="px-4 py-3">Cepat</td>
+                                        <td class="px-4 py-3">Sedang</td>
+                                        <td class="px-4 py-3">Lama (perlu menggambar)</td>
+                                    </tr>
+                                    <tr class="border-t">
+                                        <td class="px-4 py-3 font-semibold">Cocok untuk</td>
+                                        <td class="px-4 py-3">Brainstorming, diskusi awal</td>
+                                        <td class="px-4 py-3">Perencanaan coding</td>
+                                        <td class="px-4 py-3">Dokumentasi, presentasi</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Latihan Algoritma -->
+                    <div class="bg-gradient-to-r from-red-50 to-orange-50 p-6 rounded-lg">
+                        <h4 class="text-lg font-semibold mb-4 text-gray-800">🎮 Latihan: Buat Algoritma</h4>
+                        <div class="mb-4">
+                            <p class="text-gray-700 mb-3"><strong>Tugas:</strong> Buat algoritma untuk "Mencari buku di perpustakaan"</p>
+                            <button onclick="showAlgorithm()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors">
+                                Lihat Contoh Algoritma
+                            </button>
+                        </div>
+                        
+                        <div id="algorithm-result" class="hidden mt-4">
+                            <div class="bg-white p-6 rounded-lg shadow">
+                                <h5 class="font-semibold text-red-600 mb-4">📚 Algoritma: Mencari Buku di Perpustakaan</h5>
+                                <ol class="space-y-2 text-sm">
+                                    <li class="flex items-start">
+                                        <span class="bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5">1</span>
+                                        <span><strong>Mulai:</strong> Tentukan judul/penulis buku yang dicari</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5">2</span>
+                                        <span>Cek katalog online atau komputer perpustakaan</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="bg-orange-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5">3</span>
+                                        <span><strong>Jika</strong> buku tersedia → catat nomor klasifikasi dan lokasi</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="bg-orange-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5">4</span>
+                                        <span><strong>Jika</strong> buku tidak tersedia → cari alternatif atau pesan</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5">5</span>
+                                        <span>Pergi ke rak sesuai nomor klasifikasi</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5">6</span>
+                                        <span>Cari buku berdasarkan urutan nomor</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="bg-purple-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5">7</span>
+                                        <span><strong>Ulangi</strong> pencarian di rak sekitar jika tidak ketemu</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5">8</span>
+                                        <span><strong>Selesai:</strong> Buku ditemukan atau minta bantuan petugas</span>
+                                    </li>
+                                </ol>
+                                <div class="mt-4 p-3 bg-gray-100 rounded text-sm">
+                                    <strong>Catatan:</strong> Algoritma ini menggunakan struktur sekuensial, percabangan (jika-maka), dan perulangan.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Practice Problems -->
+        <section>
+            <h2 class="text-3xl font-bold text-center text-gray-700 mb-8">Contoh Soal & Penerapan Sehari-hari</h2>
+
+            <!-- Problem 1 -->
+            <div class="card p-6 mb-6">
+                <details>
+                    <summary class="flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-semibold text-blue-800">Soal 1: Merencanakan Liburan Kelompok dengan Anggaran Terbatas</h3>
+                        <span class="text-blue-600 font-bold transform transition-transform duration-300 rotate-0">▼</span>
+                    </summary>
+                    <div class="mt-4 pt-4 border-t">
+                        <p class="mb-4"><strong>Skenario:</strong> Anda dan 5 orang teman ingin pergi berlibur ke Yogyakarta selama 3 hari 2 malam. Total anggaran per orang adalah Rp 750.000. Bagaimana Anda merencanakannya menggunakan empat pilar Berpikir Komputasional?</p>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h4 class="font-bold mb-2">Pembahasan:</h4>
+                            <p class="mb-2"><strong>1. Dekomposisi:</strong></p>
+                            <ul class="list-disc list-inside ml-4 mb-3 text-sm">
+                                <li>Transportasi (Pergi-Pulang)</li>
+                                <li>Akomodasi (Penginapan)</li>
+                                <li>Makan (3 hari)</li>
+                                <li>Tiket Masuk Tempat Wisata</li>
+                                <li>Transportasi Lokal (selama di Yogyakarta)</li>
+                                <li>Dana Darurat/Oleh-oleh</li>
+                            </ul>
+                            <p class="mb-2"><strong>2. Pengenalan Pola:</strong></p>
+                            <ul class="list-disc list-inside ml-4 mb-3 text-sm">
+                                <li>Mencari pola biaya murah: Tiket kereta api promo sering ada di hari kerja. Penginapan tipe homestay/guesthouse lebih murah daripada hotel untuk rombongan. Makan di warung lokal lebih hemat daripada di restoran turis.</li>
+                                <li>Pola lokasi wisata: Mengelompokkan kunjungan wisata berdasarkan lokasinya yang berdekatan (misal: Candi Prambanan dan sekitarnya di hari pertama, area Malioboro dan Keraton di hari kedua) untuk menghemat waktu dan biaya transportasi lokal.</li>
+                            </ul>
+                             <p class="mb-2"><strong>3. Abstraksi:</strong></p>
+                            <ul class="list-disc list-inside ml-4 mb-3 text-sm">
+                                <li>Fokus pada total biaya dan fasilitas utama yang dibutuhkan (misal: kebersihan dan keamanan penginapan, jadwal keberangkatan transportasi).</li>
+                                <li>Mengabaikan detail yang tidak terlalu penting saat ini, seperti warna cat dinding kamar hotel atau merek air mineral yang disediakan.</li>
+                            </ul>
+                             <p class="mb-2"><strong>4. Algoritma (Rencana Langkah-demi-Langkah):</strong></p>
+                            <ol class="list-decimal list-inside ml-4 text-sm">
+                                <li>Buat survei tanggal keberangkatan yang disetujui semua anggota.</li>
+                                <li>Riset dan bandingkan harga tiket kereta/bus, pesan yang termurah.</li>
+                                <li>Riset dan booking penginapan yang sesuai kapasitas dan anggaran.</li>
+                                <li>Buat itinerary (rencana perjalanan) harian berdasarkan wisata yang sudah dikelompokkan.</li>
+                                <li>Buat rincian anggaran untuk setiap pos pengeluaran dan bagikan ke grup.</li>
+                                <li>Kumpulkan uang dari setiap anggota.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </details>
+            </div>
+            
+            <!-- Problem 2 -->
+             <div class="card p-6 mb-6">
+                <details>
+                    <summary class="flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-semibold text-blue-800">Soal 2: Mengerjakan Tugas Kelompok Besar dalam Waktu Singkat</h3>
+                         <span class="text-blue-600 font-bold transform transition-transform duration-300 rotate-0">▼</span>
+                    </summary>
+                    <div class="mt-4 pt-4 border-t">
+                        <p class="mb-4"><strong>Skenario:</strong> Guru memberikan tugas membuat makalah 10 halaman dan presentasi PowerPoint tentang "Dampak AI dalam Pendidikan". Kelompok Anda terdiri dari 4 orang dan tenggat waktu hanya 3 hari. Bagaimana cara Anda mengaturnya?</p>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h4 class="font-bold mb-2">Pembahasan:</h4>
+                            <p class="mb-2"><strong>1. Dekomposisi (Membagi Tugas):</strong></p>
+                            <ul class="list-disc list-inside ml-4 mb-3 text-sm">
+                                <li><strong>Makalah:</strong> Bab 1 (Pendahuluan), Bab 2 (Dampak Positif AI), Bab 3 (Dampak Negatif & Tantangan), Bab 4 (Studi Kasus), Bab 5 (Kesimpulan & Saran).</li>
+                                <li><strong>Presentasi:</strong> Membuat slide, mencari gambar/grafik, menyusun narasi presentasi.</li>
+                                <li><strong>Tugas Tambahan:</strong> Mencari referensi, menyusun daftar pustaka, menggabungkan dan merapikan format akhir.</li>
+                            </ul>
+                            <p class="mb-2"><strong>2. Pengenalan Pola (Pembagian Berdasarkan Keahlian):</strong></p>
+                            <ul class="list-disc list-inside ml-4 mb-3 text-sm">
+                                <li>Anda mengenali pola kekuatan masing-masing anggota. Si A jago riset, Si B pandai menulis, Si C ahli desain (untuk PPT), dan Si D jago berbicara (untuk latihan presentasi). Pembagian tugas disesuaikan dengan pola ini.</li>
+                            </ul>
+                             <p class="mb-2"><strong>3. Abstraksi (Fokus pada Inti):</strong></p>
+                            <ul class="list-disc list-inside ml-4 mb-3 text-sm">
+                                <li>Fokus pada poin-poin utama yang diminta oleh guru dalam tugas.</li>
+                                <li>Mengabaikan detail-detail yang terlalu mendalam atau di luar topik utama untuk sementara waktu agar kerangka utama cepat selesai. Misalnya, tidak perlu membahas sejarah lengkap AI, cukup yang relevan dengan pendidikan.</li>
+                            </ul>
+                             <p class="mb-2"><strong>4. Algoritma (Jadwal Kerja):</strong></p>
+                            <ol class="list-decimal list-inside ml-4 text-sm">
+                                <li><strong>Hari 1:</strong> Semua anggota mencari referensi. Tentukan pembagian bab makalah. Mulai menyusun kerangka kasar.</li>
+                                <li><strong>Hari 2:</strong> Semua anggota menyelesaikan draf bagiannya masing-masing. Si C mulai membuat template PPT.</li>
+                                <li><strong>Hari 3 Pagi:</strong> Gabungkan semua bagian makalah, rapikan format, dan buat daftar pustaka. Finalisasi slide PPT.</li>
+                                <li><strong>Hari 3 Siang:</strong> Latihan presentasi bersama.</li>
+                                <li><strong>Hari 3 Sore:</strong> Tugas dikumpulkan.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="mt-10 card p-6 bg-blue-800 text-white">
+            <h2 class="text-2xl font-bold mb-3">Kesimpulan</h2>
+            <p class="text-lg">
+                Berpikir Komputasional adalah sebuah <em class="italic">mindset</em> atau kerangka berpikir untuk memecahkan masalah secara sistematis dan logis. Dengan menguasai dekomposisi, pengenalan pola, abstraksi, dan algoritma, Anda tidak hanya dipersiapkan untuk bidang teknologi, tetapi juga dibekali kemampuan untuk menghadapi berbagai tantangan kompleks dalam studi, karir, dan kehidupan sehari-hari secara lebih efektif dan efisien.
+            </p>
+        </section>
+    </main>
+
+        <!-- Tab: Latihan Soal -->
+        <div id="content-latihan" class="tab-content hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <span class="bg-indigo-100 p-2 rounded-lg mr-3">📝</span>
+                    Latihan Soal Berpikir Komputasional
+                </h2>
+                
+                <div class="space-y-8">
+                    <!-- Soal 1 -->
+                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-800">📚 Soal 1: Dekomposisi</h3>
+                        <p class="text-gray-700 mb-4">
+                            Andi ingin mengorganisir acara ulang tahun temannya. Acara tersebut akan dihadiri 50 orang dan berlangsung di rumah. 
+                            Lakukan dekomposisi untuk memecah masalah ini menjadi sub-masalah yang lebih kecil!
+                        </p>
+                        <button onclick="toggleAnswer('answer1')" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors mb-4">
+                            Lihat Pembahasan
+                        </button>
+                        <div id="answer1" class="hidden bg-white p-4 rounded-lg border-l-4 border-blue-500">
+                            <h4 class="font-semibold mb-2">💡 Pembahasan Dekomposisi:</h4>
+                            <div class="grid md:grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <strong class="text-blue-600">1. Perencanaan Awal:</strong>
+                                    <ul class="ml-4 mt-1 space-y-1">
+                                        <li>• Tentukan tanggal dan waktu</li>
+                                        <li>• Buat daftar tamu (50 orang)</li>
+                                        <li>• Tentukan tema acara</li>
+                                        <li>• Hitung budget yang dibutuhkan</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <strong class="text-green-600">2. Persiapan Tempat:</strong>
+                                    <ul class="ml-4 mt-1 space-y-1">
+                                        <li>• Bersihkan dan dekorasi rumah</li>
+                                        <li>• Atur tata letak furniture</li>
+                                        <li>• Siapkan tempat duduk</li>
+                                        <li>• Setup sound system/musik</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <strong class="text-purple-600">3. Makanan & Minuman:</strong>
+                                    <ul class="ml-4 mt-1 space-y-1">
+                                        <li>• Rencanakan menu untuk 50 orang</li>
+                                        <li>• Beli bahan makanan</li>
+                                        <li>• Masak atau pesan catering</li>
+                                        <li>• Siapkan kue ulang tahun</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <strong class="text-red-600">4. Hiburan & Aktivitas:</strong>
+                                    <ul class="ml-4 mt-1 space-y-1">
+                                        <li>• Siapkan games/permainan</li>
+                                        <li>• Buat playlist musik</li>
+                                        <li>• Siapkan hadiah/doorprize</li>
+                                        <li>• Rencanakan rundown acara</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Soal 2 -->
+                    <div class="bg-gradient-to-r from-green-50 to-teal-50 p-6 rounded-lg border border-green-200">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-800">🎯 Soal 2: Abstraksi</h3>
+                        <p class="text-gray-700 mb-4">
+                            Sari ingin membuat aplikasi untuk memesan tiket bioskop online. Dari perspektif pengguna, 
+                            identifikasi mana yang merupakan abstraksi (yang penting) dan mana yang merupakan detail implementasi (yang disembunyikan)!
+                        </p>
+                        <button onclick="toggleAnswer('answer2')" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors mb-4">
+                            Lihat Pembahasan
+                        </button>
+                        <div id="answer2" class="hidden bg-white p-4 rounded-lg border-l-4 border-green-500">
+                            <h4 class="font-semibold mb-2">💡 Pembahasan Abstraksi:</h4>
+                            <div class="grid md:grid-cols-2 gap-4 text-sm">
+                                <div class="bg-green-50 p-4 rounded">
+                                    <strong class="text-green-600">✅ Yang Penting (Abstraksi):</strong>
+                                    <ul class="ml-4 mt-2 space-y-1">
+                                        <li>• Pilih bioskop dan lokasi</li>
+                                        <li>• Pilih film yang ingin ditonton</li>
+                                        <li>• Pilih jadwal tayang</li>
+                                        <li>• Pilih kursi yang tersedia</li>
+                                        <li>• Masukkan data pembeli</li>
+                                        <li>• Pilih metode pembayaran</li>
+                                        <li>• Konfirmasi pemesanan</li>
+                                        <li>• Terima tiket digital/cetak</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded">
+                                    <strong class="text-gray-600">❌ Detail yang Disembunyikan:</strong>
+                                    <ul class="ml-4 mt-2 space-y-1">
+                                        <li>• Database management system</li>
+                                        <li>• Server infrastructure</li>
+                                        <li>• Payment gateway integration</li>
+                                        <li>• Security encryption</li>
+                                        <li>• Load balancing</li>
+                                        <li>• API communication</li>
+                                        <li>• Backup dan recovery system</li>
+                                        <li>• Real-time seat availability sync</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mt-4 p-3 bg-blue-50 rounded text-sm">
+                                <strong>Kesimpulan:</strong> Pengguna hanya perlu fokus pada proses pemesanan yang sederhana, 
+                                sementara semua kompleksitas teknis disembunyikan di balik layar.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Soal 3 -->
+                    <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-lg border border-purple-200">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-800">🔍 Soal 3: Pengenalan Pola</h3>
+                        <p class="text-gray-700 mb-4">
+                            Perhatikan data penjualan es krim di sebuah toko selama 12 bulan:<br>
+                            <strong>Jan: 100, Feb: 120, Mar: 180, Apr: 250, Mei: 320, Jun: 400, Jul: 450, Agu: 430, Sep: 350, Okt: 280, Nov: 150, Des: 110</strong><br>
+                            Identifikasi pola yang ada dan prediksi untuk bulan-bulan berikutnya!
+                        </p>
+                        <button onclick="toggleAnswer('answer3')" class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg transition-colors mb-4">
+                            Lihat Pembahasan
+                        </button>
+                        <div id="answer3" class="hidden bg-white p-4 rounded-lg border-l-4 border-purple-500">
+                            <h4 class="font-semibold mb-2">💡 Pembahasan Pengenalan Pola:</h4>
+                            <div class="space-y-4 text-sm">
+                                <div class="bg-purple-50 p-4 rounded">
+                                    <strong class="text-purple-600">🔍 Pola yang Teridentifikasi:</strong>
+                                    <ul class="ml-4 mt-2 space-y-1">
+                                        <li>• <strong>Pola Musiman:</strong> Penjualan tinggi saat musim panas (Apr-Agu)</li>
+                                        <li>• <strong>Pola Siklis:</strong> Naik dari Januari, puncak di Juli, turun ke Desember</li>
+                                        <li>• <strong>Pola Tren:</strong> Kenaikan bertahap Jan-Jul, penurunan Jul-Des</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="bg-blue-50 p-4 rounded">
+                                    <strong class="text-blue-600">📈 Analisis Detail:</strong>
+                                    <ul class="ml-4 mt-2 space-y-1">
+                                        <li>• <strong>Musim Dingin (Des-Feb):</strong> Penjualan rendah (100-120)</li>
+                                        <li>• <strong>Musim Semi (Mar-Mei):</strong> Penjualan mulai naik (180-320)</li>
+                                        <li>• <strong>Musim Panas (Jun-Agu):</strong> Penjualan tertinggi (400-450)</li>
+                                        <li>• <strong>Musim Gugur (Sep-Nov):</strong> Penjualan menurun (350-150)</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="bg-green-50 p-4 rounded">
+                                    <strong class="text-green-600">🔮 Prediksi Tahun Berikutnya:</strong>
+                                    <ul class="ml-4 mt-2 space-y-1">
+                                        <li>• <strong>Jan:</strong> ~105 (sedikit naik dari tahun sebelumnya)</li>
+                                        <li>• <strong>Feb:</strong> ~125</li>
+                                        <li>• <strong>Mar:</strong> ~190</li>
+                                        <li>• <strong>Puncak (Jul):</strong> ~460-470</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="bg-yellow-50 p-4 rounded">
+                                    <strong class="text-yellow-600">💡 Insight Bisnis:</strong>
+                                    <p class="mt-2">Toko harus menyiapkan stok lebih banyak menjelang musim panas dan mengurangi stok saat musim dingin. 
+                                    Bisa juga mengembangkan produk alternatif untuk musim dingin seperti minuman hangat.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Soal 4 -->
+                    <div class="bg-gradient-to-r from-red-50 to-orange-50 p-6 rounded-lg border border-red-200">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-800">⚡ Soal 4: Algoritma</h3>
+                        <p class="text-gray-700 mb-4">
+                            Buatlah algoritma lengkap untuk "Mencari dan melamar pekerjaan online" yang mencakup struktur sekuensial, 
+                            percabangan, dan perulangan!
+                        </p>
+                        <button onclick="toggleAnswer('answer4')" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors mb-4">
+                            Lihat Pembahasan
+                        </button>
+                        <div id="answer4" class="hidden bg-white p-4 rounded-lg border-l-4 border-red-500">
+                            <h4 class="font-semibold mb-2">💡 Algoritma: Mencari dan Melamar Pekerjaan Online</h4>
+                            <div class="space-y-4 text-sm">
+                                <div class="bg-blue-50 p-4 rounded">
+                                    <strong class="text-blue-600">📝 Bagian 1: Persiapan (Sekuensial)</strong>
+                                    <ol class="ml-4 mt-2 space-y-1">
+                                        <li>1. Buat/update CV dan portfolio</li>
+                                        <li>2. Tentukan jenis pekerjaan yang dicari</li>
+                                        <li>3. Tentukan range gaji yang diinginkan</li>
+                                        <li>4. Daftar akun di platform job portal (JobStreet, LinkedIn, dll)</li>
+                                        <li>5. Lengkapi profil dengan foto profesional</li>
+                                    </ol>
+                                </div>
+                                
+                                <div class="bg-green-50 p-4 rounded">
+                                    <strong class="text-green-600">🔄 Bagian 2: Pencarian (Perulangan)</strong>
+                                    <div class="ml-4 mt-2">
+                                        <strong>ULANGI sampai dapat pekerjaan:</strong>
+                                        <ol class="ml-4 mt-1 space-y-1">
+                                            <li>1. Cari lowongan sesuai kriteria</li>
+                                            <li>2. Filter berdasarkan lokasi, gaji, pengalaman</li>
+                                            <li>3. Baca detail job description</li>
+                                            <li>4. Simpan lowongan yang menarik</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-purple-50 p-4 rounded">
+                                    <strong class="text-purple-600">🔀 Bagian 3: Seleksi & Lamaran (Percabangan)</strong>
+                                    <div class="ml-4 mt-2 space-y-2">
+                                        <div>
+                                            <strong>JIKA</strong> lowongan sesuai kriteria:
+                                            <ul class="ml-4 mt-1 space-y-1">
+                                                <li>• Sesuaikan CV dengan job requirement</li>
+                                                <li>• Tulis cover letter yang personal</li>
+                                                <li>• Submit lamaran online</li>
+                                                <li>• Catat tanggal dan perusahaan</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <strong>JIKA TIDAK</strong> sesuai kriteria:
+                                            <ul class="ml-4 mt-1 space-y-1">
+                                                <li>• Lewati lowongan tersebut</li>
+                                                <li>• Lanjut cari lowongan lain</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-yellow-50 p-4 rounded">
+                                    <strong class="text-yellow-600">📞 Bagian 4: Follow Up (Percabangan + Perulangan)</strong>
+                                    <div class="ml-4 mt-2">
+                                        <strong>UNTUK SETIAP lamaran yang dikirim:</strong>
+                                        <div class="ml-4 mt-1 space-y-2">
+                                            <div>
+                                                <strong>JIKA</strong> dipanggil interview:
+                                                <ul class="ml-4 mt-1 space-y-1">
+                                                    <li>• Persiapkan jawaban pertanyaan umum</li>
+                                                    <li>• Riset tentang perusahaan</li>
+                                                    <li>• Hadiri interview tepat waktu</li>
+                                                    <li>• Kirim thank you email setelah interview</li>
+                                                </ul>
+                                            </div>
+                                            <div>
+                                                <strong>JIKA</strong> tidak ada respon setelah 2 minggu:
+                                                <ul class="ml-4 mt-1 space-y-1">
+                                                    <li>• Kirim follow up email yang sopan</li>
+                                                    <li>• Tunggu 1 minggu lagi</li>
+                                                </ul>
+                                            </div>
+                                            <div>
+                                                <strong>JIKA</strong> ditolak:
+                                                <ul class="ml-4 mt-1 space-y-1">
+                                                    <li>• Minta feedback untuk perbaikan</li>
+                                                    <li>• Evaluasi CV dan strategi</li>
+                                                    <li>• Lanjut melamar ke tempat lain</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-green-100 p-4 rounded">
+                                    <strong class="text-green-700">🎉 Bagian 5: Selesai</strong>
+                                    <div class="ml-4 mt-2">
+                                        <strong>JIKA</strong> diterima kerja:
+                                        <ul class="ml-4 mt-1 space-y-1">
+                                            <li>• Negosiasi gaji dan benefit</li>
+                                            <li>• Tanda tangan kontrak</li>
+                                            <li>• Informasikan ke perusahaan lain yang masih proses</li>
+                                            <li>• Persiapkan hari pertama kerja</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Interaktif -->
+                    <div class="bg-gradient-to-r from-indigo-50 to-blue-50 p-6 rounded-lg border border-indigo-200">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-800">🎯 Quiz Interaktif</h3>
+                        <div id="quiz-container">
+                            <div class="quiz-question mb-4">
+                                <p class="text-gray-700 mb-3">
+                                    <strong>Soal 5:</strong> Manakah yang BUKAN merupakan karakteristik algoritma yang baik?
+                                </p>
+                                <div class="space-y-2">
+                                    <button onclick="checkQuiz('a', false)" class="quiz-option w-full text-left p-3 bg-white border border-gray-300 rounded hover:bg-gray-50 transition-colors">
+                                        A. Jelas dan mudah dipahami
+                                    </button>
+                                    <button onclick="checkQuiz('b', false)" class="quiz-option w-full text-left p-3 bg-white border border-gray-300 rounded hover:bg-gray-50 transition-colors">
+                                        B. Memiliki titik awal dan akhir yang jelas
+                                    </button>
+                                    <button onclick="checkQuiz('c', true)" class="quiz-option w-full text-left p-3 bg-white border border-gray-300 rounded hover:bg-gray-50 transition-colors">
+                                        C. Semakin panjang semakin baik
+                                    </button>
+                                    <button onclick="checkQuiz('d', false)" class="quiz-option w-full text-left p-3 bg-white border border-gray-300 rounded hover:bg-gray-50 transition-colors">
+                                        D. Efisien dalam penggunaan sumber daya
+                                    </button>
+                                </div>
+                                <div id="quiz-result" class="hidden mt-3 p-3 rounded-lg"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <h3 class="text-xl font-semibold mb-2">🧠 Berpikir Komputasional</h3>
+            <p class="text-gray-300 mb-4">Mata Pelajaran Informatika - Fase F Kelas 12 SMA</p>
+            <p class="text-sm text-gray-400">
+                @pak.zunny
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Tab Navigation
+        function showTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.add('hidden'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach(tab => {
+                tab.classList.remove('active-tab');
+                tab.classList.add('bg-gray-100', 'hover:bg-gray-200');
+            });
+            
+            // Show selected tab content
+            document.getElementById(`content-${tabName}`).classList.remove('hidden');
+            document.getElementById(`content-${tabName}`).classList.add('fade-in');
+            
+            // Add active class to selected tab
+            const activeTab = document.getElementById(`tab-${tabName}`);
+            activeTab.classList.add('active-tab');
+            activeTab.classList.remove('bg-gray-100', 'hover:bg-gray-200');
+        }
+
+        // Interactive Functions
+        function showDecomposition() {
+            const result = document.getElementById('decomposition-result');
+            result.classList.remove('hidden');
+            result.classList.add('fade-in');
+        }
+
+        function showAbstraction() {
+            const result = document.getElementById('abstraction-result');
+            result.classList.remove('hidden');
+            result.classList.add('fade-in');
+        }
+
+        function checkPattern(answer) {
+            const result = document.getElementById('pattern-result');
+            const buttons = document.querySelectorAll('.pattern-btn');
+            
+            // Reset all buttons
+            buttons.forEach(btn => {
+                btn.classList.remove('quiz-correct', 'quiz-incorrect');
+                btn.classList.add('bg-gray-200');
+            });
+            
+            if (answer === 32) {
+                result.innerHTML = '<div class="bg-green-100 text-green-800 p-3 rounded"><strong>✅ Benar!</strong> Pola: setiap angka dikali 2. (2×2=4, 4×2=8, 8×2=16, 16×2=32, 32×2=64)</div>';
+                event.target.classList.add('quiz-correct');
+            } else {
+                result.innerHTML = '<div class="bg-red-100 text-red-800 p-3 rounded"><strong>❌ Salah!</strong> Coba perhatikan lagi polanya. Setiap angka dikali 2.</div>';
+                event.target.classList.add('quiz-incorrect');
+            }
+            
+            result.classList.remove('hidden');
+            result.classList.add('fade-in');
+        }
+
+        function showAlgorithm() {
+            const result = document.getElementById('algorithm-result');
+            result.classList.remove('hidden');
+            result.classList.add('fade-in');
+        }
+
+        function toggleAnswer(answerId) {
+            const answer = document.getElementById(answerId);
+            if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                answer.classList.add('fade-in');
+            } else {
+                answer.classList.add('hidden');
+            }
+        }
+
+        function checkQuiz(option, isCorrect) {
+            const result = document.getElementById('quiz-result');
+            const buttons = document.querySelectorAll('.quiz-option');
+            
+            // Reset all buttons
+            buttons.forEach(btn => {
+                btn.classList.remove('quiz-correct', 'quiz-incorrect');
+            });
+            
+            if (isCorrect) {
+                result.innerHTML = '<div class="bg-green-100 text-green-800 p-3 rounded"><strong>✅ Benar!</strong> Algoritma yang baik justru harus efisien dan tidak bertele-tele. Panjang algoritma tidak menentukan kualitasnya.</div>';
+                event.target.classList.add('quiz-correct');
+            } else {
+                result.innerHTML = '<div class="bg-red-100 text-red-800 p-3 rounded"><strong>❌ Salah!</strong> Jawaban yang benar adalah C. Algoritma yang baik harus efisien, bukan semakin panjang semakin baik.</div>';
+                event.target.classList.add('quiz-incorrect');
+            }
+            
+            result.classList.remove('hidden');
+            result.classList.add('fade-in');
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            showTab('pengantar');
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'985a6d6bf4fb81a1',t:'MTc1ODk3MDA5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

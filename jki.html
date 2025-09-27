@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Materi Jaringan Komputer - Informatika Kelas 12</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        box-sizing: border-box;
+      }
+      .fade-in {
+        animation: fadeIn 0.6s ease-in;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .quiz-option {
+        transition: all 0.3s ease;
+      }
+      .quiz-option:hover {
+        transform: translateX(5px);
+      }
+      .correct {
+        background-color: #10b981;
+        color: white;
+      }
+      .incorrect {
+        background-color: #ef4444;
+        color: white;
+      }
+      .topology-diagram {
+        transition: transform 0.3s ease;
+      }
+      .topology-diagram:hover {
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+  <body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-lg">
+      <div class="container mx-auto px-6 py-8">
+        <h1 class="text-4xl font-bold text-center mb-2">Jaringan Komputer dan Internet</h1>
+        <p class="text-xl text-center opacity-90">Informatika Kelas 12 SMA - Fase F</p>
+        <div class="flex justify-center mt-4">
+          <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm">Topologi • Konfigurasi • Peer to Peer</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-wrap justify-center space-x-2 md:space-x-8 py-4">
+          <button onclick="showSection('overview')" class="nav-btn px-4 py-2 rounded-lg font-medium transition-colors hover:bg-blue-100 text-blue-700">Pengantar</button>
+          <button onclick="showSection('topology')" class="nav-btn px-4 py-2 rounded-lg font-medium transition-colors hover:bg-blue-100 text-blue-700">Topologi</button>
+          <button onclick="showSection('configuration')" class="nav-btn px-4 py-2 rounded-lg font-medium transition-colors hover:bg-blue-100 text-blue-700">Konfigurasi</button>
+          <button onclick="showSection('p2p')" class="nav-btn px-4 py-2 rounded-lg font-medium transition-colors hover:bg-blue-100 text-blue-700">Peer to Peer</button>
+          <button onclick="showSection('quiz')" class="nav-btn px-4 py-2 rounded-lg font-medium transition-colors hover:bg-blue-100 text-blue-700">Evaluasi</button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mx-auto px-6 py-8">
+      <!-- Overview Section -->
+      <section id="overview" class="section-content fade-in">
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+            <span class="bg-blue-100 p-3 rounded-lg mr-4">🌐</span>
+            Pengantar Jaringan Komputer
+          </h2>
+
+          <div class="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">Tujuan Pembelajaran</h3>
+              <ul class="space-y-3 text-gray-600">
+                <li class="flex items-start">
+                  <span class="text-green-500 mr-2">✓</span>
+                  Memahami konsep dasar jaringan komputer
+                </li>
+                <li class="flex items-start">
+                  <span class="text-green-500 mr-2">✓</span>
+                  Menganalisis berbagai topologi jaringan
+                </li>
+                <li class="flex items-start">
+                  <span class="text-green-500 mr-2">✓</span>
+                  Memahami konfigurasi jaringan dasar
+                </li>
+                <li class="flex items-start">
+                  <span class="text-green-500 mr-2">✓</span>
+                  Menerapkan konsep peer-to-peer
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-lg">
+              <h3 class="text-xl font-semibold text-gray-700 mb-4">Definisi Jaringan Komputer</h3>
+              <p class="text-gray-600 leading-relaxed">
+                Jaringan komputer adalah kumpulan dua atau lebih komputer yang saling terhubung untuk berbagi sumber daya, data, dan informasi. Jaringan memungkinkan komunikasi dan kolaborasi antar pengguna di lokasi yang berbeda.
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-8 grid md:grid-cols-3 gap-6">
+            <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-lg border border-green-200">
+              <h4 class="font-semibold text-green-800 mb-2">🔗 Konektivitas</h4>
+              <p class="text-green-700 text-sm">Menghubungkan perangkat untuk komunikasi</p>
+            </div>
+            <div class="bg-gradient-to-br from-purple-50 to-violet-50 p-6 rounded-lg border border-purple-200">
+              <h4 class="font-semibold text-purple-800 mb-2">📊 Berbagi Sumber Daya</h4>
+              <p class="text-purple-700 text-sm">Sharing file, printer, dan aplikasi</p>
+            </div>
+            <div class="bg-gradient-to-br from-orange-50 to-amber-50 p-6 rounded-lg border border-orange-200">
+              <h4 class="font-semibold text-orange-800 mb-2">⚡ Efisiensi</h4>
+              <p class="text-orange-700 text-sm">Meningkatkan produktivitas kerja</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Topology Section -->
+      <section id="topology" class="section-content hidden">
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+            <span class="bg-purple-100 p-3 rounded-lg mr-4">🔗</span>
+            Topologi Jaringan
+          </h2>
+
+          <div class="mb-8">
+            <p class="text-gray-600 text-lg leading-relaxed">
+              Topologi jaringan adalah cara atau pola yang digunakan untuk menghubungkan komputer-komputer dalam suatu jaringan. Pemilihan topologi yang tepat sangat penting untuk kinerja dan keandalan jaringan.
+            </p>
+          </div>
+
+          <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Bus Topology -->
+            <div class="topology-card bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-lg border border-blue-200 topology-diagram">
+              <h3 class="text-xl font-semibold text-blue-800 mb-4">🚌 Topologi Bus</h3>
+              <div class="mb-4">
+                <svg viewBox="0 0 300 100" class="w-full h-20 mb-4">
+                  <line x1="50" y1="50" x2="250" y2="50" stroke="#3b82f6" stroke-width="3" />
+                  <circle cx="80" cy="30" r="8" fill="#10b981" />
+                  <circle cx="120" cy="30" r="8" fill="#10b981" />
+                  <circle cx="180" cy="30" r="8" fill="#10b981" />
+                  <circle cx="220" cy="30" r="8" fill="#10b981" />
+                  <line x1="80" y1="38" x2="80" y2="50" stroke="#6b7280" stroke-width="2" />
+                  <line x1="120" y1="38" x2="120" y2="50" stroke="#6b7280" stroke-width="2" />
+                  <line x1="180" y1="38" x2="180" y2="50" stroke="#6b7280" stroke-width="2" />
+                  <line x1="220" y1="38" x2="220" y2="50" stroke="#6b7280" stroke-width="2" />
+                  <text x="150" y="80" text-anchor="middle" class="text-xs fill-blue-600">Kabel Utama (Backbone)</text>
+                </svg>
+              </div>
+              <div class="space-y-2 text-sm">
+                <p><strong>Kelebihan:</strong> Mudah dipasang, biaya rendah</p>
+                <p><strong>Kekurangan:</strong> Jika kabel utama rusak, seluruh jaringan down</p>
+                <p><strong>Penggunaan:</strong> Jaringan kecil, kantor sederhana</p>
+              </div>
+            </div>
+
+            <!-- Star Topology -->
+            <div class="topology-card bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-lg border border-green-200 topology-diagram">
+              <h3 class="text-xl font-semibold text-green-800 mb-4">⭐ Topologi Star</h3>
+              <div class="mb-4">
+                <svg viewBox="0 0 300 100" class="w-full h-20 mb-4">
+                  <circle cx="150" cy="50" r="12" fill="#3b82f6" />
+                  <circle cx="100" cy="20" r="8" fill="#10b981" />
+                  <circle cx="200" cy="20" r="8" fill="#10b981" />
+                  <circle cx="100" cy="80" r="8" fill="#10b981" />
+                  <circle cx="200" cy="80" r="8" fill="#10b981" />
+                  <line x1="150" y1="50" x2="100" y2="20" stroke="#6b7280" stroke-width="2" />
+                  <line x1="150" y1="50" x2="200" y2="20" stroke="#6b7280" stroke-width="2" />
+                  <line x1="150" y1="50" x2="100" y2="80" stroke="#6b7280" stroke-width="2" />
+                  <line x1="150" y1="50" x2="200" y2="80" stroke="#6b7280" stroke-width="2" />
+                  <text x="150" y="75" text-anchor="middle" class="text-xs fill-blue-600">Hub/Switch</text>
+                </svg>
+              </div>
+              <div class="space-y-2 text-sm">
+                <p><strong>Kelebihan:</strong> Mudah troubleshooting, kerusakan satu node tidak mempengaruhi yang lain</p>
+                <p><strong>Kekurangan:</strong> Bergantung pada hub/switch pusat</p>
+                <p><strong>Penggunaan:</strong> Jaringan kantor modern, sekolah</p>
+              </div>
+            </div>
+
+            <!-- Ring Topology -->
+            <div class="topology-card bg-gradient-to-br from-purple-50 to-violet-50 p-6 rounded-lg border border-purple-200 topology-diagram">
+              <h3 class="text-xl font-semibold text-purple-800 mb-4">💍 Topologi Ring</h3>
+              <div class="mb-4">
+                <svg viewBox="0 0 300 100" class="w-full h-20 mb-4">
+                  <circle cx="150" cy="50" r="30" fill="none" stroke="#3b82f6" stroke-width="3" />
+                  <circle cx="150" cy="20" r="8" fill="#10b981" />
+                  <circle cx="180" cy="50" r="8" fill="#10b981" />
+                  <circle cx="150" cy="80" r="8" fill="#10b981" />
+                  <circle cx="120" cy="50" r="8" fill="#10b981" />
+                  <text x="150" y="95" text-anchor="middle" class="text-xs fill-purple-600">Data berputar searah</text>
+                </svg>
+              </div>
+              <div class="space-y-2 text-sm">
+                <p><strong>Kelebihan:</strong> Tidak ada collision, performa konsisten</p>
+                <p><strong>Kekurangan:</strong> Jika satu node rusak, seluruh jaringan terganggu</p>
+                <p><strong>Penggunaan:</strong> Jaringan fiber optic, FDDI</p>
+              </div>
+            </div>
+
+            <!-- Mesh Topology -->
+            <div class="topology-card bg-gradient-to-br from-orange-50 to-amber-50 p-6 rounded-lg border border-orange-200 topology-diagram">
+              <h3 class="text-xl font-semibold text-orange-800 mb-4">🕸️ Topologi Mesh</h3>
+              <div class="mb-4">
+                <svg viewBox="0 0 300 100" class="w-full h-20 mb-4">
+                  <circle cx="100" cy="30" r="8" fill="#10b981" />
+                  <circle cx="200" cy="30" r="8" fill="#10b981" />
+                  <circle cx="100" cy="70" r="8" fill="#10b981" />
+                  <circle cx="200" cy="70" r="8" fill="#10b981" />
+                  <line x1="100" y1="30" x2="200" y2="30" stroke="#6b7280" stroke-width="2" />
+                  <line x1="100" y1="70" x2="200" y2="70" stroke="#6b7280" stroke-width="2" />
+                  <line x1="100" y1="30" x2="100" y2="70" stroke="#6b7280" stroke-width="2" />
+                  <line x1="200" y1="30" x2="200" y2="70" stroke="#6b7280" stroke-width="2" />
+                  <line x1="100" y1="30" x2="200" y2="70" stroke="#6b7280" stroke-width="2" />
+                  <line x1="200" y1="30" x2="100" y2="70" stroke="#6b7280" stroke-width="2" />
+                  <text x="150" y="95" text-anchor="middle" class="text-xs fill-orange-600">Semua terhubung ke semua</text>
+                </svg>
+              </div>
+              <div class="space-y-2 text-sm">
+                <p><strong>Kelebihan:</strong> Redundansi tinggi, sangat reliable</p>
+                <p><strong>Kekurangan:</strong> Biaya tinggi, kompleks</p>
+                <p><strong>Penggunaan:</strong> Jaringan kritis, internet backbone</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-lg">
+            <h3 class="text-xl font-semibold text-indigo-800 mb-4">💡 Tips Memilih Topologi</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-semibold text-gray-700 mb-2">Pertimbangan Teknis:</h4>
+                <ul class="space-y-1 text-sm text-gray-600">
+                  <li>• Jumlah komputer yang akan dihubungkan</li>
+                  <li>• Jarak antar komputer</li>
+                  <li>• Kebutuhan bandwidth</li>
+                  <li>• Tingkat keamanan yang diperlukan</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-700 mb-2">Pertimbangan Ekonomis:</h4>
+                <ul class="space-y-1 text-sm text-gray-600">
+                  <li>• Budget yang tersedia</li>
+                  <li>• Biaya maintenance</li>
+                  <li>• Kemudahan troubleshooting</li>
+                  <li>• Skalabilitas untuk masa depan</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Configuration Section -->
+      <section id="configuration" class="section-content hidden">
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+            <span class="bg-green-100 p-3 rounded-lg mr-4">⚙️</span>
+            Konfigurasi Jaringan
+          </h2>
+
+          <div class="mb-8">
+            <p class="text-gray-600 text-lg leading-relaxed">Konfigurasi jaringan adalah proses pengaturan parameter-parameter jaringan agar komputer dapat berkomunikasi dengan benar dalam suatu jaringan.</p>
+          </div>
+
+          <!-- IP Address Section -->
+          <div class="mb-8">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">🏠 Alamat IP (IP Address)</h3>
+            <div class="grid lg:grid-cols-2 gap-8">
+              <div class="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-lg">
+                <h4 class="text-lg font-semibold text-blue-800 mb-3">IPv4</h4>
+                <div class="space-y-3">
+                  <div class="bg-white p-4 rounded border">
+                    <p class="font-mono text-lg text-center text-blue-600">192.168.1.100</p>
+                    <p class="text-sm text-gray-600 text-center mt-2">Format: xxx.xxx.xxx.xxx (0-255)</p>
+                  </div>
+                  <div class="text-sm space-y-2">
+                    <p><strong>Kelas A:</strong> 1.0.0.0 - 126.255.255.255</p>
+                    <p><strong>Kelas B:</strong> 128.0.0.0 - 191.255.255.255</p>
+                    <p><strong>Kelas C:</strong> 192.0.0.0 - 223.255.255.255</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-lg">
+                <h4 class="text-lg font-semibold text-green-800 mb-3">Subnet Mask</h4>
+                <div class="space-y-3">
+                  <div class="bg-white p-4 rounded border">
+                    <p class="font-mono text-lg text-center text-green-600">255.255.255.0</p>
+                    <p class="text-sm text-gray-600 text-center mt-2">Menentukan bagian network dan host</p>
+                  </div>
+                  <div class="text-sm space-y-2">
+                    <p><strong>/24:</strong> 255.255.255.0 (254 host)</p>
+                    <p><strong>/16:</strong> 255.255.0.0 (65,534 host)</p>
+                    <p><strong>/8:</strong> 255.0.0.0 (16,777,214 host)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DHCP vs Static -->
+          <div class="mb-8">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">🔄 DHCP vs Static IP</h3>
+            <div class="grid lg:grid-cols-2 gap-8">
+              <div class="bg-gradient-to-br from-purple-50 to-violet-50 p-6 rounded-lg border border-purple-200">
+                <h4 class="text-lg font-semibold text-purple-800 mb-3">🔄 DHCP (Dynamic)</h4>
+                <div class="space-y-3">
+                  <p class="text-sm text-gray-600">IP address diberikan secara otomatis oleh DHCP server</p>
+                  <div class="bg-white p-4 rounded">
+                    <h5 class="font-semibold text-green-700 mb-2">Kelebihan:</h5>
+                    <ul class="text-sm space-y-1">
+                      <li>• Mudah dikelola</li>
+                      <li>• Tidak ada konflik IP</li>
+                      <li>• Otomatis konfigurasi</li>
+                    </ul>
+                  </div>
+                  <div class="bg-white p-4 rounded">
+                    <h5 class="font-semibold text-red-700 mb-2">Kekurangan:</h5>
+                    <ul class="text-sm space-y-1">
+                      <li>• IP dapat berubah</li>
+                      <li>• Bergantung pada DHCP server</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-gradient-to-br from-orange-50 to-amber-50 p-6 rounded-lg border border-orange-200">
+                <h4 class="text-lg font-semibold text-orange-800 mb-3">📌 Static IP</h4>
+                <div class="space-y-3">
+                  <p class="text-sm text-gray-600">IP address dikonfigurasi manual dan tetap</p>
+                  <div class="bg-white p-4 rounded">
+                    <h5 class="font-semibold text-green-700 mb-2">Kelebihan:</h5>
+                    <ul class="text-sm space-y-1">
+                      <li>• IP tidak berubah</li>
+                      <li>• Cocok untuk server</li>
+                      <li>• Kontrol penuh</li>
+                    </ul>
+                  </div>
+                  <div class="bg-white p-4 rounded">
+                    <h5 class="font-semibold text-red-700 mb-2">Kekurangan:</h5>
+                    <ul class="text-sm space-y-1">
+                      <li>• Konfigurasi manual</li>
+                      <li>• Risiko konflik IP</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Configuration Steps -->
+          <div class="bg-gradient-to-r from-indigo-50 to-blue-50 p-6 rounded-lg">
+            <h3 class="text-xl font-semibold text-indigo-800 mb-4">📋 Langkah Konfigurasi Dasar</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-semibold text-gray-700 mb-3">Windows:</h4>
+                <ol class="space-y-2 text-sm text-gray-600">
+                  <li>1. Buka Control Panel → Network and Internet</li>
+                  <li>2. Pilih Network and Sharing Center</li>
+                  <li>3. Klik "Change adapter settings"</li>
+                  <li>4. Klik kanan pada koneksi → Properties</li>
+                  <li>5. Pilih "Internet Protocol Version 4 (TCP/IPv4)"</li>
+                  <li>6. Masukkan IP, Subnet Mask, Gateway, DNS</li>
+                </ol>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-700 mb-3">Parameter Penting:</h4>
+                <div class="space-y-3 text-sm">
+                  <div class="bg-white p-3 rounded"><strong>IP Address:</strong> Alamat unik komputer</div>
+                  <div class="bg-white p-3 rounded"><strong>Subnet Mask:</strong> Membagi network dan host</div>
+                  <div class="bg-white p-3 rounded"><strong>Default Gateway:</strong> Pintu keluar ke jaringan lain</div>
+                  <div class="bg-white p-3 rounded"><strong>DNS Server:</strong> Menerjemahkan nama domain</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- P2P Section -->
+      <section id="p2p" class="section-content hidden">
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+            <span class="bg-yellow-100 p-3 rounded-lg mr-4">🤝</span>
+            Jaringan Peer-to-Peer (P2P)
+          </h2>
+
+          <div class="mb-8">
+            <p class="text-gray-600 text-lg leading-relaxed">Peer-to-Peer (P2P) adalah model jaringan di mana setiap komputer dapat berfungsi sebagai client dan server secara bersamaan. Tidak ada server pusat yang mengontrol jaringan.</p>
+          </div>
+
+          <!-- P2P vs Client-Server -->
+          <div class="mb-8">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">⚖️ P2P vs Client-Server</h3>
+            <div class="grid lg:grid-cols-2 gap-8">
+              <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-lg border border-green-200">
+                <h4 class="text-lg font-semibold text-green-800 mb-4">🤝 Peer-to-Peer</h4>
+                <div class="mb-4">
+                  <svg viewBox="0 0 300 120" class="w-full h-24 mb-4">
+                    <circle cx="75" cy="40" r="15" fill="#10b981" />
+                    <circle cx="225" cy="40" r="15" fill="#10b981" />
+                    <circle cx="75" cy="80" r="15" fill="#10b981" />
+                    <circle cx="225" cy="80" r="15" fill="#10b981" />
+                    <line x1="75" y1="40" x2="225" y2="40" stroke="#6b7280" stroke-width="2" />
+                    <line x1="75" y1="80" x2="225" y2="80" stroke="#6b7280" stroke-width="2" />
+                    <line x1="75" y1="40" x2="75" y2="80" stroke="#6b7280" stroke-width="2" />
+                    <line x1="225" y1="40" x2="225" y2="80" stroke="#6b7280" stroke-width="2" />
+                    <line x1="75" y1="40" x2="225" y2="80" stroke="#6b7280" stroke-width="2" />
+                    <line x1="225" y1="40" x2="75" y2="80" stroke="#6b7280" stroke-width="2" />
+                    <text x="150" y="110" text-anchor="middle" class="text-xs fill-green-600">Semua peer setara</text>
+                  </svg>
+                </div>
+                <div class="space-y-3">
+                  <div class="bg-white p-3 rounded">
+                    <h5 class="font-semibold text-green-700 mb-1">Karakteristik:</h5>
+                    <ul class="text-sm space-y-1">
+                      <li>• Tidak ada server pusat</li>
+                      <li>• Setiap node adalah client dan server</li>
+                      <li>• Berbagi sumber daya langsung</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-lg border border-blue-200">
+                <h4 class="text-lg font-semibold text-blue-800 mb-4">🏢 Client-Server</h4>
+                <div class="mb-4">
+                  <svg viewBox="0 0 300 120" class="w-full h-24 mb-4">
+                    <rect x="135" y="30" width="30" height="40" fill="#3b82f6" rx="5" />
+                    <circle cx="75" cy="90" r="12" fill="#10b981" />
+                    <circle cx="150" cy="90" r="12" fill="#10b981" />
+                    <circle cx="225" cy="90" r="12" fill="#10b981" />
+                    <line x1="150" y1="70" x2="75" y2="90" stroke="#6b7280" stroke-width="2" />
+                    <line x1="150" y1="70" x2="150" y2="90" stroke="#6b7280" stroke-width="2" />
+                    <line x1="150" y1="70" x2="225" y2="90" stroke="#6b7280" stroke-width="2" />
+                    <text x="150" y="25" text-anchor="middle" class="text-xs fill-blue-600">Server</text>
+                    <text x="150" y="115" text-anchor="middle" class="text-xs fill-blue-600">Clients</text>
+                  </svg>
+                </div>
+                <div class="space-y-3">
+                  <div class="bg-white p-3 rounded">
+                    <h5 class="font-semibold text-blue-700 mb-1">Karakteristik:</h5>
+                    <ul class="text-sm space-y-1">
+                      <li>• Ada server pusat</li>
+                      <li>• Client meminta layanan ke server</li>
+                      <li>• Kontrol terpusat</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- P2P Applications -->
+          <div class="mb-8">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">💻 Contoh Penerapan P2P</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div class="bg-gradient-to-br from-red-50 to-pink-50 p-6 rounded-lg border border-red-200">
+                <h4 class="text-lg font-semibold text-red-800 mb-3">🎵 File Sharing</h4>
+                <div class="space-y-2 text-sm">
+                  <p><strong>Contoh:</strong> BitTorrent, eMule</p>
+                  <p><strong>Cara Kerja:</strong> File dibagi menjadi potongan kecil dan didistribusikan ke banyak peer</p>
+                  <p><strong>Keuntungan:</strong> Download lebih cepat, tidak bergantung pada satu server</p>
+                </div>
+              </div>
+
+              <div class="bg-gradient-to-br from-purple-50 to-violet-50 p-6 rounded-lg border border-purple-200">
+                <h4 class="text-lg font-semibold text-purple-800 mb-3">💰 Cryptocurrency</h4>
+                <div class="space-y-2 text-sm">
+                  <p><strong>Contoh:</strong> Bitcoin, Ethereum</p>
+                  <p><strong>Cara Kerja:</strong> Blockchain tersebar di seluruh jaringan peer</p>
+                  <p><strong>Keuntungan:</strong> Desentralisasi, transparansi, keamanan</p>
+                </div>
+              </div>
+
+              <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-lg border border-green-200">
+                <h4 class="text-lg font-semibold text-green-800 mb-3">💬 Komunikasi</h4>
+                <div class="space-y-2 text-sm">
+                  <p><strong>Contoh:</strong> Skype (versi lama), Discord P2P</p>
+                  <p><strong>Cara Kerja:</strong> Komunikasi langsung antar pengguna</p>
+                  <p><strong>Keuntungan:</strong> Latensi rendah, privasi lebih baik</p>
+                </div>
+              </div>
+
+              <div class="bg-gradient-to-br from-orange-50 to-amber-50 p-6 rounded-lg border border-orange-200">
+                <h4 class="text-lg font-semibold text-orange-800 mb-3">🎮 Gaming</h4>
+                <div class="space-y-2 text-sm">
+                  <p><strong>Contoh:</strong> Multiplayer games, LAN gaming</p>
+                  <p><strong>Cara Kerja:</strong> Player terhubung langsung untuk bermain</p>
+                  <p><strong>Keuntungan:</strong> Latensi rendah, tidak perlu server game</p>
+                </div>
+              </div>
+
+              <div class="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-lg border border-blue-200">
+                <h4 class="text-lg font-semibold text-blue-800 mb-3">☁️ Distributed Storage</h4>
+                <div class="space-y-2 text-sm">
+                  <p><strong>Contoh:</strong> IPFS, Storj</p>
+                  <p><strong>Cara Kerja:</strong> File disimpan tersebar di banyak node</p>
+                  <p><strong>Keuntungan:</strong> Redundansi, ketahanan terhadap kegagalan</p>
+                </div>
+              </div>
+
+              <div class="bg-gradient-to-br from-indigo-50 to-purple-50 p-6 rounded-lg border border-indigo-200">
+                <h4 class="text-lg font-semibold text-indigo-800 mb-3">🌐 Content Delivery</h4>
+                <div class="space-y-2 text-sm">
+                  <p><strong>Contoh:</strong> WebRTC, P2P CDN</p>
+                  <p><strong>Cara Kerja:</strong> Konten didistribusikan melalui peer terdekat</p>
+                  <p><strong>Keuntungan:</strong> Bandwidth efisien, skalabilitas</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- P2P Advantages and Disadvantages -->
+          <div class="mb-8">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">⚖️ Kelebihan dan Kekurangan P2P</h3>
+            <div class="grid lg:grid-cols-2 gap-8">
+              <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-lg">
+                <h4 class="text-lg font-semibold text-green-800 mb-4">✅ Kelebihan</h4>
+                <div class="space-y-3">
+                  <div class="flex items-start">
+                    <span class="text-green-500 mr-3 mt-1">💰</span>
+                    <div>
+                      <h5 class="font-semibold">Biaya Rendah</h5>
+                      <p class="text-sm text-gray-600">Tidak perlu server khusus yang mahal</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start">
+                    <span class="text-green-500 mr-3 mt-1">🔄</span>
+                    <div>
+                      <h5 class="font-semibold">Skalabilitas</h5>
+                      <p class="text-sm text-gray-600">Performa meningkat seiring bertambahnya peer</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start">
+                    <span class="text-green-500 mr-3 mt-1">🛡️</span>
+                    <div>
+                      <h5 class="font-semibold">Fault Tolerance</h5>
+                      <p class="text-sm text-gray-600">Tidak ada single point of failure</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start">
+                    <span class="text-green-500 mr-3 mt-1">🚀</span>
+                    <div>
+                      <h5 class="font-semibold">Performa</h5>
+                      <p class="text-sm text-gray-600">Bandwidth terdistribusi, download lebih cepat</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-gradient-to-br from-red-50 to-pink-50 p-6 rounded-lg">
+                <h4 class="text-lg font-semibold text-red-800 mb-4">❌ Kekurangan</h4>
+                <div class="space-y-3">
+                  <div class="flex items-start">
+                    <span class="text-red-500 mr-3 mt-1">🔒</span>
+                    <div>
+                      <h5 class="font-semibold">Keamanan</h5>
+                      <p class="text-sm text-gray-600">Sulit mengontrol akses dan keamanan data</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start">
+                    <span class="text-red-500 mr-3 mt-1">⚙️</span>
+                    <div>
+                      <h5 class="font-semibold">Manajemen</h5>
+                      <p class="text-sm text-gray-600">Sulit mengelola dan memantau jaringan</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start">
+                    <span class="text-red-500 mr-3 mt-1">📊</span>
+                    <div>
+                      <h5 class="font-semibold">Konsistensi Data</h5>
+                      <p class="text-sm text-gray-600">Sulit menjaga konsistensi data di semua peer</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start">
+                    <span class="text-red-500 mr-3 mt-1">⚖️</span>
+                    <div>
+                      <h5 class="font-semibold">Legal</h5>
+                      <p class="text-sm text-gray-600">Potensi masalah hukum terkait konten ilegal</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- P2P Implementation Example -->
+          <div class="bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-lg">
+            <h3 class="text-xl font-semibold text-indigo-800 mb-4">🛠️ Implementasi P2P Sederhana</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-semibold text-gray-700 mb-3">Langkah-langkah:</h4>
+                <ol class="space-y-2 text-sm text-gray-600">
+                  <li>1. <strong>Discovery:</strong> Peer mencari peer lain dalam jaringan</li>
+                  <li>2. <strong>Connection:</strong> Membuat koneksi langsung antar peer</li>
+                  <li>3. <strong>Authentication:</strong> Verifikasi identitas peer</li>
+                  <li>4. <strong>Data Exchange:</strong> Pertukaran data atau layanan</li>
+                  <li>5. <strong>Maintenance:</strong> Menjaga koneksi dan sinkronisasi</li>
+                </ol>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-700 mb-3">Teknologi Pendukung:</h4>
+                <div class="space-y-2 text-sm">
+                  <div class="bg-white p-3 rounded"><strong>DHT (Distributed Hash Table):</strong> Untuk pencarian peer</div>
+                  <div class="bg-white p-3 rounded"><strong>NAT Traversal:</strong> Mengatasi firewall dan NAT</div>
+                  <div class="bg-white p-3 rounded"><strong>Encryption:</strong> Mengamankan komunikasi</div>
+                  <div class="bg-white p-3 rounded"><strong>Consensus Algorithm:</strong> Untuk sinkronisasi data</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quiz Section -->
+      <section id="quiz" class="section-content hidden">
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+            <span class="bg-red-100 p-3 rounded-lg mr-4">📝</span>
+            Evaluasi Pembelajaran
+          </h2>
+
+          <div class="mb-8">
+            <p class="text-gray-600 text-lg">Uji pemahaman Anda tentang materi Jaringan Komputer dan Internet yang telah dipelajari.</p>
+          </div>
+
+          <div id="quiz-container">
+            <div class="quiz-question mb-8" id="question-1">
+              <h3 class="text-xl font-semibold text-gray-800 mb-4">1. Topologi jaringan yang menggunakan kabel utama (backbone) sebagai media transmisi adalah:</h3>
+              <div class="space-y-3">
+                <button class="quiz-option w-full text-left p-4 bg-gray-50 hover:bg-blue-50 rounded-lg border border-gray-200" onclick="selectAnswer(1, 'a', false)">A. Topologi Star</button>
+                <button class="quiz-option w-full text-left p-4 bg-gray-50 hover:bg-blue-50 rounded-lg border border-gray-200" onclick="selectAnswer(1, 'b', true)">B. Topologi Bus</button>
+                <button class="quiz-option w-full text-left p-4 bg-gray-50 hover:bg-blue-50 rounded-lg border border-gray-200" onclick="selectAnswer(1, 'c', false)">C. Topologi Ring</button>
+                <button class="quiz-option w-full text-left p-4 bg-gray-50 hover:bg-blue-50 rounded-lg border border-gray-200" onclick="selectAnswer(1, 'd', false)">D. Topologi Mesh</button>
+              </div>
+              <div id="explanation-1" class="hidden mt-4 p-4 bg-blue-50 rounded-lg">
+                <p class="text-blue-800"><strong>Penjelasan:</strong> Topologi Bus menggunakan satu kabel utama (backbone) yang menghubungkan semua komputer dalam jaringan. Semua data yang dikirim akan melewati kabel utama ini.</p>
+              </div>
+            </div>
+
+            <div class="quiz-question mb-8" id="question-2">
+              <h3 class="text-xl font-semibold text-gray-800 mb-4">2. Dalam konfigurasi jaringan, fungsi dari Subnet Mask adalah:</h3>
+              <div class="space-y-3">
+                <button class="quiz-option w-full text-left p-4 bg-gray-50 hover:bg-blue-50 rounded-lg border border-gray-200" onclick="selectAnswer(2, 'a', false)">A. Memberikan alamat IP secara otomatis</button>
+                <button class="quiz-option w-full text-left p-4 bg-gray-50 hover:bg-blue-50 rounded-lg border border-gray-200" onclick="selectAnswer(2, 'b', true)">B. Membagi alamat IP menjadi bagian network dan host</button>
+                <button class="quiz-option w-full text-left p-4 bg-gray-50 hover:bg-blue-50 rounded-lg border border-gray-200" onclick="selectAnswer(2, 'c', false)">C. Menerjemahkan nama domain menjadi IP address</button>
+                <button class="quiz-option w-full text-left p-4 bg-gray-50 hover:bg-blue-50 rounded-lg border border-gray-200" onclick="selectAnswer(2, 'd', false)">D. Mengamankan koneksi jaringan</button>
+              </div>
+              <div id="explanation-2" class="hidden mt-4 p-4 bg-blue-50 rounded-lg">
+                <p class="text-blue-800">
+                  <strong>Penjelasan:</strong> Subnet Mask berfungsi untuk membagi alamat IP menjadi dua bagian: bagian network (jaringan) dan bagian host (komputer). Ini membantu router menentukan apakah alamat tujuan berada dalam jaringan
+                  lokal atau jaringan lain.
+                </p>
+              </div>
+            </div>
+
+            <div class="quiz-question mb-8" id="question-3">
+              <h3 class="text-xl font-semibold text-gray-800 mb-4">3. Karakteristik utama dari jaringan Peer-to-Peer (P2P) adalah:</h3>
+              <div class="space-y-3">
+                <button class="quiz-option w-full text-left p-4 bg-gray-50 hover:bg-blue-50 rounded-lg border border-gray-200" onclick="selectAnswer(3, 'a', false)">A. Memiliki server pusat yang mengontrol semua komunikasi</button>
+                <button class="quiz-option w-full text-left p-4 bg-gray-50 hover:bg-blue-50 rounded-lg border border-gray-200" onclick="selectAnswer(3, 'b', true)">B. Setiap komputer dapat berfungsi sebagai client dan server</button>
+                <button class="quiz-option w-full text-left p-4 bg-gray-50 hover:bg-blue-50 rounded-lg border border-gray-200" onclick="selectAnswer(3, 'c', false)">C. Hanya dapat digunakan untuk file sharing</button>
+                <button class="quiz-option w-full text-left p-4 bg-gray-50 hover:bg-blue-50 rounded-lg border border-gray-200" onclick="selectAnswer(3, 'd', false)">D. Memerlukan koneksi internet yang sangat cepat</button>
+              </div>
+              <div id="explanation-3" class="hidden mt-4 p-4 bg-blue-50 rounded-lg">
+                <p class="text-blue-800">
+                  <strong>Penjelasan:</strong> Dalam jaringan P2P, tidak ada pembedaan antara client dan server. Setiap komputer (peer) dapat memberikan layanan kepada peer lain sekaligus meminta layanan dari peer lain. Ini berbeda dengan
+                  model client-server yang memiliki pembagian peran yang jelas.
+                </p>
+              </div>
+            </div>
+
+            <div class="quiz-question mb-8" id="question-4">
+              <h3 class="text-xl font-semibold text-gray-800 mb-4">4. Contoh penerapan teknologi P2P dalam kehidupan sehari-hari adalah:</h3>
+              <div class="space-y-3">
+                <button class="quiz-option w-full text-left p-4 bg-gray-50 hover:bg-blue-50 rounded-lg border border-gray-200" onclick="selectAnswer(4, 'a', false)">A. Email dan web browsing</button>
+                <button class="quiz-option w-full text-left p-4 bg-gray-50 hover:bg-blue-50 rounded-lg border border-gray-200" onclick="selectAnswer(4, 'b', false)">C. Streaming video dari YouTube</button>
+                <button class="quiz-option w-full text-left p-4 bg-gray-50 hover:bg-blue-50 rounded-lg border border-gray-200" onclick="selectAnswer(4, 'c', true)">C. BitTorrent dan cryptocurrency</button>
+                <button class="quiz-option w-full text-left p-4 bg-gray-50 hover:bg-blue-50 rounded-lg border border-gray-200" onclick="selectAnswer(4, 'd', false)">D. Online banking dan e-commerce</button>
+              </div>
+              <div id="explanation-4" class="hidden mt-4 p-4 bg-blue-50 rounded-lg">
+                <p class="text-blue-800">
+                  <strong>Penjelasan:</strong> BitTorrent adalah protokol P2P untuk file sharing, sedangkan cryptocurrency seperti Bitcoin menggunakan jaringan P2P untuk blockchain. Keduanya tidak bergantung pada server pusat dan
+                  menggunakan prinsip peer-to-peer.
+                </p>
+              </div>
+            </div>
+
+            <div class="quiz-question mb-8" id="question-5">
+              <h3 class="text-xl font-semibold text-gray-800 mb-4">5. Kelebihan utama dari topologi Star dibandingkan topologi Bus adalah:</h3>
+              <div class="space-y-3">
+                <button class="quiz-option w-full text-left p-4 bg-gray-50 hover:bg-blue-50 rounded-lg border border-gray-200" onclick="selectAnswer(5, 'a', false)">A. Biaya instalasi lebih murah</button>
+                <button class="quiz-option w-full text-left p-4 bg-gray-50 hover:bg-blue-50 rounded-lg border border-gray-200" onclick="selectAnswer(5, 'b', true)">B. Kerusakan satu komputer tidak mempengaruhi yang lain</button>
+                <button class="quiz-option w-full text-left p-4 bg-gray-50 hover:bg-blue-50 rounded-lg border border-gray-200" onclick="selectAnswer(5, 'c', false)">C. Kecepatan transfer data lebih tinggi</button>
+                <button class="quiz-option w-full text-left p-4 bg-gray-50 hover:bg-blue-50 rounded-lg border border-gray-200" onclick="selectAnswer(5, 'd', false)">D. Tidak memerlukan perangkat tambahan</button>
+              </div>
+              <div id="explanation-5" class="hidden mt-4 p-4 bg-blue-50 rounded-lg">
+                <p class="text-blue-800">
+                  <strong>Penjelasan:</strong> Dalam topologi Star, setiap komputer terhubung langsung ke hub/switch pusat. Jika satu komputer rusak, hanya komputer tersebut yang terputus dari jaringan, sedangkan komputer lain tetap dapat
+                  berkomunikasi. Berbeda dengan topologi Bus yang jika kabel utama rusak, seluruh jaringan akan down.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 text-center">
+            <button onclick="showResults()" class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-colors">Lihat Hasil</button>
+          </div>
+
+          <div id="quiz-results" class="hidden mt-8 p-6 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200">
+            <h3 class="text-xl font-semibold text-green-800 mb-4">📊 Hasil Evaluasi</h3>
+            <div id="score-display" class="text-lg mb-4"></div>
+            <div id="grade-display" class="text-lg font-semibold mb-4"></div>
+            <div class="bg-white p-4 rounded-lg">
+              <h4 class="font-semibold text-gray-700 mb-2">Kriteria Penilaian:</h4>
+              <ul class="text-sm space-y-1">
+                <li>• 90-100: Sangat Baik (A)</li>
+                <li>• 80-89: Baik (B)</li>
+                <li>• 70-79: Cukup (C)</li>
+                <li>• 60-69: Kurang (D)</li>
+                <li>• <60: Sangat Kurang (E)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+      <div class="container mx-auto px-6 text-center">
+        <h3 class="text-xl font-semibold mb-4">Materi Informatika Kelas 12</h3>
+        <p class="text-gray-300 mb-4">Jaringan Komputer dan Internet - Fase F</p>
+        <div class="flex justify-center space-x-6 text-sm">
+          <span>📚 Topologi Jaringan</span>
+          <span>⚙️ Konfigurasi Jaringan</span>
+          <span>🤝 Peer-to-Peer</span>
+        </div>
+        <p class="text-gray-400 text-sm mt-4">© pak_zunny - Materi Pembelajaran Interaktif</p>
+      </div>
+    </footer>
+
+    <script>
+      let currentSection = "overview";
+      let quizAnswers = {};
+      let quizScore = 0;
+
+      function showSection(sectionId) {
+        // Hide all sections
+        const sections = document.querySelectorAll(".section-content");
+        sections.forEach((section) => {
+          section.classList.add("hidden");
+          section.classList.remove("fade-in");
+        });
+
+        // Show selected section
+        const targetSection = document.getElementById(sectionId);
+        targetSection.classList.remove("hidden");
+        setTimeout(() => {
+          targetSection.classList.add("fade-in");
+        }, 50);
+
+        // Update navigation
+        const navButtons = document.querySelectorAll(".nav-btn");
+        navButtons.forEach((btn) => {
+          btn.classList.remove("bg-blue-600", "text-white");
+          btn.classList.add("text-blue-700");
+        });
+
+        event.target.classList.add("bg-blue-600", "text-white");
+        event.target.classList.remove("text-blue-700");
+
+        currentSection = sectionId;
+      }
+
+      function selectAnswer(questionNum, option, isCorrect) {
+        // Store answer
+        quizAnswers[questionNum] = {
+          selected: option,
+          correct: isCorrect,
+        };
+
+        // Update button styles
+        const questionDiv = document.getElementById(`question-${questionNum}`);
+        const buttons = questionDiv.querySelectorAll(".quiz-option");
+
+        buttons.forEach((btn) => {
+          btn.classList.remove("correct", "incorrect");
+          if (btn === event.target) {
+            if (isCorrect) {
+              btn.classList.add("correct");
+            } else {
+              btn.classList.add("incorrect");
+            }
+          }
+        });
+
+        // Show explanation
+        const explanation = document.getElementById(`explanation-${questionNum}`);
+        explanation.classList.remove("hidden");
+
+        // Scroll to next question or results button
+        setTimeout(() => {
+          if (questionNum < 5) {
+            const nextQuestion = document.getElementById(`question-${questionNum + 1}`);
+            nextQuestion.scrollIntoView({ behavior: "smooth", block: "start" });
+          } else {
+            const resultsButton = document.querySelector('button[onclick="showResults()"]');
+            resultsButton.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+        }, 1000);
+      }
+
+      function showResults() {
+        // Calculate score
+        quizScore = 0;
+        const totalQuestions = 5;
+
+        for (let i = 1; i <= totalQuestions; i++) {
+          if (quizAnswers[i] && quizAnswers[i].correct) {
+            quizScore++;
+          }
+        }
+
+        const percentage = (quizScore / totalQuestions) * 100;
+
+        // Determine grade
+        let grade = "";
+        if (percentage >= 90) grade = "A (Sangat Baik)";
+        else if (percentage >= 80) grade = "B (Baik)";
+        else if (percentage >= 70) grade = "C (Cukup)";
+        else if (percentage >= 60) grade = "D (Kurang)";
+        else grade = "E (Sangat Kurang)";
+
+        // Display results
+        document.getElementById("score-display").innerHTML = `Skor Anda: ${quizScore}/${totalQuestions} (${percentage.toFixed(0)}%)`;
+        document.getElementById("grade-display").innerHTML = `Nilai: ${grade}`;
+
+        document.getElementById("quiz-results").classList.remove("hidden");
+        document.getElementById("quiz-results").scrollIntoView({ behavior: "smooth" });
+      }
+
+      // Initialize page
+      document.addEventListener("DOMContentLoaded", function () {
+        showSection("overview");
+      });
+    </script>
+    <script>
+      (function () {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement("script");
+            d.innerHTML =
+              "window.__CF$cv$params={r:'985a9d2d84eaf8dc',t:'MTc1ODk3MjA0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName("head")[0].appendChild(d);
+          }
+        }
+        if (document.body) {
+          var a = document.createElement("iframe");
+          a.height = 1;
+          a.width = 1;
+          a.style.position = "absolute";
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = "none";
+          a.style.visibility = "hidden";
+          document.body.appendChild(a);
+          if ("loading" !== document.readyState) c();
+          else if (window.addEventListener) document.addEventListener("DOMContentLoaded", c);
+          else {
+            var e = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (b) {
+              e(b);
+              "loading" !== document.readyState && ((document.onreadystatechange = e), c());
+            };
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>

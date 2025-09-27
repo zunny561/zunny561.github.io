@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistem Komputer: Single Board & Arduino - Kelas 12</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      .gradient-bg {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+      .arduino-bg {
+        background: linear-gradient(135deg, #00979d 0%, #4caf50 100%);
+      }
+      .code-editor {
+        font-family: "Courier New", monospace;
+        background: #1e1e1e;
+        color: #d4d4d4;
+      }
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+      .progress-bar {
+        transition: width 0.5s ease;
+      }
+      .fade-in {
+        animation: fadeIn 0.6s ease-in;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .syntax-highlight {
+        color: #569cd6;
+      }
+      .string-highlight {
+        color: #ce9178;
+      }
+      .comment-highlight {
+        color: #6a9955;
+      }
+      .keyword-highlight {
+        color: #c586c0;
+      }
+      .output-terminal {
+        background: #000;
+        color: #00ff00;
+        font-family: "Courier New", monospace;
+        min-height: 200px;
+        max-height: 300px;
+        overflow-y: auto;
+      }
+      .interactive-demo {
+        border: 2px dashed #3b82f6;
+        transition: all 0.3s ease;
+      }
+      .interactive-demo:hover {
+        border-color: #1d4ed8;
+        background: #eff6ff;
+      }
+      .concept-box {
+        border-left: 4px solid #3b82f6;
+      }
+      .exercise-box {
+        border: 2px solid #10b981;
+      }
+      .challenge-box {
+        border: 2px solid #f59e0b;
+      }
+      .error-highlight {
+        background: #fee2e2;
+        border: 1px solid #fca5a5;
+      }
+      .success-highlight {
+        background: #dcfce7;
+        border: 1px solid #86efac;
+      }
+      .wokwi-frame {
+        border: 3px solid #00979d;
+        border-radius: 12px;
+      }
+      .component-card {
+        background: linear-gradient(145deg, #ffffff, #f0f0f0);
+        box-shadow: 5px 5px 15px #d1d1d1, -5px -5px 15px #ffffff;
+      }
+      .project-showcase {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+      .quiz-option {
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+      .quiz-option:hover {
+        background: #f3f4f6;
+      }
+      .quiz-option.correct {
+        background: #dcfce7;
+        border-color: #16a34a;
+      }
+      .quiz-option.incorrect {
+        background: #fee2e2;
+        border-color: #dc2626;
+      }
+      .quiz-option.selected {
+        background: #dbeafe;
+        border-color: #2563eb;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Header -->
+    <header class="arduino-bg text-white py-8">
+      <div class="container mx-auto px-6">
+        <div class="flex items-center justify-center mb-4">
+          <div class="text-6xl mr-4">🔧</div>
+          <div>
+            <h1 class="text-4xl font-bold">Sistem Komputer: Single Board & Arduino</h1>
+            <p class="text-xl opacity-90">Mengenal Arduino dan Pemrograman Embedded System</p>
+          </div>
+        </div>
+        <div class="text-center mt-4">
+          <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm">Kelas 12 Fase F • Informatika</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="bg-white shadow-sm">
+      <div class="container mx-auto px-6 py-4">
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-sm font-medium text-gray-600">Progress Pembelajaran</span>
+          <span class="text-sm font-medium text-gray-600" id="progress-text">0%</span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-2">
+          <div class="progress-bar bg-green-600 h-2 rounded-full" id="progress-bar" style="width: 0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-10">
+      <div class="container mx-auto px-6">
+        <div class="flex space-x-4 overflow-x-auto py-4">
+          <button onclick="showSection('overview')" class="nav-btn whitespace-nowrap px-4 py-2 rounded-lg font-medium transition-colors bg-blue-100 text-blue-700">📋 Gambaran Umum</button>
+          <button onclick="showSection('singleboard')" class="nav-btn whitespace-nowrap px-4 py-2 rounded-lg font-medium transition-colors text-gray-600 hover:bg-gray-100">💻 Single Board Computer</button>
+          <button onclick="showSection('arduino-intro')" class="nav-btn whitespace-nowrap px-4 py-2 rounded-lg font-medium transition-colors text-gray-600 hover:bg-gray-100">🔧 Pengenalan Arduino</button>
+          <button onclick="showSection('components')" class="nav-btn whitespace-nowrap px-4 py-2 rounded-lg font-medium transition-colors text-gray-600 hover:bg-gray-100">⚡ Komponen Arduino</button>
+          <button onclick="showSection('programming')" class="nav-btn whitespace-nowrap px-4 py-2 rounded-lg font-medium transition-colors text-gray-600 hover:bg-gray-100">💻 Pemrograman Arduino</button>
+          <button onclick="showSection('wokwi')" class="nav-btn whitespace-nowrap px-4 py-2 rounded-lg font-medium transition-colors text-gray-600 hover:bg-gray-100">🌐 Simulasi Wokwi</button>
+          <button onclick="showSection('projects')" class="nav-btn whitespace-nowrap px-4 py-2 rounded-lg font-medium transition-colors text-gray-600 hover:bg-gray-100">🚀 Proyek Arduino</button>
+          <button onclick="showSection('assessment')" class="nav-btn whitespace-nowrap px-4 py-2 rounded-lg font-medium transition-colors text-gray-600 hover:bg-gray-100">📝 Asesmen</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8">
+      <!-- Overview Section -->
+      <section id="overview" class="section fade-in">
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">🎯 Capaian Pembelajaran</h2>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="concept-box bg-blue-50 p-6 rounded-lg">
+              <h3 class="text-xl font-semibold text-blue-800 mb-3">Kompetensi Dasar</h3>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span>Mengenal konsep Single Board Computer</li>
+                <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span>Mengidentifikasi komponen dasar Arduino</li>
+                <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span>Merangkai komponen Arduino (board, sensor, LED, motor)</li>
+                <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span>Membuat program sederhana di Arduino IDE</li>
+                <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span>Merancang proyek berbasis Arduino</li>
+              </ul>
+            </div>
+            <div class="concept-box bg-green-50 p-6 rounded-lg">
+              <h3 class="text-xl font-semibold text-green-800 mb-3">Tujuan Pembelajaran</h3>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start"><span class="text-green-500 mr-2">🎯</span>Memahami arsitektur sistem embedded</li>
+                <li class="flex items-start"><span class="text-green-500 mr-2">🎯</span>Mampu merangkai rangkaian elektronik dasar</li>
+                <li class="flex items-start"><span class="text-green-500 mr-2">🎯</span>Menguasai pemrograman Arduino C++</li>
+                <li class="flex items-start"><span class="text-green-500 mr-2">🎯</span>Dapat membuat proyek IoT sederhana</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-4 gap-6">
+          <div class="card-hover bg-white rounded-xl shadow-lg p-6 text-center">
+            <div class="text-4xl mb-4">💻</div>
+            <h3 class="text-xl font-semibold mb-3">Single Board</h3>
+            <p class="text-gray-600">Komputer mini dalam satu papan</p>
+          </div>
+          <div class="card-hover bg-white rounded-xl shadow-lg p-6 text-center">
+            <div class="text-4xl mb-4">🔧</div>
+            <h3 class="text-xl font-semibold mb-3">Arduino</h3>
+            <p class="text-gray-600">Platform prototyping elektronik</p>
+          </div>
+          <div class="card-hover bg-white rounded-xl shadow-lg p-6 text-center">
+            <div class="text-4xl mb-4">⚡</div>
+            <h3 class="text-xl font-semibold mb-3">Komponen</h3>
+            <p class="text-gray-600">Sensor, LED, motor, dan lainnya</p>
+          </div>
+          <div class="card-hover bg-white rounded-xl shadow-lg p-6 text-center">
+            <div class="text-4xl mb-4">🚀</div>
+            <h3 class="text-xl font-semibold mb-3">Proyek</h3>
+            <p class="text-gray-600">Aplikasi nyata berbasis Arduino</p>
+          </div>
+        </div>
+
+        <div class="mt-8 bg-yellow-50 p-6 rounded-lg">
+          <h3 class="text-xl font-semibold text-yellow-800 mb-4">🌟 Mengapa Belajar Arduino?</h3>
+          <div class="grid md:grid-cols-3 gap-4">
+            <div class="text-center">
+              <div class="text-2xl mb-2">🔧</div>
+              <h4 class="font-semibold mb-1">Mudah Dipelajari</h4>
+              <p class="text-sm text-gray-600">Platform yang user-friendly untuk pemula</p>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl mb-2">🌍</div>
+              <h4 class="font-semibold mb-1">Aplikasi Luas</h4>
+              <p class="text-sm text-gray-600">IoT, robotika, otomasi, dan smart home</p>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl mb-2">💡</div>
+              <h4 class="font-semibold mb-1">Kreativitas</h4>
+              <p class="text-sm text-gray-600">Wujudkan ide menjadi prototype nyata</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Single Board Computer Section -->
+      <section id="singleboard" class="section hidden">
+        <div class="bg-white rounded-xl shadow-lg p-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">💻 Single Board Computer (SBC)</h2>
+
+          <div class="mb-8">
+            <h3 class="text-2xl font-semibold mb-4">Apa itu Single Board Computer?</h3>
+            <p class="text-gray-700 mb-6">
+              Single Board Computer adalah komputer lengkap yang dibangun dalam satu papan sirkuit. Berbeda dengan komputer desktop yang komponennya terpisah, SBC mengintegrasikan CPU, RAM, storage, dan I/O dalam satu board.
+            </p>
+
+            <div class="concept-box bg-blue-50 p-6 rounded-lg mb-6">
+              <h4 class="font-semibold text-blue-800 mb-3">🏗️ Karakteristik SBC</h4>
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h5 class="font-semibold mb-2">Komponen Terintegrasi:</h5>
+                  <ul class="text-sm text-gray-700 space-y-1">
+                    <li>• CPU (Central Processing Unit)</li>
+                    <li>• RAM (Random Access Memory)</li>
+                    <li>• Storage (eMMC/microSD)</li>
+                    <li>• GPU (Graphics Processing Unit)</li>
+                    <li>• I/O Ports (USB, HDMI, GPIO)</li>
+                  </ul>
+                </div>
+                <div>
+                  <h5 class="font-semibold mb-2">Keunggulan SBC:</h5>
+                  <ul class="text-sm text-gray-700 space-y-1">
+                    <li>• Ukuran kompak dan portabel</li>
+                    <li>• Konsumsi daya rendah</li>
+                    <li>• Harga terjangkau</li>
+                    <li>• Mudah diintegrasikan</li>
+                    <li>• Cocok untuk embedded system</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-8">
+            <h4 class="text-xl font-semibold mb-4">🔍 Jenis-jenis Single Board Computer</h4>
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="component-card p-6 rounded-lg">
+                <div class="text-4xl mb-3 text-center">🍓</div>
+                <h5 class="text-lg font-semibold text-center mb-3">Raspberry Pi</h5>
+                <ul class="text-sm text-gray-700 space-y-1">
+                  <li>• ARM Cortex processor</li>
+                  <li>• Linux-based OS</li>
+                  <li>• GPIO pins untuk I/O</li>
+                  <li>• HDMI, USB, Ethernet</li>
+                  <li>• Cocok untuk pembelajaran</li>
+                </ul>
+              </div>
+
+              <div class="component-card p-6 rounded-lg">
+                <div class="text-4xl mb-3 text-center">🔧</div>
+                <h5 class="text-lg font-semibold text-center mb-3">Arduino</h5>
+                <ul class="text-sm text-gray-700 space-y-1">
+                  <li>• Microcontroller-based</li>
+                  <li>• Real-time processing</li>
+                  <li>• Analog & digital I/O</li>
+                  <li>• Simple programming</li>
+                  <li>• Ideal untuk prototyping</li>
+                </ul>
+              </div>
+
+              <div class="component-card p-6 rounded-lg">
+                <div class="text-4xl mb-3 text-center">⚡</div>
+                <h5 class="text-lg font-semibold text-center mb-3">ESP32</h5>
+                <ul class="text-sm text-gray-700 space-y-1">
+                  <li>• WiFi & Bluetooth built-in</li>
+                  <li>• Dual-core processor</li>
+                  <li>• Low power consumption</li>
+                  <li>• IoT applications</li>
+                  <li>• Arduino IDE compatible</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="exercise-box bg-green-50 p-6 rounded-lg">
+            <h4 class="font-semibold text-green-800 mb-3">🤔 Diskusi: Kapan Menggunakan SBC vs Microcontroller?</h4>
+            <p class="text-gray-700 mb-4">Berdasarkan karakteristik yang telah dipelajari, diskusikan dalam kelompok:</p>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <h5 class="font-semibold mb-2">Skenario 1: Smart Home System</h5>
+                <p class="text-sm text-gray-600 mb-3">Sistem yang dapat mengontrol lampu, AC, kamera keamanan, dan terhubung ke internet untuk monitoring jarak jauh.</p>
+                <div class="bg-white p-3 rounded border">
+                  <p class="text-sm"><strong>Pilihan:</strong> <span class="text-blue-600">Single Board Computer</span></p>
+                  <p class="text-xs text-gray-500">Alasan: Membutuhkan OS, koneksi internet, processing power tinggi</p>
+                </div>
+              </div>
+              <div>
+                <h5 class="font-semibold mb-2">Skenario 2: Sensor Suhu Otomatis</h5>
+                <p class="text-sm text-gray-600 mb-3">Sistem sederhana yang membaca suhu dan menyalakan kipas jika suhu > 30°C.</p>
+                <div class="bg-white p-3 rounded border">
+                  <p class="text-sm"><strong>Pilihan:</strong> <span class="text-green-600">Microcontroller</span></p>
+                  <p class="text-xs text-gray-500">Alasan: Tugas sederhana, real-time, hemat daya</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Arduino Introduction Section -->
+      <section id="arduino-intro" class="section hidden">
+        <div class="bg-white rounded-xl shadow-lg p-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">🔧 Pengenalan Arduino</h2>
+
+          <div class="mb-8">
+            <h3 class="text-2xl font-semibold mb-4">Apa itu Arduino?</h3>
+            <p class="text-gray-700 mb-6">
+              Arduino adalah platform prototyping elektronik open-source yang terdiri dari hardware (board) dan software (IDE). Arduino memudahkan pembuatan proyek interaktif yang dapat membaca input dari sensor dan mengontrol output
+              seperti LED, motor, atau speaker.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+              <div class="concept-box bg-blue-50 p-6 rounded-lg">
+                <h4 class="font-semibold text-blue-800 mb-3">🏗️ Hardware Arduino</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="text-blue-500 mr-2">•</span>Microcontroller (ATmega328P)</li>
+                  <li class="flex items-start"><span class="text-blue-500 mr-2">•</span>Digital I/O pins (0-13)</li>
+                  <li class="flex items-start"><span class="text-blue-500 mr-2">•</span>Analog input pins (A0-A5)</li>
+                  <li class="flex items-start"><span class="text-blue-500 mr-2">•</span>Power supply (USB/DC jack)</li>
+                  <li class="flex items-start"><span class="text-blue-500 mr-2">•</span>Reset button</li>
+                </ul>
+              </div>
+              <div class="concept-box bg-green-50 p-6 rounded-lg">
+                <h4 class="font-semibold text-green-800 mb-3">💻 Software Arduino</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start"><span class="text-green-500 mr-2">•</span>Arduino IDE (Integrated Development Environment)</li>
+                  <li class="flex items-start"><span class="text-green-500 mr-2">•</span>Bahasa pemrograman C/C++</li>
+                  <li class="flex items-start"><span class="text-green-500 mr-2">•</span>Library yang lengkap</li>
+                  <li class="flex items-start"><span class="text-green-500 mr-2">•</span>Serial Monitor untuk debugging</li>
+                  <li class="flex items-start"><span class="text-green-500 mr-2">•</span>Community support</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-8">
+            <h4 class="text-xl font-semibold mb-4">📋 Jenis-jenis Board Arduino</h4>
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="component-card p-6 rounded-lg">
+                <div class="text-4xl mb-3 text-center">🔵</div>
+                <h5 class="text-lg font-semibold text-center mb-3">Arduino Uno</h5>
+                <ul class="text-sm text-gray-700 space-y-1">
+                  <li>• ATmega328P microcontroller</li>
+                  <li>• 14 digital I/O pins</li>
+                  <li>• 6 analog input pins</li>
+                  <li>• 32KB Flash memory</li>
+                  <li>• Paling populer untuk pemula</li>
+                </ul>
+              </div>
+
+              <div class="component-card p-6 rounded-lg">
+                <div class="text-4xl mb-3 text-center">🟢</div>
+                <h5 class="text-lg font-semibold text-center mb-3">Arduino Nano</h5>
+                <ul class="text-sm text-gray-700 space-y-1">
+                  <li>• Ukuran kecil dan compact</li>
+                  <li>• Fungsi sama dengan Uno</li>
+                  <li>• Mini USB connector</li>
+                  <li>• Breadboard friendly</li>
+                  <li>• Cocok untuk proyek permanen</li>
+                </ul>
+              </div>
+
+              <div class="component-card p-6 rounded-lg">
+                <div class="text-4xl mb-3 text-center">🔴</div>
+                <h5 class="text-lg font-semibold text-center mb-3">Arduino Mega</h5>
+                <ul class="text-sm text-gray-700 space-y-1">
+                  <li>• ATmega2560 microcontroller</li>
+                  <li>• 54 digital I/O pins</li>
+                  <li>• 16 analog input pins</li>
+                  <li>• 256KB Flash memory</li>
+                  <li>• Untuk proyek kompleks</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="exercise-box bg-green-50 p-6 rounded-lg">
+            <h4 class="font-semibold text-green-800 mb-3">🎯 Aktivitas: Identifikasi Komponen Arduino</h4>
+            <p class="text-gray-700 mb-4">Amati gambar Arduino Uno dan identifikasi komponen-komponen berikut:</p>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <h5 class="font-semibold mb-2">Checklist Komponen:</h5>
+                <div class="space-y-2">
+                  <label class="flex items-center"> <input type="checkbox" class="mr-2" onchange="updateProgress()" /> USB Connector </label>
+                  <label class="flex items-center"> <input type="checkbox" class="mr-2" onchange="updateProgress()" /> Power Jack </label>
+                  <label class="flex items-center"> <input type="checkbox" class="mr-2" onchange="updateProgress()" /> Digital Pins (0-13) </label>
+                  <label class="flex items-center"> <input type="checkbox" class="mr-2" onchange="updateProgress()" /> Analog Pins (A0-A5) </label>
+                  <label class="flex items-center"> <input type="checkbox" class="mr-2" onchange="updateProgress()" /> Power Pins (5V, 3.3V, GND) </label>
+                  <label class="flex items-center"> <input type="checkbox" class="mr-2" onchange="updateProgress()" /> Reset Button </label>
+                  <label class="flex items-center"> <input type="checkbox" class="mr-2" onchange="updateProgress()" /> LED Built-in (L) </label>
+                  <label class="flex items-center"> <input type="checkbox" class="mr-2" onchange="updateProgress()" /> Microcontroller (ATmega328P) </label>
+                </div>
+              </div>
+              <div>
+                <h5 class="font-semibold mb-2">Pertanyaan Diskusi:</h5>
+                <div class="space-y-3 text-sm">
+                  <div class="bg-white p-3 rounded border">
+                    <p class="font-semibold">1. Mengapa Arduino Uno populer untuk pemula?</p>
+                    <textarea class="w-full mt-2 p-2 border rounded text-xs" rows="2" placeholder="Tulis jawaban Anda..."></textarea>
+                  </div>
+                  <div class="bg-white p-3 rounded border">
+                    <p class="font-semibold">2. Apa perbedaan pin digital dan analog?</p>
+                    <textarea class="w-full mt-2 p-2 border rounded text-xs" rows="2" placeholder="Tulis jawaban Anda..."></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Components Section -->
+      <section id="components" class="section hidden">
+        <div class="bg-white rounded-xl shadow-lg p-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">⚡ Komponen Arduino</h2>
+
+          <div class="mb-8">
+            <h3 class="text-2xl font-semibold mb-4">Komponen Dasar Arduino</h3>
+            <p class="text-gray-700 mb-6">Untuk membuat proyek Arduino, kita membutuhkan berbagai komponen elektronik. Mari pelajari komponen-komponen dasar dan fungsinya.</p>
+          </div>
+
+          <div class="mb-8">
+            <h4 class="text-xl font-semibold mb-4">🔌 Komponen Input</h4>
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="component-card p-6 rounded-lg">
+                <div class="text-4xl mb-3 text-center">🌡️</div>
+                <h5 class="text-lg font-semibold text-center mb-3">Sensor Suhu (DHT22)</h5>
+                <ul class="text-sm text-gray-700 space-y-1">
+                  <li>• Mengukur suhu dan kelembaban</li>
+                  <li>• Range: -40°C to 80°C</li>
+                  <li>• Akurasi: ±0.5°C</li>
+                  <li>• Interface: Digital</li>
+                  <li>• Voltage: 3.3V - 5V</li>
+                </ul>
+              </div>
+
+              <div class="component-card p-6 rounded-lg">
+                <div class="text-4xl mb-3 text-center">👆</div>
+                <h5 class="text-lg font-semibold text-center mb-3">Push Button</h5>
+                <ul class="text-sm text-gray-700 space-y-1">
+                  <li>• Input digital sederhana</li>
+                  <li>• Normally Open (NO)</li>
+                  <li>• Membutuhkan pull-up resistor</li>
+                  <li>• Debouncing diperlukan</li>
+                  <li>• Voltage: 3.3V - 5V</li>
+                </ul>
+              </div>
+
+              <div class="component-card p-6 rounded-lg">
+                <div class="text-4xl mb-3 text-center">💡</div>
+                <h5 class="text-lg font-semibold text-center mb-3">LDR (Light Sensor)</h5>
+                <ul class="text-sm text-gray-700 space-y-1">
+                  <li>• Light Dependent Resistor</li>
+                  <li>• Resistansi berubah dengan cahaya</li>
+                  <li>• Interface: Analog</li>
+                  <li>• Membutuhkan voltage divider</li>
+                  <li>• Range: 1MΩ (gelap) - 10kΩ (terang)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-8">
+            <h4 class="text-xl font-semibold mb-4">💡 Komponen Output</h4>
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="component-card p-6 rounded-lg">
+                <div class="text-4xl mb-3 text-center">💡</div>
+                <h5 class="text-lg font-semibold text-center mb-3">LED</h5>
+                <ul class="text-sm text-gray-700 space-y-1">
+                  <li>• Light Emitting Diode</li>
+                  <li>• Forward voltage: ~2V</li>
+                  <li>• Current: 20mA (max)</li>
+                  <li>• Membutuhkan current limiting resistor</li>
+                  <li>• Berbagai warna tersedia</li>
+                </ul>
+              </div>
+
+              <div class="component-card p-6 rounded-lg">
+                <div class="text-4xl mb-3 text-center">🔊</div>
+                <h5 class="text-lg font-semibold text-center mb-3">Buzzer</h5>
+                <ul class="text-sm text-gray-700 space-y-1">
+                  <li>• Active & Passive buzzer</li>
+                  <li>• Active: built-in oscillator</li>
+                  <li>• Passive: perlu PWM signal</li>
+                  <li>• Voltage: 3V - 5V</li>
+                  <li>• Aplikasi: alarm, notifikasi</li>
+                </ul>
+              </div>
+
+              <div class="component-card p-6 rounded-lg">
+                <div class="text-4xl mb-3 text-center">⚙️</div>
+                <h5 class="text-lg font-semibold text-center mb-3">Servo Motor</h5>
+                <ul class="text-sm text-gray-700 space-y-1">
+                  <li>• Motor dengan kontrol posisi</li>
+                  <li>• Range: 0° - 180°</li>
+                  <li>• Control signal: PWM</li>
+                  <li>• 3 wire: Power, Ground, Signal</li>
+                  <li>• Torque: varies by model</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="exercise-box bg-green-50 p-6 rounded-lg">
+            <h4 class="font-semibold text-green-800 mb-3">🎯 Latihan: Pemilihan Komponen</h4>
+            <p class="text-gray-700 mb-4">Untuk setiap skenario berikut, pilih komponen yang tepat:</p>
+
+            <div class="grid md:grid-cols-2 gap-6">
+              <div class="space-y-4">
+                <div class="bg-white p-4 rounded border">
+                  <h5 class="font-semibold mb-2">Skenario 1: Lampu Otomatis</h5>
+                  <p class="text-sm text-gray-600 mb-2">Lampu yang menyala otomatis saat gelap</p>
+                  <select class="w-full p-2 border rounded text-sm" onchange="checkComponentAnswer(this, 'ldr-led')">
+                    <option value="">Pilih komponen input...</option>
+                    <option value="ldr-led">LDR + LED</option>
+                    <option value="dht-buzzer">DHT22 + Buzzer</option>
+                    <option value="button-servo">Button + Servo</option>
+                  </select>
+                </div>
+
+                <div class="bg-white p-4 rounded border">
+                  <h5 class="font-semibold mb-2">Skenario 2: Alarm Suhu</h5>
+                  <p class="text-sm text-gray-600 mb-2">Alarm berbunyi jika suhu > 30°C</p>
+                  <select class="w-full p-2 border rounded text-sm" onchange="checkComponentAnswer(this, 'dht-buzzer')">
+                    <option value="">Pilih komponen...</option>
+                    <option value="ldr-led">LDR + LED</option>
+                    <option value="dht-buzzer">DHT22 + Buzzer</option>
+                    <option value="ultrasonic-lcd">Ultrasonic + LCD</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="space-y-4">
+                <div class="bg-white p-4 rounded border">
+                  <h5 class="font-semibold mb-2">Skenario 3: Pengukur Jarak</h5>
+                  <p class="text-sm text-gray-600 mb-2">Menampilkan jarak objek di depan sensor</p>
+                  <select class="w-full p-2 border rounded text-sm" onchange="checkComponentAnswer(this, 'ultrasonic-lcd')">
+                    <option value="">Pilih komponen...</option>
+                    <option value="ldr-led">LDR + LED</option>
+                    <option value="dht-buzzer">DHT22 + Buzzer</option>
+                    <option value="ultrasonic-lcd">Ultrasonic + LCD</option>
+                  </select>
+                </div>
+
+                <div class="bg-white p-4 rounded border">
+                  <h5 class="font-semibold mb-2">Skenario 4: Kontrol Servo</h5>
+                  <p class="text-sm text-gray-600 mb-2">Mengontrol posisi servo dengan knob</p>
+                  <select class="w-full p-2 border rounded text-sm" onchange="checkComponentAnswer(this, 'pot-servo')">
+                    <option value="">Pilih komponen...</option>
+                    <option value="pot-servo">Potentiometer + Servo</option>
+                    <option value="dht-buzzer">DHT22 + Buzzer</option>
+                    <option value="button-led">Button + LED</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Programming Section -->
+      <section id="programming" class="section hidden">
+        <div class="bg-white rounded-xl shadow-lg p-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">💻 Pemrograman Arduino</h2>
+
+          <div class="mb-8">
+            <h3 class="text-2xl font-semibold mb-4">Struktur Program Arduino</h3>
+            <p class="text-gray-700 mb-6">Program Arduino (sketch) memiliki struktur dasar yang terdiri dari dua fungsi utama: setup() dan loop(). Mari pelajari struktur dan sintaks pemrograman Arduino.</p>
+
+            <div class="concept-box bg-blue-50 p-6 rounded-lg mb-6">
+              <h4 class="font-semibold text-blue-800 mb-3">🏗️ Struktur Dasar Arduino</h4>
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h5 class="font-semibold mb-2">Template Dasar:</h5>
+                  <div class="code-editor p-4 rounded text-sm">
+                    <span class="comment-highlight">// Deklarasi variabel global</span><br />
+                    <span class="keyword-highlight">int</span> <span class="syntax-highlight">ledPin</span> = <span class="string-highlight">13</span>;<br /><br />
+                    <span class="keyword-highlight">void</span> <span class="syntax-highlight">setup</span>() {<br />
+                    &nbsp;&nbsp;<span class="comment-highlight">// Kode inisialisasi (dijalankan sekali)</span><br />
+                    &nbsp;&nbsp;<span class="syntax-highlight">pinMode</span>(ledPin, <span class="keyword-highlight">OUTPUT</span>);<br />
+                    }<br /><br />
+                    <span class="keyword-highlight">void</span> <span class="syntax-highlight">loop</span>() {<br />
+                    &nbsp;&nbsp;<span class="comment-highlight">// Kode utama (dijalankan berulang)</span><br />
+                    &nbsp;&nbsp;<span class="syntax-highlight">digitalWrite</span>(ledPin, <span class="keyword-highlight">HIGH</span>);<br />
+                    &nbsp;&nbsp;<span class="syntax-highlight">delay</span>(<span class="string-highlight">1000</span>);<br />
+                    }
+                  </div>
+                </div>
+                <div>
+                  <h5 class="font-semibold mb-2">Penjelasan Fungsi:</h5>
+                  <ul class="text-sm text-gray-700 space-y-2">
+                    <li><strong>setup():</strong> Dijalankan sekali saat Arduino dinyalakan atau di-reset</li>
+                    <li><strong>loop():</strong> Dijalankan berulang-ulang setelah setup() selesai</li>
+                    <li><strong>pinMode():</strong> Mengatur pin sebagai INPUT atau OUTPUT</li>
+                    <li><strong>digitalWrite():</strong> Menulis nilai HIGH atau LOW ke pin digital</li>
+                    <li><strong>delay():</strong> Menunda eksekusi dalam milidetik</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-8">
+            <h4 class="text-xl font-semibold mb-4">🎮 Contoh Program: LED Blink</h4>
+            <div class="interactive-demo p-6 rounded-lg">
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h5 class="font-semibold mb-3">Program Sederhana:</h5>
+                  <textarea id="blink-code" class="w-full h-64 p-4 code-editor rounded border text-sm" readonly>
+// Program LED Blink - Contoh Dasar Arduino
+// LED terhubung ke pin 13 (built-in LED)
+
+int ledPin = 13;  // Pin untuk LED
+
+void setup() {
+  // Inisialisasi pin LED sebagai output
+  pinMode(ledPin, OUTPUT);
+  
+  // Mulai komunikasi serial untuk debugging
+  Serial.begin(9600);
+  Serial.println("Program LED Blink dimulai!");
+}
+
+void loop() {
+  // Nyalakan LED
+  digitalWrite(ledPin, HIGH);
+  Serial.println("LED ON");
+  delay(1000);  // Tunggu 1 detik
+  
+  // Matikan LED
+  digitalWrite(ledPin, LOW);
+  Serial.println("LED OFF");
+  delay(1000);  // Tunggu 1 detik
+}</textarea
+                  >
+                  <button onclick="explainCode('blink')" class="mt-3 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Jelaskan Kode</button>
+                </div>
+                <div>
+                  <h5 class="font-semibold mb-3">Penjelasan:</h5>
+                  <div id="blink-explanation" class="output-terminal p-4 rounded">Klik "Jelaskan Kode" untuk melihat penjelasan detail...</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="exercise-box bg-green-50 p-6 rounded-lg">
+            <h4 class="font-semibold text-green-800 mb-3">✏️ Latihan: Modifikasi Program</h4>
+            <p class="text-gray-700 mb-4">Modifikasi program LED Blink dengan requirements berikut:</p>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <textarea
+                  id="exercise-programming"
+                  class="w-full h-48 p-3 code-editor rounded border text-sm"
+                  placeholder="// Modifikasi program LED Blink:
+// 1. Tambahkan LED kedua di pin 12
+// 2. LED berkedip bergantian (saat LED1 ON, LED2 OFF)
+// 3. Kecepatan blink dapat diatur dengan potentiometer di A0
+// 4. Tampilkan status di Serial Monitor
+
+int led1Pin = 13;
+int led2Pin = 12;
+int potPin = A0;
+
+void setup() {
+  // Tulis kode setup di sini
+}
+
+void loop() {
+  // Tulis kode loop di sini
+}"
+                ></textarea>
+                <button onclick="checkProgrammingExercise()" class="mt-3 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Periksa Jawaban</button>
+              </div>
+              <div>
+                <div id="programming-exercise-result" class="output-terminal p-4 rounded">Tulis kode dan klik "Periksa Jawaban"</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Wokwi Section -->
+      <section id="wokwi" class="section hidden">
+        <div class="bg-white rounded-xl shadow-lg p-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">🌐 Simulasi dengan Wokwi</h2>
+
+          <div class="mb-8">
+            <h3 class="text-2xl font-semibold mb-4">Apa itu Wokwi?</h3>
+            <p class="text-gray-700 mb-6">
+              Wokwi adalah simulator Arduino online yang memungkinkan kita membuat, menguji, dan berbagi proyek Arduino tanpa memerlukan hardware fisik. Platform ini sangat berguna untuk pembelajaran dan prototyping.
+            </p>
+
+            <div class="concept-box bg-blue-50 p-6 rounded-lg mb-6">
+              <h4 class="font-semibold text-blue-800 mb-3">🌟 Keunggulan Wokwi</h4>
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h5 class="font-semibold mb-2">Fitur Utama:</h5>
+                  <ul class="text-sm text-gray-700 space-y-1">
+                    <li>• Simulasi real-time yang akurat</li>
+                    <li>• Library komponen yang lengkap</li>
+                    <li>• Code editor dengan syntax highlighting</li>
+                    <li>• Serial Monitor terintegrasi</li>
+                    <li>• Sharing proyek mudah</li>
+                    <li>• Gratis untuk penggunaan dasar</li>
+                  </ul>
+                </div>
+                <div>
+                  <h5 class="font-semibold mb-2">Keuntungan untuk Pembelajaran:</h5>
+                  <ul class="text-sm text-gray-700 space-y-1">
+                    <li>• Tidak perlu hardware fisik</li>
+                    <li>• Eksperimen tanpa risiko kerusakan</li>
+                    <li>• Debugging lebih mudah</li>
+                    <li>• Akses dari mana saja</li>
+                    <li>• Kolaborasi online</li>
+                    <li>• Dokumentasi visual</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-8">
+            <h4 class="text-xl font-semibold mb-4">🚀 Memulai dengan Wokwi</h4>
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="component-card p-6 rounded-lg text-center">
+                <div class="text-4xl mb-3">1️⃣</div>
+                <h5 class="text-lg font-semibold mb-3">Buka Wokwi</h5>
+                <p class="text-sm text-gray-700 mb-3">Kunjungi wokwi.com dan buat akun gratis</p>
+                <a href="https://wokwi.com" target="_blank" class="inline-block px-4 py-2 bg-blue-600 text-white rounded text-sm hover:bg-blue-700">Buka Wokwi</a>
+              </div>
+
+              <div class="component-card p-6 rounded-lg text-center">
+                <div class="text-4xl mb-3">2️⃣</div>
+                <h5 class="text-lg font-semibold mb-3">Pilih Template</h5>
+                <p class="text-sm text-gray-700 mb-3">Mulai dengan template Arduino Uno atau buat proyek baru</p>
+                <button class="px-4 py-2 bg-green-600 text-white rounded text-sm hover:bg-green-700">New Project</button>
+              </div>
+
+              <div class="component-card p-6 rounded-lg text-center">
+                <div class="text-4xl mb-3">3️⃣</div>
+                <h5 class="text-lg font-semibold text-center mb-3">Mulai Coding</h5>
+                <p class="text-sm text-gray-700 mb-3">Tulis kode, tambah komponen, dan jalankan simulasi</p>
+                <button class="px-4 py-2 bg-purple-600 text-white rounded text-sm hover:bg-purple-700">Start Coding</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="exercise-box bg-green-50 p-6 rounded-lg">
+            <h4 class="font-semibold text-green-800 mb-3">🎯 Praktikum: Buat Proyek di Wokwi</h4>
+            <p class="text-gray-700 mb-4">Buat proyek "Smart Night Light" dengan spesifikasi berikut:</p>
+
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h5 class="font-semibold mb-3">Spesifikasi Proyek:</h5>
+                <ul class="space-y-2 text-sm text-gray-700">
+                  <li class="flex items-start">
+                    <span class="text-green-500 mr-2">✓</span>
+                    LED menyala otomatis saat gelap (LDR < threshold)
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-green-500 mr-2">✓</span>
+                    Brightness LED dapat diatur dengan potentiometer
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-green-500 mr-2">✓</span>
+                    Push button untuk override manual ON/OFF
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-green-500 mr-2">✓</span>
+                    Serial Monitor menampilkan status dan nilai sensor
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h5 class="font-semibold mb-3">Checklist Pengerjaan:</h5>
+                <div class="space-y-2">
+                  <label class="flex items-center text-sm"> <input type="checkbox" class="mr-2" onchange="updateProgress()" /> Buat proyek baru di Wokwi </label>
+                  <label class="flex items-center text-sm"> <input type="checkbox" class="mr-2" onchange="updateProgress()" /> Tambahkan semua komponen </label>
+                  <label class="flex items-center text-sm"> <input type="checkbox" class="mr-2" onchange="updateProgress()" /> Hubungkan komponen dengan benar </label>
+                  <label class="flex items-center text-sm"> <input type="checkbox" class="mr-2" onchange="updateProgress()" /> Tulis kode program </label>
+                  <label class="flex items-center text-sm"> <input type="checkbox" class="mr-2" onchange="updateProgress()" /> Test simulasi berjalan </label>
+                  <label class="flex items-center text-sm"> <input type="checkbox" class="mr-2" onchange="updateProgress()" /> Verifikasi semua fitur bekerja </label>
+                </div>
+
+                <div class="mt-6 p-4 bg-white rounded border">
+                  <h6 class="font-semibold mb-2">Submit Proyek:</h6>
+                  <input type="url" placeholder="Paste link Wokwi project di sini..." class="w-full p-2 border rounded text-sm mb-2" />
+                  <button class="px-4 py-2 bg-green-600 text-white rounded text-sm hover:bg-green-700">Submit Project</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects" class="section hidden">
+        <div class="bg-white rounded-xl shadow-lg p-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">🚀 Proyek Arduino</h2>
+
+          <div class="mb-8">
+            <h3 class="text-2xl font-semibold mb-4">Proyek-proyek Praktis</h3>
+            <p class="text-gray-700 mb-6">Mari implementasikan pengetahuan Arduino dalam proyek-proyek nyata yang bermanfaat. Setiap proyek dirancang untuk mengaplikasikan konsep yang telah dipelajari.</p>
+          </div>
+
+          <!-- Project 1: Smart Lamp -->
+          <div class="mb-8">
+            <div class="project-showcase p-6 rounded-lg mb-6">
+              <h4 class="text-2xl font-bold mb-4">💡 Proyek 1: Lampu Otomatis Pintar</h4>
+              <p class="text-lg opacity-90">Lampu yang menyala otomatis saat gelap dengan kontrol kecerahan manual</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+              <div class="concept-box bg-blue-50 p-6 rounded-lg">
+                <h5 class="text-lg font-semibold text-blue-800 mb-3">📋 Spesifikasi</h5>
+                <ul class="space-y-2 text-sm text-gray-700">
+                  <li class="flex items-start">
+                    <span class="text-blue-500 mr-2">•</span>
+                    <strong>Input:</strong> LDR (sensor cahaya), Potentiometer (kontrol brightness)
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-blue-500 mr-2">•</span>
+                    <strong>Output:</strong> LED dengan PWM brightness control
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-blue-500 mr-2">•</span>
+                    <strong>Fitur:</strong> Auto ON/OFF berdasarkan cahaya ambient
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-blue-500 mr-2">•</span>
+                    <strong>Display:</strong> Serial Monitor untuk monitoring nilai sensor
+                  </li>
+                </ul>
+              </div>
+
+              <div class="concept-box bg-green-50 p-6 rounded-lg">
+                <h5 class="text-lg font-semibold text-green-800 mb-3">🔧 Komponen</h5>
+                <ul class="space-y-2 text-sm text-gray-700">
+                  <li>• Arduino Uno</li>
+                  <li>• LDR (Light Dependent Resistor)</li>
+                  <li>• Resistor 10kΩ (untuk LDR)</li>
+                  <li>• LED + Resistor 220Ω</li>
+                  <li>• Potentiometer 10kΩ</li>
+                  <li>• Breadboard & Jumper wires</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2: Temperature Alarm -->
+          <div class="mb-8">
+            <div class="project-showcase p-6 rounded-lg mb-6">
+              <h4 class="text-2xl font-bold mb-4">🌡️ Proyek 2: Sistem Alarm Suhu</h4>
+              <p class="text-lg opacity-90">Monitor suhu ruangan dengan alarm visual dan audio</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+              <div class="concept-box bg-red-50 p-6 rounded-lg">
+                <h5 class="text-lg font-semibold text-red-800 mb-3">📋 Spesifikasi</h5>
+                <ul class="space-y-2 text-sm text-gray-700">
+                  <li class="flex items-start">
+                    <span class="text-red-500 mr-2">•</span>
+                    <strong>Sensor:</strong> DHT22 untuk suhu dan kelembaban
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-red-500 mr-2">•</span>
+                    <strong>Alarm:</strong> Buzzer + LED merah jika suhu > 30°C
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-red-500 mr-2">•</span>
+                    <strong>Indikator:</strong> LED hijau untuk status normal
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-red-500 mr-2">•</span>
+                    <strong>Display:</strong> LCD 16x2 untuk menampilkan data
+                  </li>
+                </ul>
+              </div>
+
+              <div class="concept-box bg-yellow-50 p-6 rounded-lg">
+                <h5 class="text-lg font-semibold text-yellow-800 mb-3">🔧 Komponen</h5>
+                <ul class="space-y-2 text-sm text-gray-700">
+                  <li>• Arduino Uno</li>
+                  <li>• DHT22 Temperature & Humidity Sensor</li>
+                  <li>• LCD 16x2 (I2C)</li>
+                  <li>• Buzzer</li>
+                  <li>• LED Merah + LED Hijau</li>
+                  <li>• Resistor 220Ω (2x)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="exercise-box bg-green-50 p-6 rounded-lg">
+            <h4 class="font-semibold text-green-800 mb-3">🎯 Challenge: Pilih Proyek Anda</h4>
+            <p class="text-gray-700 mb-4">Pilih salah satu proyek berikut untuk dikerjakan:</p>
+
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="challenge-box bg-orange-50 p-6 rounded-lg">
+                <h5 class="text-lg font-semibold text-orange-800 mb-3">🏠 Smart Home Controller</h5>
+                <p class="text-sm text-gray-700 mb-3">Sistem kontrol rumah pintar dengan multiple sensor dan actuator</p>
+                <ul class="text-xs text-gray-600 space-y-1 mb-3">
+                  <li>• Sensor suhu, cahaya, dan gerak</li>
+                  <li>• Kontrol lampu, kipas, dan alarm</li>
+                  <li>• Interface LCD dan button</li>
+                  <li>• Data logging ke Serial</li>
+                </ul>
+                <span class="inline-block px-3 py-1 bg-orange-200 text-orange-800 rounded-full text-xs">Advanced</span>
+              </div>
+
+              <div class="challenge-box bg-teal-50 p-6 rounded-lg">
+                <h5 class="text-lg font-semibold text-teal-800 mb-3">🚗 Parking Sensor System</h5>
+                <p class="text-sm text-gray-700 mb-3">Sistem sensor parkir dengan indikator visual dan audio</p>
+                <ul class="text-xs text-gray-600 space-y-1 mb-3">
+                  <li>• Multiple ultrasonic sensors</li>
+                  <li>• LED strip indicator</li>
+                  <li>• Buzzer dengan pola berbeda</li>
+                  <li>• Display jarak real-time</li>
+                </ul>
+                <span class="inline-block px-3 py-1 bg-teal-200 text-teal-800 rounded-full text-xs">Intermediate</span>
+              </div>
+
+              <div class="challenge-box bg-pink-50 p-6 rounded-lg">
+                <h5 class="text-lg font-semibold text-pink-800 mb-3">🌱 Plant Monitoring System</h5>
+                <p class="text-sm text-gray-700 mb-3">Monitor kondisi tanaman dengan sensor kelembaban tanah</p>
+                <ul class="text-xs text-gray-600 space-y-1 mb-3">
+                  <li>• Soil moisture sensor</li>
+                  <li>• Automatic watering system</li>
+                  <li>• Light and temperature monitoring</li>
+                  <li>• Alert system</li>
+                </ul>
+                <span class="inline-block px-3 py-1 bg-pink-200 text-pink-800 rounded-full text-xs">Intermediate</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Assessment Section -->
+      <section id="assessment" class="section hidden">
+        <div class="bg-white rounded-xl shadow-lg p-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">📝 Asesmen Interaktif</h2>
+
+          <div class="mb-8">
+            <h3 class="text-2xl font-semibold mb-4">Evaluasi Pembelajaran</h3>
+            <p class="text-gray-700 mb-6">Uji pemahaman Anda tentang Single Board Computer dan Arduino melalui berbagai jenis asesmen interaktif.</p>
+          </div>
+
+          <!-- Quiz Section -->
+          <div class="mb-8">
+            <h4 class="text-xl font-semibold mb-4">🧠 Kuis Pilihan Ganda</h4>
+            <div id="quiz-container" class="space-y-6">
+              <!-- Quiz questions will be generated by JavaScript -->
+            </div>
+            <div class="mt-6 text-center">
+              <button onclick="submitQuiz()" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-semibold">Submit Kuis</button>
+            </div>
+            <div id="quiz-result" class="mt-4 p-4 rounded-lg hidden"></div>
+          </div>
+
+          <!-- Practical Assessment -->
+          <div class="mb-8">
+            <h4 class="text-xl font-semibold mb-4">🔧 Asesmen Praktik</h4>
+            <div class="exercise-box bg-blue-50 p-6 rounded-lg">
+              <h5 class="text-lg font-semibold text-blue-800 mb-3">Tugas Praktik: Sistem Monitoring Lingkungan</h5>
+              <p class="text-gray-700 mb-4">Buat sistem monitoring lingkungan dengan spesifikasi berikut:</p>
+
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h6 class="font-semibold mb-3">Requirements:</h6>
+                  <ul class="space-y-2 text-sm text-gray-700">
+                    <li class="flex items-start">
+                      <span class="text-blue-500 mr-2">1.</span>
+                      Monitor suhu dan kelembaban menggunakan DHT22
+                    </li>
+                    <li class="flex items-start">
+                      <span class="text-blue-500 mr-2">2.</span>
+                      Monitor intensitas cahaya menggunakan LDR
+                    </li>
+                    <li class="flex items-start">
+                      <span class="text-blue-500 mr-2">3.</span>
+                      Tampilkan data di LCD 16x2
+                    </li>
+                    <li class="flex items-start">
+                      <span class="text-blue-500 mr-2">4.</span>
+                      LED indikator: Hijau (normal), Kuning (warning), Merah (danger)
+                    </li>
+                    <li class="flex items-start">
+                      <span class="text-blue-500 mr-2">5.</span>
+                      Buzzer alarm jika suhu > 35°C atau kelembaban < 30%
+                    </li>
+                    <li class="flex items-start">
+                      <span class="text-blue-500 mr-2">6.</span>
+                      Data logging ke Serial Monitor setiap 5 detik
+                    </li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h6 class="font-semibold mb-3">Rubrik Penilaian:</h6>
+                  <div class="space-y-3 text-sm">
+                    <div class="bg-white p-3 rounded border">
+                      <div class="flex justify-between items-center mb-1">
+                        <span class="font-semibold">Rangkaian (25%)</span>
+                        <select class="text-xs border rounded px-2 py-1">
+                          <option>Pilih Nilai</option>
+                          <option value="4">Excellent (90-100)</option>
+                          <option value="3">Good (80-89)</option>
+                          <option value="2">Fair (70-79)</option>
+                          <option value="1">Poor (60-69)</option>
+                        </select>
+                      </div>
+                      <p class="text-xs text-gray-600">Koneksi komponen benar dan rapi</p>
+                    </div>
+
+                    <div class="bg-white p-3 rounded border">
+                      <div class="flex justify-between items-center mb-1">
+                        <span class="font-semibold">Program (35%)</span>
+                        <select class="text-xs border rounded px-2 py-1">
+                          <option>Pilih Nilai</option>
+                          <option value="4">Excellent (90-100)</option>
+                          <option value="3">Good (80-89)</option>
+                          <option value="2">Fair (70-79)</option>
+                          <option value="1">Poor (60-69)</option>
+                        </select>
+                      </div>
+                      <p class="text-xs text-gray-600">Kode berfungsi sesuai requirements</p>
+                    </div>
+
+                    <div class="bg-white p-3 rounded border">
+                      <div class="flex justify-between items-center mb-1">
+                        <span class="font-semibold">Fungsionalitas (25%)</span>
+                        <select class="text-xs border rounded px-2 py-1">
+                          <option>Pilih Nilai</option>
+                          <option value="4">Excellent (90-100)</option>
+                          <option value="3">Good (80-89)</option>
+                          <option value="2">Fair (70-79)</option>
+                          <option value="1">Poor (60-69)</option>
+                        </select>
+                      </div>
+                      <p class="text-xs text-gray-600">Semua fitur bekerja dengan baik</p>
+                    </div>
+
+                    <div class="bg-white p-3 rounded border">
+                      <div class="flex justify-between items-center mb-1">
+                        <span class="font-semibold">Dokumentasi (15%)</span>
+                        <select class="text-xs border rounded px-2 py-1">
+                          <option>Pilih Nilai</option>
+                          <option value="4">Excellent (90-100)</option>
+                          <option value="3">Good (80-89)</option>
+                          <option value="2">Fair (70-79)</option>
+                          <option value="1">Poor (60-69)</option>
+                        </select>
+                      </div>
+                      <p class="text-xs text-gray-600">Komentar kode dan laporan lengkap</p>
+                    </div>
+                  </div>
+
+                  <button onclick="calculatePracticalScore()" class="mt-4 w-full px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Hitung Nilai</button>
+                  <div id="practical-score" class="mt-3 p-3 bg-gray-100 rounded text-center hidden">
+                    <span class="font-semibold">Nilai Akhir: </span>
+                    <span id="final-score" class="text-2xl font-bold text-blue-600">-</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Portfolio Assessment -->
+          <div class="mb-8">
+            <h4 class="text-xl font-semibold mb-4">📁 Portfolio Digital</h4>
+            <div class="exercise-box bg-purple-50 p-6 rounded-lg">
+              <h5 class="text-lg font-semibold text-purple-800 mb-3">Dokumentasi Proyek</h5>
+              <p class="text-gray-700 mb-4">Buat dokumentasi lengkap untuk semua proyek yang telah dikerjakan:</p>
+
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h6 class="font-semibold mb-3">Komponen Portfolio:</h6>
+                  <div class="space-y-2">
+                    <label class="flex items-center text-sm"> <input type="checkbox" class="mr-2" onchange="updateProgress()" /> Link proyek Wokwi (minimum 3 proyek) </label>
+                    <label class="flex items-center text-sm"> <input type="checkbox" class="mr-2" onchange="updateProgress()" /> Screenshot rangkaian dan simulasi </label>
+                    <label class="flex items-center text-sm"> <input type="checkbox" class="mr-2" onchange="updateProgress()" /> Source code dengan komentar lengkap </label>
+                    <label class="flex items-center text-sm"> <input type="checkbox" class="mr-2" onchange="updateProgress()" /> Video demo proyek berjalan </label>
+                    <label class="flex items-center text-sm"> <input type="checkbox" class="mr-2" onchange="updateProgress()" /> Analisis dan refleksi pembelajaran </label>
+                    <label class="flex items-center text-sm"> <input type="checkbox" class="mr-2" onchange="updateProgress()" /> Troubleshooting dan solusi masalah </label>
+                  </div>
+                </div>
+
+                <div>
+                  <h6 class="font-semibold mb-3">Template Dokumentasi:</h6>
+                  <div class="bg-white p-4 rounded border text-sm">
+                    <h6 class="font-semibold mb-2">Judul Proyek: [Nama Proyek]</h6>
+                    <div class="space-y-2 text-xs text-gray-600">
+                      <p><strong>Tujuan:</strong> [Jelaskan tujuan proyek]</p>
+                      <p><strong>Komponen:</strong> [List komponen yang digunakan]</p>
+                      <p><strong>Rangkaian:</strong> [Diagram/foto rangkaian]</p>
+                      <p><strong>Kode Program:</strong> [Source code dengan komentar]</p>
+                      <p><strong>Hasil:</strong> [Screenshot/video hasil]</p>
+                      <p><strong>Analisis:</strong> [Analisis hasil dan pembelajaran]</p>
+                      <p><strong>Kesimpulan:</strong> [Kesimpulan dan saran pengembangan]</p>
+                    </div>
+                  </div>
+
+                  <div class="mt-4">
+                    <label class="block text-sm font-semibold mb-2">Upload Portfolio (PDF/Link):</label>
+                    <input type="url" placeholder="Link Google Drive/OneDrive portfolio..." class="w-full p-2 border rounded text-sm mb-2" />
+                    <button class="w-full px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700">Submit Portfolio</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Final Assessment Summary -->
+          <div class="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-lg">
+            <h4 class="text-xl font-semibold mb-4">📊 Ringkasan Penilaian</h4>
+            <div class="grid md:grid-cols-4 gap-4">
+              <div class="bg-white p-4 rounded-lg text-center">
+                <div class="text-2xl font-bold text-blue-600" id="quiz-score">-</div>
+                <div class="text-sm text-gray-600">Kuis (25%)</div>
+              </div>
+              <div class="bg-white p-4 rounded-lg text-center">
+                <div class="text-2xl font-bold text-green-600" id="practical-score-display">-</div>
+                <div class="text-sm text-gray-600">Praktik (35%)</div>
+              </div>
+              <div class="bg-white p-4 rounded-lg text-center">
+                <div class="text-2xl font-bold text-purple-600" id="portfolio-score">-</div>
+                <div class="text-sm text-gray-600">Portfolio (25%)</div>
+              </div>
+              <div class="bg-white p-4 rounded-lg text-center">
+                <div class="text-2xl font-bold text-orange-600" id="participation-score">-</div>
+                <div class="text-sm text-gray-600">Partisipasi (15%)</div>
+              </div>
+            </div>
+
+            <div class="mt-6 text-center">
+              <div class="text-3xl font-bold text-gray-800 mb-2">Nilai Akhir: <span id="total-score" class="text-blue-600">-</span></div>
+              <div class="text-lg text-gray-600" id="grade-letter">-</div>
+              <button onclick="calculateFinalGrade()" class="mt-4 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 font-semibold">Hitung Nilai Akhir</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+      <div class="container mx-auto px-6 text-center">
+        <h3 class="text-xl font-semibold mb-4">Sistem Komputer: Single Board & Arduino</h3>
+        <p class="text-gray-300 mb-4">Materi Pembelajaran Informatika Kelas 12 Fase F</p>
+        <div class="flex justify-center space-x-6 text-sm">
+          <span>📧 Email: pak.zunny@gmail.com</span>
+          <span>📱 WhatsApp: +62 856 4260 0917</span>
+        </div>
+        <div class="mt-4 text-xs text-gray-400">© 2025 Materi Pembelajaran Arduino. @pak_zunny ❤️ SMANDUNg.</div>
+      </div>
+    </footer>
+
+    <script>
+      // Global variables
+      let currentSection = "overview";
+      let quizAnswers = {};
+      let quizQuestions = [
+        {
+          id: 1,
+          question: "Apa yang dimaksud dengan Single Board Computer (SBC)?",
+          options: ["Komputer yang hanya memiliki satu processor", "Komputer lengkap yang dibangun dalam satu papan sirkuit", "Komputer yang hanya bisa menjalankan satu program", "Komputer dengan satu port USB"],
+          correct: 1,
+          explanation: "SBC adalah komputer lengkap yang mengintegrasikan CPU, RAM, storage, dan I/O dalam satu papan sirkuit.",
+        },
+        {
+          id: 2,
+          question: "Berapa jumlah pin digital I/O pada Arduino Uno?",
+          options: ["12 pin", "13 pin", "14 pin", "16 pin"],
+          correct: 2,
+          explanation: "Arduino Uno memiliki 14 pin digital I/O (pin 0-13), dimana 6 pin diantaranya mendukung PWM.",
+        },
+        {
+          id: 3,
+          question: "Fungsi utama dari fungsi setup() dalam program Arduino adalah:",
+          options: ["Menjalankan kode berulang-ulang", "Menginisialisasi pin dan variabel (dijalankan sekali)", "Membaca input dari sensor", "Mengontrol output ke actuator"],
+          correct: 1,
+          explanation: "Fungsi setup() dijalankan sekali saat Arduino dinyalakan untuk inisialisasi pin, variabel, dan konfigurasi awal.",
+        },
+        {
+          id: 4,
+          question: "Komponen apa yang dibutuhkan untuk membuat rangkaian LED dengan Arduino?",
+          options: ["Hanya LED", "LED dan resistor", "LED, resistor, dan capacitor", "LED, resistor, dan transistor"],
+          correct: 1,
+          explanation: "LED membutuhkan resistor sebagai current limiting untuk mencegah kerusakan akibat arus berlebih.",
+        },
+        {
+          id: 5,
+          question: "Apa keunggulan utama menggunakan Wokwi untuk pembelajaran Arduino?",
+          options: ["Lebih cepat dari hardware asli", "Tidak memerlukan hardware fisik dan aman untuk eksperimen", "Hanya bisa digunakan untuk proyek sederhana", "Tidak mendukung Serial Monitor"],
+          correct: 1,
+          explanation: "Wokwi memungkinkan simulasi Arduino tanpa hardware fisik, aman untuk eksperimen, dan mudah diakses dari mana saja.",
+        },
+      ];
+
+      // Navigation functions
+      function showSection(sectionId) {
+        // Hide all sections
+        document.querySelectorAll(".section").forEach((section) => {
+          section.classList.add("hidden");
+        });
+
+        // Show selected section
+        document.getElementById(sectionId).classList.remove("hidden");
+
+        // Update navigation buttons
+        document.querySelectorAll(".nav-btn").forEach((btn) => {
+          btn.classList.remove("bg-blue-100", "text-blue-700");
+          btn.classList.add("text-gray-600", "hover:bg-gray-100");
+        });
+
+        event.target.classList.remove("text-gray-600", "hover:bg-gray-100");
+        event.target.classList.add("bg-blue-100", "text-blue-700");
+
+        currentSection = sectionId;
+        updateProgress();
+      }
+
+      // Progress tracking
+      function updateProgress() {
+        const totalCheckboxes = document.querySelectorAll('input[type="checkbox"]').length;
+        const checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked').length;
+        const progress = totalCheckboxes > 0 ? Math.round((checkedBoxes / totalCheckboxes) * 100) : 0;
+
+        document.getElementById("progress-bar").style.width = progress + "%";
+        document.getElementById("progress-text").textContent = progress + "%";
+      }
+
+      // Code explanation functions
+      function explainCode(type) {
+        const explanationDiv = document.getElementById(type + "-explanation");
+
+        if (type === "blink") {
+          explanationDiv.innerHTML = `
+                    <div class="text-green-400">Program LED Blink - Penjelasan:</div>
+                    <div class="mt-2 space-y-1 text-sm">
+                        <div><span class="text-yellow-400">Line 4:</span> Deklarasi variabel ledPin = 13 (pin built-in LED)</div>
+                        <div><span class="text-yellow-400">Line 7:</span> pinMode() mengatur pin 13 sebagai OUTPUT</div>
+                        <div><span class="text-yellow-400">Line 9-10:</span> Serial.begin() memulai komunikasi serial 9600 baud</div>
+                        <div><span class="text-yellow-400">Line 15:</span> digitalWrite(HIGH) menyalakan LED (5V)</div>
+                        <div><span class="text-yellow-400">Line 17:</span> delay(1000) menunda 1 detik</div>
+                        <div><span class="text-yellow-400">Line 20:</span> digitalWrite(LOW) mematikan LED (0V)</div>
+                        <div class="mt-3 text-cyan-400">Hasil: LED berkedip ON-OFF setiap 1 detik</div>
+                    </div>
+                `;
+        }
+      }
+
+      // Component selection check
+      function checkComponentAnswer(selectElement, correctAnswer) {
+        const selectedValue = selectElement.value;
+
+        if (selectedValue === correctAnswer) {
+          selectElement.classList.remove("border-red-500");
+          selectElement.classList.add("border-green-500", "bg-green-50");
+          selectElement.parentElement.classList.add("success-highlight");
+        } else if (selectedValue !== "") {
+          selectElement.classList.remove("border-green-500");
+          selectElement.classList.add("border-red-500", "bg-red-50");
+          selectElement.parentElement.classList.add("error-highlight");
+        }
+      }
+
+      // Programming exercise check
+      function checkProgrammingExercise() {
+        const code = document.getElementById("exercise-programming").value;
+        const resultDiv = document.getElementById("programming-exercise-result");
+
+        // Simple code validation
+        const hasSetup = code.includes("void setup()");
+        const hasLoop = code.includes("void loop()");
+        const hasPinMode = code.includes("pinMode");
+        const hasAnalogRead = code.includes("analogRead");
+        const hasSerial = code.includes("Serial");
+
+        let score = 0;
+        let feedback = '<div class="text-green-400">Hasil Pemeriksaan Kode:</div><div class="mt-2 space-y-1 text-sm">';
+
+        if (hasSetup) {
+          score += 20;
+          feedback += '<div class="text-green-400">✓ Fungsi setup() ditemukan</div>';
+        } else {
+          feedback += '<div class="text-red-400">✗ Fungsi setup() tidak ditemukan</div>';
+        }
+
+        if (hasLoop) {
+          score += 20;
+          feedback += '<div class="text-green-400">✓ Fungsi loop() ditemukan</div>';
+        } else {
+          feedback += '<div class="text-red-400">✗ Fungsi loop() tidak ditemukan</div>';
+        }
+
+        if (hasPinMode) {
+          score += 20;
+          feedback += '<div class="text-green-400">✓ pinMode() digunakan</div>';
+        } else {
+          feedback += '<div class="text-red-400">✗ pinMode() tidak ditemukan</div>';
+        }
+
+        if (hasAnalogRead) {
+          score += 20;
+          feedback += '<div class="text-green-400">✓ analogRead() untuk potentiometer</div>';
+        } else {
+          feedback += '<div class="text-red-400">✗ analogRead() tidak ditemukan</div>';
+        }
+
+        if (hasSerial) {
+          score += 20;
+          feedback += '<div class="text-green-400">✓ Serial communication digunakan</div>';
+        } else {
+          feedback += '<div class="text-red-400">✗ Serial communication tidak ditemukan</div>';
+        }
+
+        feedback += `</div><div class="mt-3 text-cyan-400">Skor: ${score}/100</div>`;
+
+        if (score >= 80) {
+          feedback += '<div class="text-green-400">Excellent! Kode Anda sudah baik.</div>';
+        } else if (score >= 60) {
+          feedback += '<div class="text-yellow-400">Good! Masih ada yang bisa diperbaiki.</div>';
+        } else {
+          feedback += '<div class="text-red-400">Perlu perbaikan. Periksa kembali requirements.</div>';
+        }
+
+        resultDiv.innerHTML = feedback;
+      }
+
+      // Quiz functions
+      function generateQuiz() {
+        const container = document.getElementById("quiz-container");
+        container.innerHTML = "";
+
+        quizQuestions.forEach((q, index) => {
+          const questionDiv = document.createElement("div");
+          questionDiv.className = "bg-gray-50 p-6 rounded-lg";
+          questionDiv.innerHTML = `
+                    <h5 class="font-semibold mb-4">${index + 1}. ${q.question}</h5>
+                    <div class="space-y-2">
+                        ${q.options
+                          .map(
+                            (option, optIndex) => `
+                            <label class="quiz-option flex items-center p-3 border rounded cursor-pointer" onclick="selectQuizOption(${q.id}, ${optIndex})">
+                                <input type="radio" name="q${q.id}" value="${optIndex}" class="mr-3">
+                                <span>${option}</span>
+                            </label>
+                        `
+                          )
+                          .join("")}
+                    </div>
+                `;
+          container.appendChild(questionDiv);
+        });
+      }
+
+      function selectQuizOption(questionId, optionIndex) {
+        quizAnswers[questionId] = optionIndex;
+
+        // Update visual feedback
+        const questionDiv = event.currentTarget.closest(".bg-gray-50");
+        questionDiv.querySelectorAll(".quiz-option").forEach((option) => {
+          option.classList.remove("selected");
+        });
+        event.currentTarget.classList.add("selected");
+      }
+
+      function submitQuiz() {
+        let correct = 0;
+        let total = quizQuestions.length;
+
+        quizQuestions.forEach((q) => {
+          const userAnswer = quizAnswers[q.id];
+          const questionDiv = document.querySelector(`input[name="q${q.id}"]`).closest(".bg-gray-50");
+          const options = questionDiv.querySelectorAll(".quiz-option");
+
+          options.forEach((option, index) => {
+            option.classList.remove("correct", "incorrect");
+            if (index === q.correct) {
+              option.classList.add("correct");
+            } else if (index === userAnswer && userAnswer !== q.correct) {
+              option.classList.add("incorrect");
+            }
+          });
+
+          if (userAnswer === q.correct) {
+            correct++;
+          }
+        });
+
+        const score = Math.round((correct / total) * 100);
+        const resultDiv = document.getElementById("quiz-result");
+        resultDiv.classList.remove("hidden");
+
+        let resultClass = "bg-red-100 border-red-500 text-red-700";
+        let resultText = "Perlu Perbaikan";
+
+        if (score >= 80) {
+          resultClass = "bg-green-100 border-green-500 text-green-700";
+          resultText = "Excellent!";
+        } else if (score >= 70) {
+          resultClass = "bg-yellow-100 border-yellow-500 text-yellow-700";
+          resultText = "Good!";
+        }
+
+        resultDiv.className = `mt-4 p-4 rounded-lg border-2 ${resultClass}`;
+        resultDiv.innerHTML = `
+                <div class="text-center">
+                    <div class="text-2xl font-bold mb-2">${resultText}</div>
+                    <div class="text-lg">Skor: ${correct}/${total} (${score}%)</div>
+                </div>
+            `;
+
+        document.getElementById("quiz-score").textContent = score;
+      }
+
+      // Practical assessment
+      function calculatePracticalScore() {
+        const selects = document.querySelectorAll("#assessment select");
+        let totalScore = 0;
+        let weights = [25, 35, 25, 15]; // Weights for each component
+
+        selects.forEach((select, index) => {
+          const value = parseInt(select.value) || 0;
+          const componentScore = (value / 4) * 100; // Convert to percentage
+          totalScore += componentScore * (weights[index] / 100);
+        });
+
+        const finalScore = Math.round(totalScore);
+        document.getElementById("final-score").textContent = finalScore;
+        document.getElementById("practical-score").classList.remove("hidden");
+        document.getElementById("practical-score-display").textContent = finalScore;
+      }
+
+      // Final grade calculation
+      function calculateFinalGrade() {
+        const quizScore = parseInt(document.getElementById("quiz-score").textContent) || 0;
+        const practicalScore = parseInt(document.getElementById("practical-score-display").textContent) || 0;
+        const portfolioScore = 85; // Default portfolio score
+        const participationScore = 90; // Default participation score
+
+        document.getElementById("portfolio-score").textContent = portfolioScore;
+        document.getElementById("participation-score").textContent = participationScore;
+
+        const finalScore = Math.round(quizScore * 0.25 + practicalScore * 0.35 + portfolioScore * 0.25 + participationScore * 0.15);
+
+        let gradeLetter = "F";
+        if (finalScore >= 90) gradeLetter = "A";
+        else if (finalScore >= 80) gradeLetter = "B";
+        else if (finalScore >= 70) gradeLetter = "C";
+        else if (finalScore >= 60) gradeLetter = "D";
+
+        document.getElementById("total-score").textContent = finalScore;
+        document.getElementById("grade-letter").textContent = `Grade: ${gradeLetter}`;
+      }
+
+      // Initialize the page
+      document.addEventListener("DOMContentLoaded", function () {
+        generateQuiz();
+        updateProgress();
+      });
+    </script>
+    <script>
+      (function () {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement("script");
+            d.innerHTML =
+              "window.__CF$cv$params={r:'977bbe70e6a63df6',t:'MTc1NjYzNTA4OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName("head")[0].appendChild(d);
+          }
+        }
+        if (document.body) {
+          var a = document.createElement("iframe");
+          a.height = 1;
+          a.width = 1;
+          a.style.position = "absolute";
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = "none";
+          a.style.visibility = "hidden";
+          document.body.appendChild(a);
+          if ("loading" !== document.readyState) c();
+          else if (window.addEventListener) document.addEventListener("DOMContentLoaded", c);
+          else {
+            var e = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (b) {
+              e(b);
+              "loading" !== document.readyState && ((document.onreadystatechange = e), c());
+            };
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>

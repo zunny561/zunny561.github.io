@@ -1,0 +1,2337 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algoritma Pemrograman Python - Kelas 12</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .python-bg { background: linear-gradient(135deg, #306998 0%, #ffd43b 100%); }
+        .code-editor { 
+            font-family: 'Courier New', monospace; 
+            background: #1e1e1e;
+            color: #d4d4d4;
+        }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .progress-bar { transition: width 0.5s ease; }
+        .fade-in { animation: fadeIn 0.6s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .syntax-highlight { color: #569cd6; }
+        .string-highlight { color: #ce9178; }
+        .comment-highlight { color: #6a9955; }
+        .keyword-highlight { color: #c586c0; }
+        .output-terminal { 
+            background: #000; 
+            color: #00ff00; 
+            font-family: 'Courier New', monospace;
+            min-height: 200px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .interactive-demo { border: 2px dashed #3b82f6; transition: all 0.3s ease; }
+        .interactive-demo:hover { border-color: #1d4ed8; background: #eff6ff; }
+        .concept-box { border-left: 4px solid #3b82f6; }
+        .exercise-box { border: 2px solid #10b981; }
+        .challenge-box { border: 2px solid #f59e0b; }
+        .error-highlight { background: #fee2e2; border: 1px solid #fca5a5; }
+        .success-highlight { background: #dcfce7; border: 1px solid #86efac; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="python-bg text-white py-8">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-center mb-4">
+                <div class="text-6xl mr-4">🐍</div>
+                <div>
+                    <h1 class="text-4xl font-bold">Algoritma Pemrograman Python</h1>
+                    <p class="text-xl opacity-90">Variabel, Tipe Data, Function & Perulangan</p>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm">Kelas 12 Fase F • Informatika</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="bg-white shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-sm font-medium text-gray-600">Progress Pembelajaran</span>
+                <span class="text-sm font-medium text-gray-600" id="progress-text">0%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+                <div class="progress-bar bg-blue-600 h-2 rounded-full" id="progress-bar" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="container mx-auto px-6">
+            <div class="flex space-x-4 overflow-x-auto py-4">
+                <button onclick="showSection('overview')" class="nav-btn whitespace-nowrap px-4 py-2 rounded-lg font-medium transition-colors bg-blue-100 text-blue-700">📋 Gambaran Umum</button>
+                <button onclick="showSection('variables')" class="nav-btn whitespace-nowrap px-4 py-2 rounded-lg font-medium transition-colors text-gray-600 hover:bg-gray-100">📦 Variabel</button>
+                <button onclick="showSection('datatypes')" class="nav-btn whitespace-nowrap px-4 py-2 rounded-lg font-medium transition-colors text-gray-600 hover:bg-gray-100">🏷️ Tipe Data</button>
+                <button onclick="showSection('functions')" class="nav-btn whitespace-nowrap px-4 py-2 rounded-lg font-medium transition-colors text-gray-600 hover:bg-gray-100">⚙️ Function</button>
+                <button onclick="showSection('conditionals')" class="nav-btn whitespace-nowrap px-4 py-2 rounded-lg font-medium transition-colors text-gray-600 hover:bg-gray-100">🤔 Percabangan (IF)</button>
+                <button onclick="showSection('loops')" class="nav-btn whitespace-nowrap px-4 py-2 rounded-lg font-medium transition-colors text-gray-600 hover:bg-gray-100">🔄 Perulangan</button>
+                <button onclick="showSection('playground')" class="nav-btn whitespace-nowrap px-4 py-2 rounded-lg font-medium transition-colors text-gray-600 hover:bg-gray-100">🎮 Playground</button>
+                <button onclick="showSection('assessment')" class="nav-btn whitespace-nowrap px-4 py-2 rounded-lg font-medium transition-colors text-gray-600 hover:bg-gray-100">📝 Asesmen</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8">
+        <!-- Overview Section -->
+        <section id="overview" class="section fade-in">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">🎯 Capaian Pembelajaran</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="concept-box bg-blue-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-blue-800 mb-3">Kompetensi Dasar</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span>Mengenal dan membuat variabel dalam Python</li>
+                            <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span>Memahami berbagai tipe data (int, float, string, boolean, list)</li>
+                            <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span>Membuat dan menggunakan function</li>
+                            <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span>Menerapkan percabangan (if, elif, else) untuk pengambilan keputusan</li>
+                            <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span>Menerapkan perulangan (for, while) dalam program</li>
+                        </ul>
+                    </div>
+                    <div class="concept-box bg-green-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-green-800 mb-3">Tujuan Pembelajaran</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start"><span class="text-green-500 mr-2">🎯</span>Mampu menulis program Python sederhana</li>
+                            <li class="flex items-start"><span class="text-green-500 mr-2">🎯</span>Memahami konsep pemrograman dasar</li>
+                            <li class="flex items-start"><span class="text-green-500 mr-2">🎯</span>Dapat memecahkan masalah dengan algoritma</li>
+                            <li class="flex items-start"><span class="text-green-500 mr-2">🎯</span>Menguasai struktur kontrol program</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="card-hover bg-white rounded-xl shadow-lg p-6 text-center">
+                    <div class="text-4xl mb-4">📦</div>
+                    <h3 class="text-xl font-semibold mb-3">Variabel</h3>
+                    <p class="text-gray-600">Tempat menyimpan data dalam program</p>
+                </div>
+                <div class="card-hover bg-white rounded-xl shadow-lg p-6 text-center">
+                    <div class="text-4xl mb-4">🏷️</div>
+                    <h3 class="text-xl font-semibold mb-3">Tipe Data</h3>
+                    <p class="text-gray-600">Jenis-jenis data yang dapat diproses</p>
+                </div>
+                <div class="card-hover bg-white rounded-xl shadow-lg p-6 text-center">
+                    <div class="text-4xl mb-4">⚙️</div>
+                    <h3 class="text-xl font-semibold mb-3">Function</h3>
+                    <p class="text-gray-600">Blok kode yang dapat digunakan berulang</p>
+                </div>
+                <div class="card-hover bg-white rounded-xl shadow-lg p-6 text-center">
+                    <div class="text-4xl mb-4">🤔</div>
+                    <h3 class="text-xl font-semibold mb-3">Percabangan</h3>
+                    <p class="text-gray-600">Membuat keputusan dalam program</p>
+                </div>
+                <div class="card-hover bg-white rounded-xl shadow-lg p-6 text-center">
+                    <div class="text-4xl mb-4">🔄</div>
+                    <h3 class="text-xl font-semibold mb-3">Perulangan</h3>
+                    <p class="text-gray-600">Menjalankan kode berulang kali</p>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-yellow-50 p-6 rounded-lg">
+                <h3 class="text-xl font-semibold text-yellow-800 mb-4">🚀 Mengapa Belajar Python?</h3>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="text-center">
+                        <div class="text-2xl mb-2">😊</div>
+                        <h4 class="font-semibold mb-1">Mudah Dipelajari</h4>
+                        <p class="text-sm text-gray-600">Syntax yang sederhana dan mudah dipahami</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl mb-2">🌍</div>
+                        <h4 class="font-semibold mb-1">Populer</h4>
+                        <p class="text-sm text-gray-600">Digunakan di berbagai bidang teknologi</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl mb-2">🔧</div>
+                        <h4 class="font-semibold mb-1">Serbaguna</h4>
+                        <p class="text-sm text-gray-600">Web, AI, Data Science, dan lainnya</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Variables Section -->
+        <section id="variables" class="section hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">📦 Variabel dalam Python</h2>
+                
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold mb-4">Apa itu Variabel?</h3>
+                    <p class="text-gray-700 mb-6">Variabel adalah tempat untuk menyimpan data dalam program. Bayangkan variabel seperti kotak yang diberi label untuk menyimpan berbagai jenis barang.</p>
+                    
+                    <div class="concept-box bg-blue-50 p-6 rounded-lg mb-6">
+                        <h4 class="font-semibold text-blue-800 mb-3">💡 Konsep Dasar Variabel</h4>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h5 class="font-semibold mb-2">Membuat Variabel:</h5>
+                                <div class="code-editor p-4 rounded text-sm">
+                                    <span class="comment-highlight"># Membuat variabel</span><br>
+                                    <span class="syntax-highlight">nama</span> = <span class="string-highlight">"Budi"</span><br>
+                                    <span class="syntax-highlight">umur</span> = <span class="keyword-highlight">17</span><br>
+                                    <span class="syntax-highlight">tinggi</span> = <span class="keyword-highlight">165.5</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold mb-2">Aturan Penamaan:</h5>
+                                <ul class="text-sm text-gray-700 space-y-1">
+                                    <li>• Dimulai dengan huruf atau underscore (_)</li>
+                                    <li>• Tidak boleh dimulai dengan angka</li>
+                                    <li>• Tidak boleh menggunakan spasi</li>
+                                    <li>• Case sensitive (nama ≠ Nama)</li>
+                                    <li>• Tidak boleh menggunakan keyword Python</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="text-xl font-semibold mb-4">🎮 Demo Interaktif: Membuat Variabel</h4>
+                    <div class="interactive-demo p-6 rounded-lg">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h5 class="font-semibold mb-3">Coba Edit Kode:</h5>
+                                <textarea id="variable-code" class="w-full h-32 p-4 code-editor rounded border text-sm" placeholder="Tulis kode Python di sini...">
+# Contoh variabel
+nama_siswa = "Ahmad"
+nilai_matematika = 85
+lulus = True
+
+print("Nama:", nama_siswa)
+print("Nilai:", nilai_matematika)
+print("Lulus:", lulus)</textarea>
+                                <button onclick="runVariableCode()" class="mt-3 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Jalankan Kode</button>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold mb-3">Output:</h5>
+                                <div id="variable-output" class="output-terminal p-4 rounded">
+                                    Klik "Jalankan Kode" untuk melihat hasil...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="text-xl font-semibold mb-4">🔄 Mengubah Nilai Variabel</h4>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h5 class="font-semibold mb-2">Contoh Penggunaan:</h5>
+                                <div class="code-editor p-4 rounded text-sm">
+                                    <span class="comment-highlight"># Variabel dapat diubah nilainya</span><br>
+                                    <span class="syntax-highlight">skor</span> = <span class="keyword-highlight">0</span><br>
+                                    <span class="keyword-highlight">print</span>(<span class="string-highlight">"Skor awal:"</span>, skor)<br><br>
+                                    <span class="syntax-highlight">skor</span> = <span class="keyword-highlight">10</span><br>
+                                    <span class="keyword-highlight">print</span>(<span class="string-highlight">"Skor setelah diubah:"</span>, skor)<br><br>
+                                    <span class="syntax-highlight">skor</span> = skor + <span class="keyword-highlight">5</span><br>
+                                    <span class="keyword-highlight">print</span>(<span class="string-highlight">"Skor final:"</span>, skor)
+                                </div>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold mb-2">Operator Assignment:</h5>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex justify-between">
+                                        <code class="bg-gray-200 px-2 py-1 rounded">x = 5</code>
+                                        <span>Assignment biasa</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <code class="bg-gray-200 px-2 py-1 rounded">x += 3</code>
+                                        <span>x = x + 3</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <code class="bg-gray-200 px-2 py-1 rounded">x -= 2</code>
+                                        <span>x = x - 2</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <code class="bg-gray-200 px-2 py-1 rounded">x *= 4</code>
+                                        <span>x = x * 4</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise-box bg-green-50 p-6 rounded-lg">
+                    <h4 class="font-semibold text-green-800 mb-3">✏️ Latihan: Variabel</h4>
+                    <p class="text-gray-700 mb-4">Buatlah program yang menyimpan informasi siswa dan menampilkannya:</p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <textarea id="exercise-variables" class="w-full h-32 p-3 code-editor rounded border text-sm" placeholder="# Tulis kode Anda di sini
+# Buat variabel untuk:
+# - nama_lengkap
+# - kelas  
+# - umur
+# - hobi
+# Kemudian tampilkan semua informasi"></textarea>
+                            <button onclick="checkVariableExercise()" class="mt-3 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Periksa Jawaban</button>
+                        </div>
+                        <div>
+                            <div id="variable-exercise-result" class="output-terminal p-4 rounded">
+                                Tulis kode dan klik "Periksa Jawaban"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Types Section -->
+        <section id="datatypes" class="section hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">🏷️ Tipe Data dalam Python</h2>
+                
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold mb-4">Jenis-jenis Tipe Data</h3>
+                    <p class="text-gray-700 mb-6">Python memiliki berbagai tipe data untuk menyimpan berbagai jenis informasi. Setiap tipe data memiliki karakteristik dan kegunaan yang berbeda.</p>
+                    
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                        <div class="concept-box bg-red-50 p-6 rounded-lg">
+                            <h4 class="text-lg font-semibold text-red-800 mb-3">🔢 Integer (int)</h4>
+                            <p class="text-sm text-gray-700 mb-3">Bilangan bulat positif atau negatif</p>
+                            <div class="code-editor p-3 rounded text-xs">
+                                umur = 17<br>
+                                suhu = -5<br>
+                                tahun = 2024
+                            </div>
+                        </div>
+                        
+                        <div class="concept-box bg-blue-50 p-6 rounded-lg">
+                            <h4 class="text-lg font-semibold text-blue-800 mb-3">🔢 Float</h4>
+                            <p class="text-sm text-gray-700 mb-3">Bilangan desimal</p>
+                            <div class="code-editor p-3 rounded text-xs">
+                                tinggi = 165.5<br>
+                                pi = 3.14159<br>
+                                harga = 25000.0
+                            </div>
+                        </div>
+                        
+                        <div class="concept-box bg-green-50 p-6 rounded-lg">
+                            <h4 class="text-lg font-semibold text-green-800 mb-3">📝 String (str)</h4>
+                            <p class="text-sm text-gray-700 mb-3">Teks atau karakter</p>
+                            <div class="code-editor p-3 rounded text-xs">
+                                nama = "Siti"<br>
+                                alamat = 'Jakarta'<br>
+                                pesan = """Hello World"""
+                            </div>
+                        </div>
+                        
+                        <div class="concept-box bg-yellow-50 p-6 rounded-lg">
+                            <h4 class="text-lg font-semibold text-yellow-800 mb-3">✅ Boolean (bool)</h4>
+                            <p class="text-sm text-gray-700 mb-3">Nilai True atau False</p>
+                            <div class="code-editor p-3 rounded text-xs">
+                                lulus = True<br>
+                                hadir = False<br>
+                                aktif = True
+                            </div>
+                        </div>
+                        
+                        <div class="concept-box bg-purple-50 p-6 rounded-lg">
+                            <h4 class="text-lg font-semibold text-purple-800 mb-3">📋 List</h4>
+                            <p class="text-sm text-gray-700 mb-3">Kumpulan data yang berurutan</p>
+                            <div class="code-editor p-3 rounded text-xs">
+                                nilai = [85, 90, 78]<br>
+                                nama = ["Ali", "Budi"]<br>
+                                campuran = [1, "text", True]
+                            </div>
+                        </div>
+                        
+                        <div class="concept-box bg-indigo-50 p-6 rounded-lg">
+                            <h4 class="text-lg font-semibold text-indigo-800 mb-3">📖 Dictionary (dict)</h4>
+                            <p class="text-sm text-gray-700 mb-3">Data dengan pasangan key-value</p>
+                            <div class="code-editor p-3 rounded text-xs">
+                                siswa = {<br>
+                                &nbsp;&nbsp;"nama": "Ana",<br>
+                                &nbsp;&nbsp;"umur": 17<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="text-xl font-semibold mb-4">🔍 Mengecek Tipe Data</h4>
+                    <div class="interactive-demo p-6 rounded-lg">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h5 class="font-semibold mb-3">Coba Berbagai Tipe Data:</h5>
+                                <textarea id="datatype-code" class="w-full h-40 p-4 code-editor rounded border text-sm">
+# Mengecek tipe data dengan type()
+nama = "Python"
+umur = 25
+tinggi = 170.5
+lulus = True
+hobi = ["coding", "gaming", "reading"]
+
+print("Tipe data nama:", type(nama))
+print("Tipe data umur:", type(umur))
+print("Tipe data tinggi:", type(tinggi))
+print("Tipe data lulus:", type(lulus))
+print("Tipe data hobi:", type(hobi))</textarea>
+                                <button onclick="runDatatypeCode()" class="mt-3 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Jalankan Kode</button>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold mb-3">Output:</h5>
+                                <div id="datatype-output" class="output-terminal p-4 rounded">
+                                    Klik "Jalankan Kode" untuk melihat hasil...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="text-xl font-semibold mb-4">🔄 Konversi Tipe Data</h4>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h5 class="font-semibold mb-2">Fungsi Konversi:</h5>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex justify-between">
+                                        <code class="bg-gray-200 px-2 py-1 rounded">int()</code>
+                                        <span>Konversi ke integer</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <code class="bg-gray-200 px-2 py-1 rounded">float()</code>
+                                        <span>Konversi ke float</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <code class="bg-gray-200 px-2 py-1 rounded">str()</code>
+                                        <span>Konversi ke string</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <code class="bg-gray-200 px-2 py-1 rounded">bool()</code>
+                                        <span>Konversi ke boolean</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold mb-2">Contoh Konversi:</h5>
+                                <div class="code-editor p-4 rounded text-sm">
+                                    <span class="comment-highlight"># Konversi tipe data</span><br>
+                                    angka_str = <span class="string-highlight">"123"</span><br>
+                                    angka_int = <span class="keyword-highlight">int</span>(angka_str)<br>
+                                    angka_float = <span class="keyword-highlight">float</span>(angka_str)<br><br>
+                                    <span class="keyword-highlight">print</span>(angka_int + <span class="keyword-highlight">10</span>)<br>
+                                    <span class="keyword-highlight">print</span>(angka_float + <span class="keyword-highlight">10.5</span>)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise-box bg-green-50 p-6 rounded-lg">
+                    <h4 class="font-semibold text-green-800 mb-3">✏️ Latihan: Tipe Data</h4>
+                    <p class="text-gray-700 mb-4">Buatlah program kalkulator sederhana yang meminta input dari user:</p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <textarea id="exercise-datatypes" class="w-full h-40 p-3 code-editor rounded border text-sm" placeholder="# Buat kalkulator sederhana
+# 1. Minta input angka pertama (gunakan input())
+# 2. Minta input angka kedua  
+# 3. Konversi ke float
+# 4. Hitung dan tampilkan hasil penjumlahan, pengurangan, perkalian, pembagian
+
+# Contoh:
+# angka1 = float(input('Masukkan angka pertama: '))"></textarea>
+                            <button onclick="checkDatatypeExercise()" class="mt-3 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Periksa Jawaban</button>
+                        </div>
+                        <div>
+                            <div id="datatype-exercise-result" class="output-terminal p-4 rounded">
+                                Tulis kode dan klik "Periksa Jawaban"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conditionals Section -->
+        <section id="conditionals" class="section hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">🤔 Percabangan (IF Statement)</h2>
+                
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold mb-4">Apa itu Percabangan?</h3>
+                    <p class="text-gray-700 mb-6">Percabangan memungkinkan program membuat keputusan berdasarkan kondisi tertentu. Seperti kehidupan sehari-hari, program dapat memilih jalur yang berbeda tergantung situasi.</p>
+                    
+                    <div class="concept-box bg-blue-50 p-6 rounded-lg mb-6">
+                        <h4 class="font-semibold text-blue-800 mb-3">🏗️ Struktur Percabangan</h4>
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div>
+                                <h5 class="font-semibold mb-2">IF Sederhana:</h5>
+                                <div class="code-editor p-4 rounded text-sm">
+                                    <span class="keyword-highlight">if</span> kondisi:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment-highlight"># kode jika True</span><br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">print</span>(<span class="string-highlight">"Kondisi benar"</span>)
+                                </div>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold mb-2">IF-ELSE:</h5>
+                                <div class="code-editor p-4 rounded text-sm">
+                                    <span class="keyword-highlight">if</span> kondisi:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment-highlight"># jika True</span><br>
+                                    <span class="keyword-highlight">else</span>:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment-highlight"># jika False</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold mb-2">IF-ELIF-ELSE:</h5>
+                                <div class="code-editor p-4 rounded text-sm">
+                                    <span class="keyword-highlight">if</span> kondisi1:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment-highlight"># pilihan 1</span><br>
+                                    <span class="keyword-highlight">elif</span> kondisi2:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment-highlight"># pilihan 2</span><br>
+                                    <span class="keyword-highlight">else</span>:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment-highlight"># pilihan default</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="text-xl font-semibold mb-4">🔍 Operator Perbandingan</h4>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h5 class="font-semibold mb-3">Operator Dasar:</h5>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex justify-between">
+                                        <code class="bg-gray-200 px-2 py-1 rounded">==</code>
+                                        <span>Sama dengan</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <code class="bg-gray-200 px-2 py-1 rounded">!=</code>
+                                        <span>Tidak sama dengan</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <code class="bg-gray-200 px-2 py-1 rounded">&gt;</code>
+                                        <span>Lebih besar dari</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <code class="bg-gray-200 px-2 py-1 rounded">&lt;</code>
+                                        <span>Lebih kecil dari</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <code class="bg-gray-200 px-2 py-1 rounded">&gt;=</code>
+                                        <span>Lebih besar atau sama dengan</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <code class="bg-gray-200 px-2 py-1 rounded">&lt;=</code>
+                                        <span>Lebih kecil atau sama dengan</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold mb-3">Operator Logika:</h5>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex justify-between">
+                                        <code class="bg-gray-200 px-2 py-1 rounded">and</code>
+                                        <span>Kedua kondisi harus True</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <code class="bg-gray-200 px-2 py-1 rounded">or</code>
+                                        <span>Salah satu kondisi True</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <code class="bg-gray-200 px-2 py-1 rounded">not</code>
+                                        <span>Membalik nilai boolean</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <code class="bg-gray-200 px-2 py-1 rounded">in</code>
+                                        <span>Cek keberadaan dalam list/string</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <code class="bg-gray-200 px-2 py-1 rounded">is</code>
+                                        <span>Cek identitas objek</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="text-xl font-semibold mb-4">🎮 Demo Interaktif: Sistem Penilaian</h4>
+                    <div class="interactive-demo p-6 rounded-lg">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h5 class="font-semibold mb-3">Contoh Percabangan:</h5>
+                                <textarea id="conditional-code" class="w-full h-56 p-4 code-editor rounded border text-sm">
+# Sistem penilaian dengan percabangan
+def tentukan_grade(nilai):
+    if nilai >= 90:
+        return "A - Excellent!"
+    elif nilai >= 80:
+        return "B - Good!"
+    elif nilai >= 70:
+        return "C - Average"
+    elif nilai >= 60:
+        return "D - Below Average"
+    else:
+        return "E - Needs Improvement"
+
+# Test dengan berbagai nilai
+nilai_siswa = [95, 85, 75, 65, 45]
+nama_siswa = ["Ali", "Budi", "Citra", "Dina", "Eko"]
+
+print("=== Hasil Penilaian ===")
+for i in range(len(nilai_siswa)):
+    nama = nama_siswa[i]
+    nilai = nilai_siswa[i]
+    grade = tentukan_grade(nilai)
+    
+    # Percabangan untuk status kelulusan
+    if nilai >= 70:
+        status = "LULUS ✓"
+    else:
+        status = "TIDAK LULUS ✗"
+    
+    print(f"{nama}: {nilai} - {grade} ({status})")
+
+# Contoh percabangan dengan multiple conditions
+print("\n=== Analisis Tambahan ===")
+total_lulus = 0
+for nilai in nilai_siswa:
+    if nilai >= 70:
+        total_lulus += 1
+
+print(f"Jumlah siswa yang lulus: {total_lulus}/{len(nilai_siswa)}")
+
+# Percabangan dengan operator logika
+if total_lulus > 0 and total_lulus == len(nilai_siswa):
+    print("Semua siswa lulus! 🎉")
+elif total_lulus > len(nilai_siswa) // 2:
+    print("Mayoritas siswa lulus 👍")
+else:
+    print("Perlu perbaikan pembelajaran 📚")</textarea>
+                                <button onclick="runConditionalCode()" class="mt-3 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Jalankan Kode</button>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold mb-3">Output:</h5>
+                                <div id="conditional-output" class="output-terminal p-4 rounded">
+                                    Klik "Jalankan Kode" untuk melihat hasil...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="text-xl font-semibold mb-4">🎯 Nested IF (Percabangan Bersarang)</h4>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h5 class="font-semibold mb-2">Contoh Nested IF:</h5>
+                                <div class="code-editor p-4 rounded text-sm">
+                                    umur = <span class="keyword-highlight">17</span><br>
+                                    nilai = <span class="keyword-highlight">85</span><br><br>
+                                    <span class="keyword-highlight">if</span> umur >= <span class="keyword-highlight">17</span>:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">if</span> nilai >= <span class="keyword-highlight">80</span>:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">print</span>(<span class="string-highlight">"Bisa ikut olimpiade!"</span>)<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">else</span>:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">print</span>(<span class="string-highlight">"Perlu belajar lebih giat"</span>)<br>
+                                    <span class="keyword-highlight">else</span>:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">print</span>(<span class="string-highlight">"Belum cukup umur"</span>)
+                                </div>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold mb-2">Alternatif dengan AND:</h5>
+                                <div class="code-editor p-4 rounded text-sm">
+                                    umur = <span class="keyword-highlight">17</span><br>
+                                    nilai = <span class="keyword-highlight">85</span><br><br>
+                                    <span class="keyword-highlight">if</span> umur >= <span class="keyword-highlight">17</span> <span class="keyword-highlight">and</span> nilai >= <span class="keyword-highlight">80</span>:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">print</span>(<span class="string-highlight">"Bisa ikut olimpiade!"</span>)<br>
+                                    <span class="keyword-highlight">elif</span> umur >= <span class="keyword-highlight">17</span>:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">print</span>(<span class="string-highlight">"Perlu belajar lebih giat"</span>)<br>
+                                    <span class="keyword-highlight">else</span>:<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">print</span>(<span class="string-highlight">"Belum cukup umur"</span>)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="text-xl font-semibold mb-4">🎲 Contoh Aplikasi Nyata</h4>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="concept-box bg-green-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-green-800 mb-3">Sistem Login</h5>
+                            <div class="code-editor p-4 rounded text-sm mb-3">
+                                username = <span class="string-highlight">"admin"</span><br>
+                                password = <span class="string-highlight">"123456"</span><br><br>
+                                <span class="keyword-highlight">if</span> username == <span class="string-highlight">"admin"</span> <span class="keyword-highlight">and</span> password == <span class="string-highlight">"123456"</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">print</span>(<span class="string-highlight">"Login berhasil!"</span>)<br>
+                                <span class="keyword-highlight">else</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">print</span>(<span class="string-highlight">"Login gagal!"</span>)
+                            </div>
+                        </div>
+                        
+                        <div class="concept-box bg-yellow-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-yellow-800 mb-3">Kalkulator Diskon</h5>
+                            <div class="code-editor p-4 rounded text-sm mb-3">
+                                harga = <span class="keyword-highlight">100000</span><br>
+                                member = <span class="keyword-highlight">True</span><br><br>
+                                <span class="keyword-highlight">if</span> harga >= <span class="keyword-highlight">200000</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;diskon = <span class="keyword-highlight">0.2</span>  <span class="comment-highlight"># 20%</span><br>
+                                <span class="keyword-highlight">elif</span> harga >= <span class="keyword-highlight">100000</span> <span class="keyword-highlight">and</span> member:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;diskon = <span class="keyword-highlight">0.1</span>  <span class="comment-highlight"># 10%</span><br>
+                                <span class="keyword-highlight">else</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;diskon = <span class="keyword-highlight">0</span><br><br>
+                                total = harga * (<span class="keyword-highlight">1</span> - diskon)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="text-xl font-semibold mb-4">🎮 Demo Interaktif: Validasi Input</h4>
+                    <div class="interactive-demo p-6 rounded-lg">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h5 class="font-semibold mb-3">Sistem Validasi:</h5>
+                                <textarea id="validation-code" class="w-full h-48 p-4 code-editor rounded border text-sm">
+# Sistem validasi input
+def validasi_email(email):
+    if "@" in email and "." in email:
+        if email.count("@") == 1:
+            return "Email valid ✓"
+        else:
+            return "Email tidak boleh lebih dari 1 @"
+    else:
+        return "Email harus mengandung @ dan ."
+
+def validasi_password(password):
+    if len(password) < 8:
+        return "Password minimal 8 karakter"
+    elif not any(c.isupper() for c in password):
+        return "Password harus ada huruf besar"
+    elif not any(c.islower() for c in password):
+        return "Password harus ada huruf kecil"
+    elif not any(c.isdigit() for c in password):
+        return "Password harus ada angka"
+    else:
+        return "Password kuat ✓"
+
+# Test validasi
+emails = ["user@gmail.com", "invalid-email", "user@@gmail.com"]
+passwords = ["123", "Password", "password123", "Password123"]
+
+print("=== Validasi Email ===")
+for email in emails:
+    print(f"{email}: {validasi_email(email)}")
+
+print("\n=== Validasi Password ===")
+for pwd in passwords:
+    print(f"{pwd}: {validasi_password(pwd)}")</textarea>
+                                <button onclick="runValidationCode()" class="mt-3 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Jalankan Kode</button>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold mb-3">Output:</h5>
+                                <div id="validation-output" class="output-terminal p-4 rounded">
+                                    Klik "Jalankan Kode" untuk melihat hasil...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise-box bg-green-50 p-6 rounded-lg">
+                    <h4 class="font-semibold text-green-800 mb-3">✏️ Latihan: Percabangan</h4>
+                    <p class="text-gray-700 mb-4">Buatlah sistem rekomendasi aktivitas berdasarkan cuaca dan suhu:</p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <textarea id="exercise-conditionals" class="w-full h-56 p-3 code-editor rounded border text-sm" placeholder="# Buat function rekomendasi_aktivitas(cuaca, suhu)
+# Parameter:
+# - cuaca: 'cerah', 'hujan', 'berawan', 'badai'
+# - suhu: angka dalam celsius
+
+# Aturan rekomendasi:
+# 1. Jika badai: 'Tetap di dalam rumah'
+# 2. Jika hujan: 'Bawa payung jika keluar'
+# 3. Jika cerah dan suhu > 30: 'Berenang atau ke pantai'
+# 4. Jika cerah dan suhu 20-30: 'Olahraga outdoor'
+# 5. Jika cerah dan suhu < 20: 'Jalan-jalan santai'
+# 6. Jika berawan dan suhu > 25: 'Piknik di taman'
+# 7. Jika berawan dan suhu <= 25: 'Nonton film di rumah'
+
+def rekomendasi_aktivitas(cuaca, suhu):
+    # Tulis kode di sini
+    pass
+
+# Test dengan berbagai kondisi
+kondisi = [
+    ('cerah', 35), ('hujan', 25), ('berawan', 28),
+    ('badai', 20), ('cerah', 15), ('berawan', 22)
+]
+
+for cuaca, suhu in kondisi:
+    rekomendasi = rekomendasi_aktivitas(cuaca, suhu)
+    print(f'Cuaca: {cuaca}, Suhu: {suhu}°C -> {rekomendasi}')"</textarea>
+                            <button onclick="checkConditionalExercise()" class="mt-3 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Periksa Jawaban</button>
+                        </div>
+                        <div>
+                            <div id="conditional-exercise-result" class="output-terminal p-4 rounded">
+                                Tulis kode dan klik "Periksa Jawaban"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Functions Section -->
+        <section id="functions" class="section hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">⚙️ Function dalam Python</h2>
+                
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold mb-4">Apa itu Function?</h3>
+                    <p class="text-gray-700 mb-6">Function adalah blok kode yang dapat digunakan berulang kali. Seperti mesin yang menerima input, memproses, dan menghasilkan output.</p>
+                    
+                    <div class="concept-box bg-blue-50 p-6 rounded-lg mb-6">
+                        <h4 class="font-semibold text-blue-800 mb-3">🏗️ Struktur Function</h4>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h5 class="font-semibold mb-2">Syntax Dasar:</h5>
+                                <div class="code-editor p-4 rounded text-sm">
+                                    <span class="keyword-highlight">def</span> <span class="syntax-highlight">nama_function</span>(parameter):<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment-highlight"># kode function</span><br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">return</span> hasil
+                                </div>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold mb-2">Contoh Sederhana:</h5>
+                                <div class="code-editor p-4 rounded text-sm">
+                                    <span class="keyword-highlight">def</span> <span class="syntax-highlight">sapa</span>(nama):<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">return</span> <span class="string-highlight">f"Halo, {nama}!"</span><br><br>
+                                    <span class="comment-highlight"># Memanggil function</span><br>
+                                    pesan = <span class="syntax-highlight">sapa</span>(<span class="string-highlight">"Budi"</span>)<br>
+                                    <span class="keyword-highlight">print</span>(pesan)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="text-xl font-semibold mb-4">🎮 Demo Interaktif: Membuat Function</h4>
+                    <div class="interactive-demo p-6 rounded-lg">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h5 class="font-semibold mb-3">Coba Buat Function:</h5>
+                                <textarea id="function-code" class="w-full h-48 p-4 code-editor rounded border text-sm">
+# Function untuk menghitung luas persegi panjang
+def hitung_luas_persegi_panjang(panjang, lebar):
+    luas = panjang * lebar
+    return luas
+
+# Function untuk menghitung keliling
+def hitung_keliling_persegi_panjang(panjang, lebar):
+    keliling = 2 * (panjang + lebar)
+    return keliling
+
+# Menggunakan function
+p = 10
+l = 5
+
+luas = hitung_luas_persegi_panjang(p, l)
+keliling = hitung_keliling_persegi_panjang(p, l)
+
+print(f"Panjang: {p}, Lebar: {l}")
+print(f"Luas: {luas}")
+print(f"Keliling: {keliling}")</textarea>
+                                <button onclick="runFunctionCode()" class="mt-3 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Jalankan Kode</button>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold mb-3">Output:</h5>
+                                <div id="function-output" class="output-terminal p-4 rounded">
+                                    Klik "Jalankan Kode" untuk melihat hasil...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="text-xl font-semibold mb-4">📚 Jenis-jenis Function</h4>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="concept-box bg-green-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-green-800 mb-3">Function dengan Return</h5>
+                            <div class="code-editor p-4 rounded text-sm mb-3">
+                                <span class="keyword-highlight">def</span> <span class="syntax-highlight">tambah</span>(a, b):<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">return</span> a + b<br><br>
+                                hasil = <span class="syntax-highlight">tambah</span>(<span class="keyword-highlight">5</span>, <span class="keyword-highlight">3</span>)<br>
+                                <span class="keyword-highlight">print</span>(hasil)  <span class="comment-highlight"># Output: 8</span>
+                            </div>
+                            <p class="text-sm text-gray-600">Function yang mengembalikan nilai</p>
+                        </div>
+                        
+                        <div class="concept-box bg-yellow-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-yellow-800 mb-3">Function tanpa Return</h5>
+                            <div class="code-editor p-4 rounded text-sm mb-3">
+                                <span class="keyword-highlight">def</span> <span class="syntax-highlight">tampilkan_info</span>(nama, umur):<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">print</span>(<span class="string-highlight">f"Nama: {nama}"</span>)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">print</span>(<span class="string-highlight">f"Umur: {umur}"</span>)<br><br>
+                                <span class="syntax-highlight">tampilkan_info</span>(<span class="string-highlight">"Ali"</span>, <span class="keyword-highlight">17</span>)
+                            </div>
+                            <p class="text-sm text-gray-600">Function yang hanya menjalankan aksi</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="text-xl font-semibold mb-4">🎯 Parameter dan Argument</h4>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div>
+                                <h5 class="font-semibold mb-2">Parameter Default:</h5>
+                                <div class="code-editor p-3 rounded text-xs">
+                                    <span class="keyword-highlight">def</span> <span class="syntax-highlight">sapa</span>(nama, sapaan=<span class="string-highlight">"Halo"</span>):<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">return</span> <span class="string-highlight">f"{sapaan}, {nama}!"</span><br><br>
+                                    <span class="keyword-highlight">print</span>(<span class="syntax-highlight">sapa</span>(<span class="string-highlight">"Budi"</span>))<br>
+                                    <span class="keyword-highlight">print</span>(<span class="syntax-highlight">sapa</span>(<span class="string-highlight">"Ana"</span>, <span class="string-highlight">"Hi"</span>))
+                                </div>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold mb-2">Multiple Parameters:</h5>
+                                <div class="code-editor p-3 rounded text-xs">
+                                    <span class="keyword-highlight">def</span> <span class="syntax-highlight">hitung_rata</span>(*angka):<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">return</span> <span class="syntax-highlight">sum</span>(angka) / <span class="syntax-highlight">len</span>(angka)<br><br>
+                                    rata = <span class="syntax-highlight">hitung_rata</span>(<span class="keyword-highlight">80, 85, 90</span>)<br>
+                                    <span class="keyword-highlight">print</span>(rata)
+                                </div>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold mb-2">Keyword Arguments:</h5>
+                                <div class="code-editor p-3 rounded text-xs">
+                                    <span class="keyword-highlight">def</span> <span class="syntax-highlight">profil</span>(**info):<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">for</span> key, value <span class="keyword-highlight">in</span> info.items():<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">print</span>(<span class="string-highlight">f"{key}: {value}"</span>)<br><br>
+                                    <span class="syntax-highlight">profil</span>(nama=<span class="string-highlight">"Siti"</span>, umur=<span class="keyword-highlight">16</span>)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise-box bg-green-50 p-6 rounded-lg">
+                    <h4 class="font-semibold text-green-800 mb-3">✏️ Latihan: Function</h4>
+                    <p class="text-gray-700 mb-4">Buatlah function untuk menghitung nilai akhir siswa:</p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <textarea id="exercise-functions" class="w-full h-48 p-3 code-editor rounded border text-sm" placeholder="# Buat function hitung_nilai_akhir dengan parameter:
+# - tugas (bobot 30%)
+# - uts (bobot 30%) 
+# - uas (bobot 40%)
+# Function mengembalikan nilai akhir
+
+# Buat juga function tentukan_grade yang menerima nilai akhir
+# dan mengembalikan grade (A, B, C, D, E)
+# A: 85-100, B: 70-84, C: 60-69, D: 50-59, E: <50
+
+# Contoh penggunaan:
+# nilai = hitung_nilai_akhir(80, 75, 85)
+# grade = tentukan_grade(nilai)"></textarea>
+                            <button onclick="checkFunctionExercise()" class="mt-3 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Periksa Jawaban</button>
+                        </div>
+                        <div>
+                            <div id="function-exercise-result" class="output-terminal p-4 rounded">
+                                Tulis kode dan klik "Periksa Jawaban"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loops Section -->
+        <section id="loops" class="section hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">🔄 Perulangan dalam Python</h2>
+                
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold mb-4">Mengapa Perlu Perulangan?</h3>
+                    <p class="text-gray-700 mb-6">Perulangan memungkinkan kita menjalankan kode yang sama berulang kali tanpa menulis ulang. Sangat berguna untuk memproses data dalam jumlah besar atau melakukan tugas berulang.</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="concept-box bg-blue-50 p-6 rounded-lg">
+                            <h4 class="text-lg font-semibold text-blue-800 mb-3">🔄 For Loop</h4>
+                            <p class="text-sm text-gray-700 mb-3">Digunakan ketika kita tahu berapa kali perulangan akan dilakukan</p>
+                            <div class="code-editor p-4 rounded text-sm">
+                                <span class="keyword-highlight">for</span> i <span class="keyword-highlight">in</span> <span class="syntax-highlight">range</span>(<span class="keyword-highlight">5</span>):<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">print</span>(<span class="string-highlight">f"Perulangan ke-{i}"</span>)
+                            </div>
+                        </div>
+                        
+                        <div class="concept-box bg-green-50 p-6 rounded-lg">
+                            <h4 class="text-lg font-semibold text-green-800 mb-3">🔄 While Loop</h4>
+                            <p class="text-sm text-gray-700 mb-3">Digunakan ketika perulangan bergantung pada kondisi tertentu</p>
+                            <div class="code-editor p-4 rounded text-sm">
+                                i = <span class="keyword-highlight">0</span><br>
+                                <span class="keyword-highlight">while</span> i < <span class="keyword-highlight">5</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">print</span>(<span class="string-highlight">f"Nilai i: {i}"</span>)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;i += <span class="keyword-highlight">1</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="text-xl font-semibold mb-4">🎮 Demo Interaktif: For Loop</h4>
+                    <div class="interactive-demo p-6 rounded-lg">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h5 class="font-semibold mb-3">Berbagai Cara Menggunakan For:</h5>
+                                <textarea id="forloop-code" class="w-full h-56 p-4 code-editor rounded border text-sm">
+# 1. For dengan range
+print("=== For dengan range ===")
+for i in range(1, 6):
+    print(f"Angka: {i}")
+
+# 2. For dengan list
+print("\n=== For dengan list ===")
+buah = ["apel", "jeruk", "mangga", "pisang"]
+for item in buah:
+    print(f"Buah: {item}")
+
+# 3. For dengan enumerate (index + value)
+print("\n=== For dengan enumerate ===")
+for index, item in enumerate(buah):
+    print(f"{index + 1}. {item}")
+
+# 4. For dengan string
+print("\n=== For dengan string ===")
+nama = "PYTHON"
+for huruf in nama:
+    print(f"Huruf: {huruf}")</textarea>
+                                <button onclick="runForLoopCode()" class="mt-3 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Jalankan Kode</button>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold mb-3">Output:</h5>
+                                <div id="forloop-output" class="output-terminal p-4 rounded">
+                                    Klik "Jalankan Kode" untuk melihat hasil...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="text-xl font-semibold mb-4">🎮 Demo Interaktif: While Loop</h4>
+                    <div class="interactive-demo p-6 rounded-lg">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h5 class="font-semibold mb-3">Contoh While Loop:</h5>
+                                <textarea id="whileloop-code" class="w-full h-48 p-4 code-editor rounded border text-sm">
+# 1. Countdown sederhana
+print("=== Countdown ===")
+countdown = 5
+while countdown > 0:
+    print(f"Countdown: {countdown}")
+    countdown -= 1
+print("Selesai!")
+
+# 2. Menghitung total
+print("\n=== Menghitung Total ===")
+total = 0
+angka = 1
+while angka <= 10:
+    total += angka
+    print(f"Menambah {angka}, total sekarang: {total}")
+    angka += 1
+print(f"Total akhir: {total}")
+
+# 3. Input validation (simulasi)
+print("\n=== Simulasi Input Validation ===")
+percobaan = 0
+max_percobaan = 3
+while percobaan < max_percobaan:
+    percobaan += 1
+    print(f"Percobaan ke-{percobaan}")
+    if percobaan == 2:  # Simulasi input benar
+        print("Input benar!")
+        break
+else:
+    print("Maksimal percobaan tercapai")</textarea>
+                                <button onclick="runWhileLoopCode()" class="mt-3 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Jalankan Kode</button>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold mb-3">Output:</h5>
+                                <div id="whileloop-output" class="output-terminal p-4 rounded">
+                                    Klik "Jalankan Kode" untuk melihat hasil...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="text-xl font-semibold mb-4">🎯 Kontrol Perulangan</h4>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="concept-box bg-red-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-red-800 mb-3">Break</h5>
+                            <p class="text-sm text-gray-700 mb-3">Menghentikan perulangan</p>
+                            <div class="code-editor p-3 rounded text-xs">
+                                <span class="keyword-highlight">for</span> i <span class="keyword-highlight">in</span> <span class="syntax-highlight">range</span>(<span class="keyword-highlight">10</span>):<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">if</span> i == <span class="keyword-highlight">5</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">break</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">print</span>(i)
+                            </div>
+                        </div>
+                        
+                        <div class="concept-box bg-yellow-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-yellow-800 mb-3">Continue</h5>
+                            <p class="text-sm text-gray-700 mb-3">Melanjutkan ke iterasi berikutnya</p>
+                            <div class="code-editor p-3 rounded text-xs">
+                                <span class="keyword-highlight">for</span> i <span class="keyword-highlight">in</span> <span class="syntax-highlight">range</span>(<span class="keyword-highlight">5</span>):<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">if</span> i == <span class="keyword-highlight">2</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">continue</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">print</span>(i)
+                            </div>
+                        </div>
+                        
+                        <div class="concept-box bg-purple-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-purple-800 mb-3">Else</h5>
+                            <p class="text-sm text-gray-700 mb-3">Dijalankan jika loop selesai normal</p>
+                            <div class="code-editor p-3 rounded text-xs">
+                                <span class="keyword-highlight">for</span> i <span class="keyword-highlight">in</span> <span class="syntax-highlight">range</span>(<span class="keyword-highlight">3</span>):<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">print</span>(i)<br>
+                                <span class="keyword-highlight">else</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">print</span>(<span class="string-highlight">"Selesai!"</span>)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="text-xl font-semibold mb-4">🔢 Nested Loop (Perulangan Bersarang)</h4>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h5 class="font-semibold mb-2">Contoh Nested Loop:</h5>
+                                <div class="code-editor p-4 rounded text-sm">
+                                    <span class="comment-highlight"># Membuat pola bintang</span><br>
+                                    <span class="keyword-highlight">for</span> baris <span class="keyword-highlight">in</span> <span class="syntax-highlight">range</span>(<span class="keyword-highlight">5</span>):<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">for</span> kolom <span class="keyword-highlight">in</span> <span class="syntax-highlight">range</span>(baris + <span class="keyword-highlight">1</span>):<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">print</span>(<span class="string-highlight">"*"</span>, end=<span class="string-highlight">""</span>)<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword-highlight">print</span>()  <span class="comment-highlight"># Pindah baris</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold mb-2">Output:</h5>
+                                <div class="bg-black text-green-400 p-4 rounded font-mono text-sm">
+                                    *<br>
+                                    **<br>
+                                    ***<br>
+                                    ****<br>
+                                    *****
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise-box bg-green-50 p-6 rounded-lg">
+                    <h4 class="font-semibold text-green-800 mb-3">✏️ Latihan: Perulangan</h4>
+                    <p class="text-gray-700 mb-4">Buatlah program untuk menghitung statistik nilai siswa:</p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <textarea id="exercise-loops" class="w-full h-56 p-3 code-editor rounded border text-sm" placeholder="# Buat program dengan requirements:
+# 1. List nilai siswa: [85, 92, 78, 96, 88, 76, 94, 89, 83, 91]
+# 2. Gunakan for loop untuk:
+#    - Hitung total nilai
+#    - Hitung rata-rata
+#    - Cari nilai tertinggi dan terendah
+#    - Hitung berapa siswa yang lulus (nilai >= 80)
+# 3. Tampilkan semua statistik
+
+# Bonus: Buat juga tabel nilai dengan format:
+# Siswa 1: 85 (Lulus/Tidak Lulus)
+# Siswa 2: 92 (Lulus/Tidak Lulus)
+# dst...
+
+nilai_siswa = [85, 92, 78, 96, 88, 76, 94, 89, 83, 91]"></textarea>
+                            <button onclick="checkLoopExercise()" class="mt-3 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Periksa Jawaban</button>
+                        </div>
+                        <div>
+                            <div id="loop-exercise-result" class="output-terminal p-4 rounded">
+                                Tulis kode dan klik "Periksa Jawaban"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Playground Section -->
+        <section id="playground" class="section hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">🎮 Python Playground</h2>
+                
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold mb-4">Latihan Bebas & Mini Projects</h3>
+                    <p class="text-gray-700 mb-6">Gunakan area ini untuk berlatih dan mengeksplorasi Python. Coba berbagai kombinasi variabel, tipe data, function, dan perulangan!</p>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="text-xl font-semibold mb-4">💻 Code Editor</h4>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="flex justify-between items-center mb-4">
+                            <h5 class="font-semibold">Python Editor</h5>
+                            <div class="space-x-2">
+                                <select id="template-select" class="px-3 py-2 border rounded" onchange="loadTemplate()">
+                                    <option value="">Pilih Template...</option>
+                                    <option value="calculator">Kalkulator Sederhana</option>
+                                    <option value="grade">Sistem Penilaian</option>
+                                    <option value="pattern">Pola Bintang</option>
+                                    <option value="guessing">Tebak Angka</option>
+                                    <option value="todo">To-Do List</option>
+                                </select>
+                                <button onclick="runPlaygroundCode()" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">▶ Run</button>
+                                <button onclick="clearPlayground()" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700">Clear</button>
+                            </div>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <textarea id="playground-code" class="w-full h-96 p-4 code-editor rounded border text-sm" placeholder="# Selamat datang di Python Playground!
+# Tulis kode Python Anda di sini...
+
+print('Hello, Python!')
+
+# Contoh: Membuat function sederhana
+def sapa(nama):
+    return f'Halo, {nama}! Selamat belajar Python!'
+
+# Menggunakan function
+pesan = sapa('Siswa')
+print(pesan)
+
+# Contoh: Perulangan
+print('\nHitung mundur:')
+for i in range(5, 0, -1):
+    print(f'{i}...')
+print('Start!')"></textarea>
+                            </div>
+                            <div>
+                                <h6 class="font-semibold mb-2">Output:</h6>
+                                <div id="playground-output" class="output-terminal p-4 rounded h-96 overflow-y-auto">
+                                    Klik "Run" untuk menjalankan kode...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="text-xl font-semibold mb-4">🏆 Mini Challenges</h4>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="challenge-box bg-yellow-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-yellow-800 mb-3">🔢 Challenge 1: FizzBuzz</h5>
+                            <p class="text-sm text-gray-700 mb-3">Buat program yang mencetak angka 1-100, tapi:</p>
+                            <ul class="text-xs text-gray-600 space-y-1 mb-3">
+                                <li>• Kelipatan 3: cetak "Fizz"</li>
+                                <li>• Kelipatan 5: cetak "Buzz"</li>
+                                <li>• Kelipatan 3 dan 5: cetak "FizzBuzz"</li>
+                            </ul>
+                            <button onclick="loadChallenge('fizzbuzz')" class="px-3 py-1 bg-yellow-600 text-white rounded text-sm hover:bg-yellow-700">Load Challenge</button>
+                        </div>
+                        
+                        <div class="challenge-box bg-blue-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-blue-800 mb-3">📊 Challenge 2: Analisis Data</h5>
+                            <p class="text-sm text-gray-700 mb-3">Analisis data penjualan:</p>
+                            <ul class="text-xs text-gray-600 space-y-1 mb-3">
+                                <li>• Hitung total penjualan</li>
+                                <li>• Cari bulan terbaik</li>
+                                <li>• Hitung rata-rata bulanan</li>
+                            </ul>
+                            <button onclick="loadChallenge('sales')" class="px-3 py-1 bg-blue-600 text-white rounded text-sm hover:bg-blue-700">Load Challenge</button>
+                        </div>
+                        
+                        <div class="challenge-box bg-green-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-green-800 mb-3">🎯 Challenge 3: Password Generator</h5>
+                            <p class="text-sm text-gray-700 mb-3">Buat generator password:</p>
+                            <ul class="text-xs text-gray-600 space-y-1 mb-3">
+                                <li>• Panjang dapat diatur</li>
+                                <li>• Kombinasi huruf, angka, simbol</li>
+                                <li>• Function untuk validasi kekuatan</li>
+                            </ul>
+                            <button onclick="loadChallenge('password')" class="px-3 py-1 bg-green-600 text-white rounded text-sm hover:bg-green-700">Load Challenge</button>
+                        </div>
+                        
+                        <div class="challenge-box bg-purple-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-purple-800 mb-3">🎲 Challenge 4: Dice Game</h5>
+                            <p class="text-sm text-gray-700 mb-3">Simulasi permainan dadu:</p>
+                            <ul class="text-xs text-gray-600 space-y-1 mb-3">
+                                <li>• Lempar 2 dadu</li>
+                                <li>• Hitung statistik hasil</li>
+                                <li>• Simulasi 1000x lemparan</li>
+                            </ul>
+                            <button onclick="loadChallenge('dice')" class="px-3 py-1 bg-purple-600 text-white rounded text-sm hover:bg-purple-700">Load Challenge</button>
+                        </div>
+                        
+                        <div class="challenge-box bg-red-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-red-800 mb-3">📝 Challenge 5: Text Analyzer</h5>
+                            <p class="text-sm text-gray-700 mb-3">Analisis teks sederhana:</p>
+                            <ul class="text-xs text-gray-600 space-y-1 mb-3">
+                                <li>• Hitung jumlah kata</li>
+                                <li>• Hitung frekuensi huruf</li>
+                                <li>• Cari kata terpanjang</li>
+                            </ul>
+                            <button onclick="loadChallenge('text')" class="px-3 py-1 bg-red-600 text-white rounded text-sm hover:bg-red-700">Load Challenge</button>
+                        </div>
+                        
+                        <div class="challenge-box bg-indigo-50 p-6 rounded-lg">
+                            <h5 class="text-lg font-semibold text-indigo-800 mb-3">🏦 Challenge 6: Bank System</h5>
+                            <p class="text-sm text-gray-700 mb-3">Sistem perbankan sederhana:</p>
+                            <ul class="text-xs text-gray-600 space-y-1 mb-3">
+                                <li>• Buat akun, deposit, withdraw</li>
+                                <li>• Cek saldo dan riwayat</li>
+                                <li>• Transfer antar akun</li>
+                            </ul>
+                            <button onclick="loadChallenge('bank')" class="px-3 py-1 bg-indigo-600 text-white rounded text-sm hover:bg-indigo-700">Load Challenge</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 p-6 rounded-lg">
+                    <h4 class="font-semibold text-blue-800 mb-3">💡 Tips untuk Playground</h4>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h5 class="font-semibold mb-2">Best Practices:</h5>
+                            <ul class="space-y-1 text-sm text-gray-700">
+                                <li>• Gunakan nama variabel yang deskriptif</li>
+                                <li>• Tambahkan komentar untuk kode kompleks</li>
+                                <li>• Test kode dengan berbagai input</li>
+                                <li>• Pecah masalah besar menjadi function kecil</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="font-semibold mb-2">Debugging Tips:</h5>
+                            <ul class="space-y-1 text-sm text-gray-700">
+                                <li>• Gunakan print() untuk debug</li>
+                                <li>• Periksa indentasi dengan teliti</li>
+                                <li>• Pastikan tipe data sesuai</li>
+                                <li>• Baca error message dengan cermat</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Assessment Section -->
+        <section id="assessment" class="section hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">📝 Asesmen Komprehensif</h2>
+                
+                <div id="quiz-container">
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-lg font-semibold">Pertanyaan <span id="current-question">1</span> dari <span id="total-questions">20</span></span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Skor: <span id="score">0</span></span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-6">
+                            <div class="bg-blue-600 h-2 rounded-full transition-all duration-300" id="quiz-progress" style="width: 5%"></div>
+                        </div>
+                    </div>
+
+                    <div id="question-container" class="mb-8">
+                        <h3 class="text-xl font-semibold mb-6" id="question-text">Loading...</h3>
+                        <div class="space-y-3" id="options-container">
+                            <!-- Options will be inserted here -->
+                        </div>
+                        <div id="code-question" class="hidden mt-4">
+                            <h4 class="font-semibold mb-2">Kode:</h4>
+                            <div id="code-display" class="code-editor p-4 rounded text-sm mb-4"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between">
+                        <button onclick="previousQuestion()" id="prev-btn" class="px-6 py-2 bg-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-400 transition-colors" disabled>Sebelumnya</button>
+                        <button onclick="nextQuestion()" id="next-btn" class="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors">Selanjutnya</button>
+                    </div>
+                </div>
+
+                <div id="quiz-result" class="hidden text-center">
+                    <div class="text-6xl mb-4">🎉</div>
+                    <h3 class="text-2xl font-bold mb-4">Asesmen Selesai!</h3>
+                    <div class="text-4xl font-bold text-blue-600 mb-4" id="final-score">0/20</div>
+                    <div class="text-lg text-gray-600 mb-6" id="score-message">Excellent work!</div>
+                    
+                    <div class="bg-gray-50 p-6 rounded-lg mb-6">
+                        <h4 class="font-semibold mb-4">Analisis Hasil per Kategori:</h4>
+                        <div class="grid md:grid-cols-5 gap-4 text-sm">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-blue-600" id="variables-score">0</div>
+                                <div>Variabel</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-green-600" id="datatypes-score">0</div>
+                                <div>Tipe Data</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-yellow-600" id="functions-score">0</div>
+                                <div>Function</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-red-600" id="conditionals-score">0</div>
+                                <div>Percabangan</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-purple-600" id="loops-score">0</div>
+                                <div>Perulangan</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-blue-50 p-6 rounded-lg mb-6">
+                        <h4 class="font-semibold text-blue-800 mb-3">📊 Rekomendasi Belajar:</h4>
+                        <div id="recommendations" class="text-left space-y-2 text-sm text-gray-700">
+                            <!-- Recommendations will be inserted here -->
+                        </div>
+                    </div>
+                    
+                    <button onclick="restartQuiz()" class="px-8 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors">Ulangi Asesmen</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="container mx-auto px-6 text-center">
+            <h3 class="text-xl font-semibold mb-4">🐍 Algoritma Pemrograman Python</h3>
+            <p class="text-gray-300 mb-4">Kelas 12 Fase F - Informatika</p>
+            <div class="text-sm text-gray-400">
+                <p>Menguasai dasar-dasar pemrograman Python untuk membangun fondasi yang kuat</p>
+                <p class="mt-2">© 2024 - Materi Pembelajaran Interaktif</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Global variables
+        let sectionsVisited = new Set(['overview']);
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let userAnswers = [];
+
+        // Quiz data
+        const quizData = [
+            {
+                question: "Manakah cara yang benar untuk membuat variabel dalam Python?",
+                options: [
+                    "var nama = 'Budi'",
+                    "nama = 'Budi'",
+                    "string nama = 'Budi'",
+                    "let nama = 'Budi'"
+                ],
+                correct: 1,
+                category: "variables"
+            },
+            {
+                question: "Aturan penamaan variabel yang SALAH adalah:",
+                options: [
+                    "Dimulai dengan huruf atau underscore",
+                    "Dapat menggunakan angka di tengah nama",
+                    "Dapat dimulai dengan angka",
+                    "Case sensitive (nama ≠ Nama)"
+                ],
+                correct: 2,
+                category: "variables"
+            },
+            {
+                question: "Apa hasil dari kode berikut?\n\nx = 5\nx += 3\nprint(x)",
+                options: ["5", "8", "53", "Error"],
+                correct: 1,
+                category: "variables",
+                hasCode: true,
+                code: "x = 5\nx += 3\nprint(x)"
+            },
+            {
+                question: "Tipe data untuk menyimpan bilangan desimal adalah:",
+                options: ["int", "float", "string", "decimal"],
+                correct: 1,
+                category: "datatypes"
+            },
+            {
+                question: "Manakah yang BUKAN tipe data dasar dalam Python?",
+                options: ["int", "float", "char", "bool"],
+                correct: 2,
+                category: "datatypes"
+            },
+            {
+                question: "Apa hasil dari type(True) dalam Python?",
+                options: [
+                    "<class 'boolean'>",
+                    "<class 'bool'>",
+                    "<class 'true'>",
+                    "<class 'Boolean'>"
+                ],
+                correct: 1,
+                category: "datatypes"
+            },
+            {
+                question: "Cara mengkonversi string '123' menjadi integer adalah:",
+                options: [
+                    "integer('123')",
+                    "int('123')",
+                    "convert('123')",
+                    "toInt('123')"
+                ],
+                correct: 1,
+                category: "datatypes"
+            },
+            {
+                question: "Apa hasil dari kode berikut?\n\nangka = [1, 2, 3, 4, 5]\nprint(len(angka))",
+                options: ["[1, 2, 3, 4, 5]", "5", "4", "Error"],
+                correct: 1,
+                category: "datatypes",
+                hasCode: true,
+                code: "angka = [1, 2, 3, 4, 5]\nprint(len(angka))"
+            },
+            {
+                question: "Keyword untuk mendefinisikan function dalam Python adalah:",
+                options: ["function", "def", "func", "define"],
+                correct: 1,
+                category: "functions"
+            },
+            {
+                question: "Syntax yang benar untuk percabangan IF dalam Python adalah:",
+                options: [
+                    "if (kondisi) { }",
+                    "if kondisi:",
+                    "if kondisi then:",
+                    "IF kondisi:"
+                ],
+                correct: 1,
+                category: "conditionals"
+            },
+            {
+                question: "Operator untuk 'tidak sama dengan' dalam Python adalah:",
+                options: ["<>", "!=", "!==", "not="],
+                correct: 1,
+                category: "conditionals"
+            },
+            {
+                question: "Apa hasil dari kode berikut?\n\nx = 10\nif x > 5:\n    print('Besar')\nelse:\n    print('Kecil')",
+                options: ["Besar", "Kecil", "10", "Error"],
+                correct: 0,
+                category: "conditionals",
+                hasCode: true,
+                code: "x = 10\nif x > 5:\n    print('Besar')\nelse:\n    print('Kecil')"
+            },
+            {
+                question: "Keyword untuk kondisi tambahan dalam percabangan adalah:",
+                options: ["elseif", "elif", "else if", "elsif"],
+                correct: 1,
+                category: "conditionals"
+            },
+            {
+                question: "Apa yang dimaksud dengan parameter dalam function?",
+                options: [
+                    "Nilai yang dikembalikan function",
+                    "Nama function",
+                    "Variabel yang menerima nilai saat function dipanggil",
+                    "Kode di dalam function"
+                ],
+                correct: 2,
+                category: "functions"
+            },
+            {
+                question: "Apa hasil dari kode berikut?\n\ndef tambah(a, b=5):\n    return a + b\n\nprint(tambah(3))",
+                options: ["3", "5", "8", "Error"],
+                correct: 2,
+                category: "functions",
+                hasCode: true,
+                code: "def tambah(a, b=5):\n    return a + b\n\nprint(tambah(3))"
+            },
+            {
+                question: "Function yang tidak mengembalikan nilai akan mengembalikan:",
+                options: ["0", "False", "None", "Empty"],
+                correct: 2,
+                category: "functions"
+            },
+            {
+                question: "Apa perbedaan utama antara parameter dan argument?",
+                options: [
+                    "Tidak ada perbedaan",
+                    "Parameter saat definisi, argument saat pemanggilan",
+                    "Parameter untuk angka, argument untuk string",
+                    "Parameter wajib, argument opsional"
+                ],
+                correct: 1,
+                category: "functions"
+            },
+            {
+                question: "Perulangan yang tepat untuk mengiterasi list adalah:",
+                options: [
+                    "while loop saja",
+                    "for loop saja", 
+                    "Keduanya bisa digunakan",
+                    "Tidak bisa menggunakan keduanya"
+                ],
+                correct: 2,
+                category: "loops"
+            },
+            {
+                question: "Apa hasil dari kode berikut?\n\nfor i in range(3):\n    print(i)",
+                options: ["1 2 3", "0 1 2", "1 2", "0 1 2 3"],
+                correct: 1,
+                category: "loops",
+                hasCode: true,
+                code: "for i in range(3):\n    print(i)"
+            },
+            {
+                question: "Keyword untuk menghentikan perulangan adalah:",
+                options: ["stop", "break", "exit", "end"],
+                correct: 1,
+                category: "loops"
+            },
+            {
+                question: "Keyword untuk melanjutkan ke iterasi berikutnya adalah:",
+                options: ["next", "skip", "continue", "pass"],
+                correct: 2,
+                category: "loops"
+            },
+            {
+                question: "Apa hasil dari kode berikut?\n\ni = 0\nwhile i < 3:\n    i += 1\nprint(i)",
+                options: ["0", "2", "3", "Infinite loop"],
+                correct: 2,
+                category: "loops",
+                hasCode: true,
+                code: "i = 0\nwhile i < 3:\n    i += 1\nprint(i)"
+            },
+            {
+                question: "Cara mendapatkan index dan value saat iterasi list adalah:",
+                options: [
+                    "for i, v in list:",
+                    "for i, v in enumerate(list):",
+                    "for index(i), value(v) in list:",
+                    "for i, v in range(list):"
+                ],
+                correct: 1,
+                category: "loops"
+            },
+            {
+                question: "Manakah kode yang akan menghasilkan error?",
+                options: [
+                    "x = 5\nprint(x)",
+                    "def test():\n    return 'hello'",
+                    "for i in range(5)\n    print(i)",
+                    "while True:\n    break"
+                ],
+                correct: 2,
+                category: "variables",
+                hasCode: true,
+                code: "# Pilihan C:\nfor i in range(5)\n    print(i)"
+            }
+        ];
+
+        // Templates for playground
+        const templates = {
+            calculator: `# Kalkulator Sederhana
+def tambah(a, b):
+    return a + b
+
+def kurang(a, b):
+    return a - b
+
+def kali(a, b):
+    return a * b
+
+def bagi(a, b):
+    if b != 0:
+        return a / b
+    else:
+        return "Error: Tidak bisa dibagi dengan nol"
+
+# Contoh penggunaan
+print("=== Kalkulator Sederhana ===")
+angka1 = 10
+angka2 = 5
+
+print(f"{angka1} + {angka2} = {tambah(angka1, angka2)}")
+print(f"{angka1} - {angka2} = {kurang(angka1, angka2)}")
+print(f"{angka1} * {angka2} = {kali(angka1, angka2)}")
+print(f"{angka1} / {angka2} = {bagi(angka1, angka2)}")`,
+
+            grade: `# Sistem Penilaian
+def hitung_nilai_akhir(tugas, uts, uas):
+    return (tugas * 0.3) + (uts * 0.3) + (uas * 0.4)
+
+def tentukan_grade(nilai):
+    if nilai >= 85:
+        return 'A'
+    elif nilai >= 70:
+        return 'B'
+    elif nilai >= 60:
+        return 'C'
+    elif nilai >= 50:
+        return 'D'
+    else:
+        return 'E'
+
+# Data siswa
+siswa = [
+    {"nama": "Ali", "tugas": 85, "uts": 80, "uas": 90},
+    {"nama": "Budi", "tugas": 75, "uts": 85, "uas": 80},
+    {"nama": "Citra", "tugas": 90, "uts": 88, "uas": 92}
+]
+
+print("=== Sistem Penilaian ===")
+for data in siswa:
+    nilai_akhir = hitung_nilai_akhir(data["tugas"], data["uts"], data["uas"])
+    grade = tentukan_grade(nilai_akhir)
+    print(f"{data['nama']}: {nilai_akhir:.1f} (Grade: {grade})")`,
+
+            pattern: `# Pola Bintang
+def pola_segitiga(tinggi):
+    print("Pola Segitiga:")
+    for i in range(1, tinggi + 1):
+        print("*" * i)
+
+def pola_piramida(tinggi):
+    print("\\nPola Piramida:")
+    for i in range(1, tinggi + 1):
+        spasi = " " * (tinggi - i)
+        bintang = "*" * (2 * i - 1)
+        print(spasi + bintang)
+
+def pola_berlian(tinggi):
+    print("\\nPola Berlian:")
+    # Bagian atas
+    for i in range(1, tinggi + 1):
+        spasi = " " * (tinggi - i)
+        bintang = "*" * (2 * i - 1)
+        print(spasi + bintang)
+    # Bagian bawah
+    for i in range(tinggi - 1, 0, -1):
+        spasi = " " * (tinggi - i)
+        bintang = "*" * (2 * i - 1)
+        print(spasi + bintang)
+
+# Menjalankan pola
+tinggi = 5
+pola_segitiga(tinggi)
+pola_piramida(tinggi)
+pola_berlian(tinggi)`,
+
+            guessing: `# Game Tebak Angka
+import random
+
+def tebak_angka():
+    angka_rahasia = random.randint(1, 100)
+    percobaan = 0
+    max_percobaan = 7
+    
+    print("=== Game Tebak Angka ===")
+    print("Saya memikirkan angka antara 1-100")
+    print(f"Anda punya {max_percobaan} kesempatan!")
+    
+    while percobaan < max_percobaan:
+        percobaan += 1
+        
+        # Simulasi input (dalam implementasi nyata gunakan input())
+        if percobaan == 1:
+            tebakan = 50
+        elif percobaan == 2:
+            tebakan = 75 if angka_rahasia > 50 else 25
+        else:
+            # Simulasi tebakan random untuk demo
+            tebakan = random.randint(1, 100)
+        
+        print(f"\\nPercobaan {percobaan}: {tebakan}")
+        
+        if tebakan == angka_rahasia:
+            print(f"🎉 Selamat! Anda berhasil menebak angka {angka_rahasia}!")
+            print(f"Anda membutuhkan {percobaan} percobaan.")
+            return
+        elif tebakan < angka_rahasia:
+            print("Terlalu kecil!")
+        else:
+            print("Terlalu besar!")
+    
+    print(f"\\n😞 Game Over! Angka yang benar adalah {angka_rahasia}")
+
+# Jalankan game
+tebak_angka()`,
+
+            todo: `# To-Do List Sederhana
+todo_list = []
+
+def tampilkan_menu():
+    print("\\n=== TO-DO LIST ===")
+    print("1. Lihat tugas")
+    print("2. Tambah tugas")
+    print("3. Selesaikan tugas")
+    print("4. Hapus tugas")
+    print("5. Keluar")
+
+def lihat_tugas():
+    if not todo_list:
+        print("\\nTidak ada tugas.")
+    else:
+        print("\\nDaftar Tugas:")
+        for i, tugas in enumerate(todo_list, 1):
+            status = "✓" if tugas["selesai"] else "○"
+            print(f"{i}. {status} {tugas['nama']}")
+
+def tambah_tugas(nama_tugas):
+    todo_list.append({"nama": nama_tugas, "selesai": False})
+    print(f"\\nTugas '{nama_tugas}' berhasil ditambahkan!")
+
+def selesaikan_tugas(nomor):
+    if 1 <= nomor <= len(todo_list):
+        todo_list[nomor-1]["selesai"] = True
+        print(f"\\nTugas '{todo_list[nomor-1]['nama']}' telah diselesaikan!")
+    else:
+        print("\\nNomor tugas tidak valid!")
+
+# Demo penggunaan
+print("Demo To-Do List:")
+tambah_tugas("Belajar Python")
+tambah_tugas("Mengerjakan PR Matematika")
+tambah_tugas("Membaca buku")
+
+lihat_tugas()
+selesaikan_tugas(1)
+lihat_tugas()`
+        };
+
+        // Challenge templates
+        const challenges = {
+            fizzbuzz: `# Challenge: FizzBuzz
+# Tugas: Buat program yang mencetak angka 1-100
+# Aturan:
+# - Kelipatan 3: cetak "Fizz"
+# - Kelipatan 5: cetak "Buzz"  
+# - Kelipatan 3 dan 5: cetak "FizzBuzz"
+# - Selainnya: cetak angka
+
+# Tulis kode Anda di sini:
+for i in range(1, 101):
+    # Lengkapi kode ini
+    pass`,
+
+            sales: `# Challenge: Analisis Data Penjualan
+# Data penjualan bulanan (dalam juta rupiah)
+penjualan = [120, 135, 110, 145, 160, 155, 170, 165, 180, 175, 190, 200]
+bulan = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", 
+         "Jul", "Agu", "Sep", "Okt", "Nov", "Des"]
+
+# Tugas:
+# 1. Hitung total penjualan tahun ini
+# 2. Cari bulan dengan penjualan tertinggi
+# 3. Hitung rata-rata penjualan bulanan
+# 4. Hitung berapa bulan yang penjualannya di atas rata-rata
+
+# Tulis kode Anda di sini:`,
+
+            password: `# Challenge: Password Generator
+import random
+import string
+
+# Tugas: Buat password generator dengan fitur:
+# 1. Function generate_password(length, include_symbols=True)
+# 2. Function check_password_strength(password)
+# 3. Generate beberapa password dengan panjang berbeda
+
+def generate_password(length, include_symbols=True):
+    # Tulis kode di sini
+    pass
+
+def check_password_strength(password):
+    # Kriteria: minimal 8 karakter, ada huruf besar, kecil, angka
+    # Return: "Lemah", "Sedang", "Kuat"
+    pass
+
+# Test generator
+print("=== Password Generator ===")
+# Tulis kode untuk test di sini`,
+
+            dice: `# Challenge: Simulasi Permainan Dadu
+import random
+
+# Tugas: Simulasi lempar 2 dadu
+# 1. Function lempar_dadu() - return hasil 2 dadu
+# 2. Simulasi 1000x lemparan
+# 3. Hitung statistik: frekuensi setiap jumlah (2-12)
+# 4. Tampilkan hasil dalam bentuk grafik sederhana
+
+def lempar_dadu():
+    # Return tuple (dadu1, dadu2)
+    pass
+
+def simulasi_dadu(jumlah_simulasi):
+    # Simulasi dan return statistik
+    pass
+
+# Jalankan simulasi
+print("=== Simulasi Dadu ===")
+# Tulis kode di sini`,
+
+            text: `# Challenge: Text Analyzer
+def analyze_text(text):
+    # Tugas: Analisis teks dengan menghitung:
+    # 1. Jumlah kata
+    # 2. Jumlah karakter (dengan dan tanpa spasi)
+    # 3. Frekuensi setiap huruf
+    # 4. Kata terpanjang dan terpendek
+    # 5. Jumlah kalimat (berdasarkan tanda titik)
+    
+    # Tulis kode di sini
+    pass
+
+# Test dengan teks sample
+sample_text = """
+Python adalah bahasa pemrograman yang mudah dipelajari dan powerful.
+Dengan Python, kita dapat membuat berbagai aplikasi menarik.
+Belajar Python sangat menyenangkan dan bermanfaat untuk masa depan.
+"""
+
+print("=== Text Analyzer ===")
+print(f"Teks: {sample_text.strip()}")
+print("\\nHasil Analisis:")
+# Panggil function analyze_text di sini`,
+
+            bank: `# Challenge: Sistem Perbankan Sederhana
+class BankAccount:
+    def __init__(self, nama, saldo_awal=0):
+        # Inisialisasi akun
+        pass
+    
+    def deposit(self, jumlah):
+        # Tambah saldo
+        pass
+    
+    def withdraw(self, jumlah):
+        # Kurangi saldo (cek saldo cukup)
+        pass
+    
+    def get_balance(self):
+        # Return saldo saat ini
+        pass
+    
+    def get_history(self):
+        # Return riwayat transaksi
+        pass
+
+# Test sistem bank
+print("=== Sistem Bank Sederhana ===")
+
+# Buat akun
+akun1 = BankAccount("Ali", 1000000)
+akun2 = BankAccount("Budi", 500000)
+
+# Test transaksi
+# Tulis kode test di sini`
+        };
+
+        // Navigation Functions
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            document.getElementById(sectionId).classList.remove('hidden');
+            document.getElementById(sectionId).classList.add('fade-in');
+            
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-100', 'text-blue-700');
+                btn.classList.add('text-gray-600');
+            });
+            
+            event.target.classList.remove('text-gray-600');
+            event.target.classList.add('bg-blue-100', 'text-blue-700');
+            
+            sectionsVisited.add(sectionId);
+            updateProgress();
+            window.scrollTo(0, 0);
+        }
+
+        function updateProgress() {
+            const totalSections = 8; // Updated to include conditionals
+            const progress = (sectionsVisited.size / totalSections) * 100;
+            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementById('progress-text').textContent = Math.round(progress) + '%';
+        }
+
+        // Python Code Execution (Simulation)
+        function executePythonCode(code) {
+            try {
+                // Simple Python code simulation
+                let output = '';
+                const lines = code.split('\n');
+                let variables = {};
+                
+                // Very basic Python interpreter simulation
+                for (let line of lines) {
+                    line = line.trim();
+                    if (line.startsWith('#') || line === '') continue;
+                    
+                    if (line.startsWith('print(')) {
+                        const match = line.match(/print\((.*)\)/);
+                        if (match) {
+                            let content = match[1];
+                            // Handle f-strings and variables
+                            content = content.replace(/f["']([^"']*?)["']/g, (match, str) => {
+                                return str.replace(/{([^}]+)}/g, (match, varName) => {
+                                    return variables[varName] || varName;
+                                });
+                            });
+                            // Remove quotes
+                            content = content.replace(/["']/g, '');
+                            output += content + '\n';
+                        }
+                    } else if (line.includes(' = ')) {
+                        const [varName, value] = line.split(' = ');
+                        variables[varName.trim()] = value.trim().replace(/["']/g, '');
+                    }
+                }
+                
+                return output || 'Kode berhasil dijalankan!';
+            } catch (error) {
+                return `Error: ${error.message}`;
+            }
+        }
+
+        // Code execution functions
+        function runVariableCode() {
+            const code = document.getElementById('variable-code').value;
+            const output = executePythonCode(code);
+            document.getElementById('variable-output').textContent = output;
+        }
+
+        function runDatatypeCode() {
+            const code = document.getElementById('datatype-code').value;
+            const output = executePythonCode(code);
+            document.getElementById('datatype-output').textContent = output;
+        }
+
+        function runFunctionCode() {
+            const code = document.getElementById('function-code').value;
+            const output = executePythonCode(code);
+            document.getElementById('function-output').textContent = output;
+        }
+
+        function runForLoopCode() {
+            const code = document.getElementById('forloop-code').value;
+            const output = executePythonCode(code);
+            document.getElementById('forloop-output').textContent = output;
+        }
+
+        function runWhileLoopCode() {
+            const code = document.getElementById('whileloop-code').value;
+            const output = executePythonCode(code);
+            document.getElementById('whileloop-output').textContent = output;
+        }
+
+        function runPlaygroundCode() {
+            const code = document.getElementById('playground-code').value;
+            const output = executePythonCode(code);
+            document.getElementById('playground-output').textContent = output;
+        }
+
+        function runConditionalCode() {
+            const code = document.getElementById('conditional-code').value;
+            const output = executePythonCode(code);
+            document.getElementById('conditional-output').textContent = output;
+        }
+
+        function runValidationCode() {
+            const code = document.getElementById('validation-code').value;
+            const output = executePythonCode(code);
+            document.getElementById('validation-output').textContent = output;
+        }
+
+        // Exercise checking functions
+        function checkVariableExercise() {
+            const code = document.getElementById('exercise-variables').value;
+            const result = document.getElementById('variable-exercise-result');
+            
+            if (code.includes('nama_lengkap') && code.includes('kelas') && 
+                code.includes('umur') && code.includes('hobi') && code.includes('print')) {
+                result.innerHTML = '<div class="text-green-400">✓ Bagus! Anda telah membuat semua variabel yang diminta dan menampilkannya.</div>';
+                result.classList.add('success-highlight');
+            } else {
+                result.innerHTML = '<div class="text-red-400">✗ Pastikan Anda membuat variabel: nama_lengkap, kelas, umur, hobi dan menampilkannya dengan print()</div>';
+                result.classList.add('error-highlight');
+            }
+        }
+
+        function checkDatatypeExercise() {
+            const code = document.getElementById('exercise-datatypes').value;
+            const result = document.getElementById('datatype-exercise-result');
+            
+            if (code.includes('input(') && code.includes('float(') && 
+                (code.includes('+') || code.includes('-') || code.includes('*') || code.includes('/'))) {
+                result.innerHTML = '<div class="text-green-400">✓ Excellent! Anda telah membuat kalkulator dengan input dan konversi tipe data.</div>';
+                result.classList.add('success-highlight');
+            } else {
+                result.innerHTML = '<div class="text-red-400">✗ Pastikan menggunakan input(), float() untuk konversi, dan operasi matematika.</div>';
+                result.classList.add('error-highlight');
+            }
+        }
+
+        function checkFunctionExercise() {
+            const code = document.getElementById('exercise-functions').value;
+            const result = document.getElementById('function-exercise-result');
+            
+            if (code.includes('def hitung_nilai_akhir') && code.includes('def tentukan_grade') && 
+                code.includes('return')) {
+                result.innerHTML = '<div class="text-green-400">✓ Perfect! Anda telah membuat kedua function dengan benar.</div>';
+                result.classList.add('success-highlight');
+            } else {
+                result.innerHTML = '<div class="text-red-400">✗ Pastikan membuat function hitung_nilai_akhir dan tentukan_grade dengan return statement.</div>';
+                result.classList.add('error-highlight');
+            }
+        }
+
+        function checkLoopExercise() {
+            const code = document.getElementById('exercise-loops').value;
+            const result = document.getElementById('loop-exercise-result');
+            
+            if (code.includes('for') && (code.includes('sum(') || code.includes('total')) && 
+                (code.includes('max(') || code.includes('min(')) && code.includes('len(')) {
+                result.innerHTML = '<div class="text-green-400">✓ Outstanding! Anda telah menggunakan perulangan untuk analisis statistik dengan baik.</div>';
+                result.classList.add('success-highlight');
+            } else {
+                result.innerHTML = '<div class="text-red-400">✗ Pastikan menggunakan for loop dan menghitung total, rata-rata, max, min, dan jumlah yang lulus.</div>';
+                result.classList.add('error-highlight');
+            }
+        }
+
+        function checkConditionalExercise() {
+            const code = document.getElementById('exercise-conditionals').value;
+            const result = document.getElementById('conditional-exercise-result');
+            
+            if (code.includes('def rekomendasi_aktivitas') && code.includes('if') && 
+                code.includes('elif') && (code.includes('badai') || code.includes('hujan') || code.includes('cerah'))) {
+                result.innerHTML = '<div class="text-green-400">✓ Excellent! Anda telah membuat sistem rekomendasi dengan percabangan yang tepat.</div>';
+                result.classList.add('success-highlight');
+            } else {
+                result.innerHTML = '<div class="text-red-400">✗ Pastikan membuat function rekomendasi_aktivitas dengan if-elif-else untuk semua kondisi cuaca.</div>';
+                result.classList.add('error-highlight');
+            }
+        }
+
+        // Playground functions
+        function loadTemplate() {
+            const select = document.getElementById('template-select');
+            const editor = document.getElementById('playground-code');
+            if (select.value && templates[select.value]) {
+                editor.value = templates[select.value];
+            }
+        }
+
+        function loadChallenge(challengeType) {
+            const editor = document.getElementById('playground-code');
+            if (challenges[challengeType]) {
+                editor.value = challenges[challengeType];
+            }
+        }
+
+        function clearPlayground() {
+            document.getElementById('playground-code').value = '';
+            document.getElementById('playground-output').textContent = 'Klik "Run" untuk menjalankan kode...';
+        }
+
+        // Quiz Functions
+        function loadQuestion() {
+            const question = quizData[currentQuestionIndex];
+            document.getElementById('question-text').textContent = question.question;
+            document.getElementById('current-question').textContent = currentQuestionIndex + 1;
+            document.getElementById('total-questions').textContent = quizData.length;
+            
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'quiz-option p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-blue-300 transition-colors';
+                optionDiv.innerHTML = `
+                    <label class="flex items-center cursor-pointer">
+                        <input type="radio" name="answer" value="${index}" class="mr-3">
+                        <span>${option}</span>
+                    </label>
+                `;
+                
+                optionDiv.addEventListener('click', function() {
+                    const radio = this.querySelector('input[type="radio"]');
+                    radio.checked = true;
+                    
+                    document.querySelectorAll('.quiz-option').forEach(opt => {
+                        opt.classList.remove('border-blue-500', 'bg-blue-50');
+                    });
+                    
+                    this.classList.add('border-blue-500', 'bg-blue-50');
+                });
+                
+                optionsContainer.appendChild(optionDiv);
+            });
+            
+            // Handle code questions
+            const codeQuestion = document.getElementById('code-question');
+            const codeDisplay = document.getElementById('code-display');
+            
+            if (question.hasCode) {
+                codeQuestion.classList.remove('hidden');
+                codeDisplay.textContent = question.code;
+            } else {
+                codeQuestion.classList.add('hidden');
+            }
+            
+            const quizProgress = ((currentQuestionIndex + 1) / quizData.length) * 100;
+            document.getElementById('quiz-progress').style.width = quizProgress + '%';
+            
+            document.getElementById('prev-btn').disabled = currentQuestionIndex === 0;
+            document.getElementById('next-btn').textContent = currentQuestionIndex === quizData.length - 1 ? 'Selesai' : 'Selanjutnya';
+            
+            if (userAnswers[currentQuestionIndex] !== undefined) {
+                const savedAnswer = userAnswers[currentQuestionIndex];
+                const radio = document.querySelector(`input[value="${savedAnswer}"]`);
+                if (radio) {
+                    radio.checked = true;
+                    radio.closest('.quiz-option').classList.add('border-blue-500', 'bg-blue-50');
+                }
+            }
+        }
+
+        function nextQuestion() {
+            const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+            
+            if (selectedAnswer) {
+                userAnswers[currentQuestionIndex] = parseInt(selectedAnswer.value);
+                
+                if (currentQuestionIndex < quizData.length - 1) {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                } else {
+                    finishQuiz();
+                }
+            } else {
+                alert('Silakan pilih jawaban terlebih dahulu!');
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion();
+            }
+        }
+
+        function finishQuiz() {
+            score = 0;
+            const categoryScores = {
+                variables: { correct: 0, total: 0 },
+                datatypes: { correct: 0, total: 0 },
+                functions: { correct: 0, total: 0 },
+                conditionals: { correct: 0, total: 0 },
+                loops: { correct: 0, total: 0 }
+            };
+            
+            for (let i = 0; i < quizData.length; i++) {
+                const question = quizData[i];
+                categoryScores[question.category].total++;
+                
+                if (userAnswers[i] === question.correct) {
+                    score++;
+                    categoryScores[question.category].correct++;
+                }
+            }
+            
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('quiz-result').classList.remove('hidden');
+            document.getElementById('final-score').textContent = `${score}/${quizData.length}`;
+            document.getElementById('score').textContent = score;
+            
+            // Update category scores
+            document.getElementById('variables-score').textContent = `${categoryScores.variables.correct}/${categoryScores.variables.total}`;
+            document.getElementById('datatypes-score').textContent = `${categoryScores.datatypes.correct}/${categoryScores.datatypes.total}`;
+            document.getElementById('functions-score').textContent = `${categoryScores.functions.correct}/${categoryScores.functions.total}`;
+            document.getElementById('conditionals-score').textContent = `${categoryScores.conditionals.correct}/${categoryScores.conditionals.total}`;
+            document.getElementById('loops-score').textContent = `${categoryScores.loops.correct}/${categoryScores.loops.total}`;
+            
+            const percentage = (score / quizData.length) * 100;
+            let message = '';
+            if (percentage >= 90) {
+                message = 'Luar biasa! Anda menguasai Python dengan sangat baik! 🌟';
+            } else if (percentage >= 80) {
+                message = 'Bagus sekali! Pemahaman Python Anda sangat baik! 👏';
+            } else if (percentage >= 70) {
+                message = 'Baik! Anda memahami konsep-konsep dasar Python! 👍';
+            } else if (percentage >= 60) {
+                message = 'Cukup baik, terus berlatih untuk meningkatkan kemampuan! 📚';
+            } else {
+                message = 'Perlu belajar lebih giat lagi. Semangat! 💪';
+            }
+            
+            document.getElementById('score-message').textContent = message;
+            
+            // Generate recommendations
+            const recommendations = document.getElementById('recommendations');
+            let recText = '';
+            
+            Object.keys(categoryScores).forEach(category => {
+                const score = categoryScores[category];
+                const percentage = (score.correct / score.total) * 100;
+                
+                if (percentage < 70) {
+                    const categoryNames = {
+                        variables: 'Variabel',
+                        datatypes: 'Tipe Data', 
+                        functions: 'Function',
+                        conditionals: 'Percabangan (IF Statement)',
+                        loops: 'Perulangan'
+                    };
+                    recText += `• Pelajari lebih lanjut tentang ${categoryNames[category]}<br>`;
+                }
+            });
+            
+            if (recText === '') {
+                recText = '• Excellent! Lanjutkan ke topik Python yang lebih advanced<br>• Coba buat project Python sederhana<br>• Pelajari library Python populer';
+            }
+            
+            recommendations.innerHTML = recText;
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            userAnswers = [];
+            
+            document.getElementById('quiz-container').classList.remove('hidden');
+            document.getElementById('quiz-result').classList.add('hidden');
+            
+            loadQuestion();
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+            loadQuestion();
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'977b7b8527926017',t:'MTc1NjYzMjM0Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

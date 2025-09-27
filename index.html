@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Informatika Kelas 12 - Fase F</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        box-sizing: border-box;
+      }
+
+      .gradient-bg {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+
+      .card-hover:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .animate-float {
+        animation: float 6s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      .tech-icon {
+        background: linear-gradient(45deg, #4f46e5, #7c3aed);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="gradient-bg text-white py-16 px-4">
+      <div class="max-w-6xl mx-auto text-center">
+        <div class="animate-float mb-8">
+          <div class="text-6xl mb-4">💻</div>
+        </div>
+        <h1 class="text-4xl md:text-6xl font-bold mb-4">Informatika Kelas 12</h1>
+        <p class="text-xl md:text-2xl mb-2 opacity-90">Fase F - Tingkat SMA</p>
+        <p class="text-lg opacity-80 max-w-2xl mx-auto">Jelajahi dunia teknologi informasi dan komunikasi melalui empat materi utama yang akan membekali kalian dengan pemahaman mendalam tentang komputasi modern</p>
+      </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="flex justify-center space-x-8 py-4">
+          <class="text-gray-700 hover:text-indigo-600 font-medium transition-colors">Berpikir Komputasional   |
+          <class="text-gray-700 hover:text-indigo-600 font-medium transition-colors">Algoritma Pemrograman    |
+          <class="text-gray-700 hover:text-indigo-600 font-medium transition-colors">Sistem Komputer   |
+          <class="text-gray-700 hover:text-indigo-600 font-medium transition-colors">Jaringan & Internet</>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-12">
+      <!-- Materi dalam Format Tabel 2x2 -->
+      <section class="mb-20">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-bold text-gray-800 mb-4">Materi Pembelajaran</h2>
+          <p class="text-xl text-gray-600">Empat pilar utama Informatika Kelas 12</p>
+        </div>
+
+        <!-- Tabel 2x2 Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Berpikir Komputasional -->
+          <div id="berpikir-komputasional" class="bg-white rounded-2xl shadow-xl p-8 card-hover border-t-4 border-indigo-500">
+            <div class="text-center mb-6">
+              <div class="text-6xl mb-4"><a href="bk.html">🧠</a></div>
+              <h3 class="text-2xl font-bold text-gray-800 mb-2"><a href="bk.html">Berpikir Komputasional</a></h3>
+              <div class="w-16 h-1 bg-indigo-500 mx-auto rounded"></div>
+            </div>
+
+            <div class="space-y-4">
+              <p class="text-gray-700 leading-relaxed text-center">Cara berpikir sistematis untuk memecahkan masalah kompleks menggunakan konsep ilmu komputer</p>
+
+              <div class="bg-gradient-to-br from-indigo-50 to-blue-50 p-4 rounded-xl">
+                <h4 class="font-semibold text-gray-800 mb-3 text-center">4 Pilar Utama:</h4>
+                <div class="grid grid-cols-2 gap-3 text-sm">
+                  <div class="flex items-center">
+                    <span class="text-blue-500 mr-2">🔍</span>
+                    <span>Dekomposisi</span>
+                  </div>
+                  <div class="flex items-center">
+                    <span class="text-green-500 mr-2">🔄</span>
+                    <span>Pola</span>
+                  </div>
+                  <div class="flex items-center">
+                    <span class="text-yellow-500 mr-2">✨</span>
+                    <span>Abstraksi</span>
+                  </div>
+                  <div class="flex items-center">
+                    <span class="text-purple-500 mr-2">⚡</span>
+                    <span>Algoritma</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="text-center">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800"> 💡 Problem Solving </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Algoritma Pemrograman -->
+          <div id="algoritma" class="bg-white rounded-2xl shadow-xl p-8 card-hover border-t-4 border-green-500">
+            <div class="text-center mb-6">
+              <div class="text-6xl mb-4"><a href="ap_12.html">⚡</a></div>
+              <h3 class="text-2xl font-bold text-gray-800 mb-2"><a href="ap_12.html">Algoritma Pemrograman</a></h3>
+              <div class="w-16 h-1 bg-green-500 mx-auto rounded"></div>
+            </div>
+
+            <div class="space-y-4">
+              <p class="text-gray-700 leading-relaxed text-center">Serangkaian langkah logis dan sistematis untuk menyelesaikan masalah dalam pemrograman</p>
+
+              <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-4 rounded-xl">
+                <h4 class="font-semibold text-gray-800 mb-3 text-center">Yang Dipelajari:</h4>
+                <div class="space-y-2 text-sm">
+                  <div class="flex items-center">
+                    <span class="text-green-500 mr-2">📝</span>
+                    <span>Pseudocode & Flowchart</span>
+                  </div>
+                  <div class="flex items-center">
+                    <span class="text-green-500 mr-2">🔄</span>
+                    <span>Struktur Kontrol</span>
+                  </div>
+                  <div class="flex items-center">
+                    <span class="text-green-500 mr-2">📊</span>
+                    <span>Array & Fungsi</span>
+                  </div>
+                  <div class="flex items-center">
+                    <span class="text-green-500 mr-2">🎯</span>
+                    <span>Pencarian & Pengurutan</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="text-center">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800"> 🚀 Step by Step </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sistem Komputer -->
+          <div id="sistem-komputer" class="bg-white rounded-2xl shadow-xl p-8 card-hover border-t-4 border-orange-500">
+            <div class="text-center mb-6">
+              <div class="text-6xl mb-4"><a href="sk.html">🖥️</a></div>
+              <h3 class="text-2xl font-bold text-gray-800 mb-2"><a href="sk.html">Sistem Komputer</a></h3>
+              <div class="w-16 h-1 bg-orange-500 mx-auto rounded"></div>
+            </div>
+
+            <div class="space-y-4">
+              <p class="text-gray-700 leading-relaxed text-center">Kombinasi hardware dan software yang bekerja sama memproses data dan informasi</p>
+
+              <div class="bg-gradient-to-br from-orange-50 to-red-50 p-4 rounded-xl">
+                <h4 class="font-semibold text-gray-800 mb-3 text-center">Komponen Utama:</h4>
+                <div class="grid grid-cols-2 gap-3 text-sm">
+                  <div class="flex items-center">
+                    <span class="text-orange-500 mr-2">🧠</span>
+                    <span>CPU</span>
+                  </div>
+                  <div class="flex items-center">
+                    <span class="text-orange-500 mr-2">💭</span>
+                    <span>RAM</span>
+                  </div>
+                  <div class="flex items-center">
+                    <span class="text-orange-500 mr-2">💿</span>
+                    <span>Storage</span>
+                  </div>
+                  <div class="flex items-center">
+                    <span class="text-orange-500 mr-2">🔌</span>
+                    <span>I/O Device</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="text-center">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-800"> ⚙️ Hardware & Software </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Jaringan Komputer dan Internet -->
+          <div id="jaringan" class="bg-white rounded-2xl shadow-xl p-8 card-hover border-t-4 border-blue-500">
+            <div class="text-center mb-6">
+              <div class="text-6xl mb-4"><a href="jki.html">🌐</a></div>
+              <h3 class="text-2xl font-bold text-gray-800 mb-2"><a href="jki.html">Jaringan & Internet</a></h3>
+              <div class="w-16 h-1 bg-blue-500 mx-auto rounded"></div>
+            </div>
+
+            <div class="space-y-4">
+              <p class="text-gray-700 leading-relaxed text-center">Sistem yang menghubungkan perangkat untuk berkomunikasi dan berbagi informasi secara global</p>
+
+              <div class="bg-gradient-to-br from-blue-50 to-cyan-50 p-4 rounded-xl">
+                <h4 class="font-semibold text-gray-800 mb-3 text-center">Topik Utama:</h4>
+                <div class="space-y-2 text-sm">
+                  <div class="flex items-center">
+                    <span class="text-blue-500 mr-2">🔗</span>
+                    <span>Protokol Komunikasi</span>
+                  </div>
+                  <div class="flex items-center">
+                    <span class="text-blue-500 mr-2">📡</span>
+                    <span>LAN, WAN, Internet</span>
+                  </div>
+                  <div class="flex items-center">
+                    <span class="text-blue-500 mr-2">🛡️</span>
+                    <span>Keamanan Jaringan</span>
+                  </div>
+                  <div class="flex items-center">
+                    <span class="text-blue-500 mr-2">☁️</span>
+                    <span>Cloud Computing</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="text-center">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800"> 🌍 Global Connection </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Detail Penjelasan -->
+      <section class="mb-20">
+        <div class="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-2xl p-8 text-white">
+          <h2 class="text-3xl font-bold text-center mb-8">Penjelasan Detail Materi</h2>
+
+          <div class="grid md:grid-cols-2 gap-8">
+            <!-- Kolom Kiri -->
+            <div class="space-y-6">
+              <div class="bg-white bg-opacity-10 p-6 rounded-xl">
+                <div class="flex items-center mb-4">
+                  <span class="text-3xl mr-3">🧠</span>
+                  <h3 class="text-xl font-bold">Berpikir Komputasional</h3>
+                </div>
+                <p class="text-sm opacity-90 leading-relaxed">
+                  Mengajarkan siswa cara memecah masalah kompleks menjadi bagian-bagian kecil yang dapat diselesaikan. Siswa akan belajar mengidentifikasi pola, membuat abstraksi, dan merancang algoritma untuk berbagai situasi dalam
+                  kehidupan sehari-hari.
+                </p>
+              </div>
+
+              <div class="bg-white bg-opacity-10 p-6 rounded-xl">
+                <div class="flex items-center mb-4">
+                  <span class="text-3xl mr-3">🖥️</span>
+                  <h3 class="text-xl font-bold">Sistem Komputer</h3>
+                </div>
+                <p class="text-sm opacity-90 leading-relaxed">
+                  Memahami arsitektur komputer dari level hardware hingga software. Siswa akan mempelajari cara kerja processor, memori, sistem operasi, dan bagaimana semua komponen bekerja sama untuk menjalankan program.
+                </p>
+              </div>
+            </div>
+
+            <!-- Kolom Kanan -->
+            <div class="space-y-6">
+              <div class="bg-white bg-opacity-10 p-6 rounded-xl">
+                <div class="flex items-center mb-4">
+                  <span class="text-3xl mr-3">⚡</span>
+                  <h3 class="text-xl font-bold">Algoritma Pemrograman</h3>
+                </div>
+                <p class="text-sm opacity-90 leading-relaxed">
+                  Mempelajari cara merancang dan mengimplementasikan solusi dalam bentuk kode program. Siswa akan menguasai struktur data, kontrol alur program, dan teknik pemrograman untuk menyelesaikan berbagai permasalahan komputasi.
+                </p>
+              </div>
+
+              <div class="bg-white bg-opacity-10 p-6 rounded-xl">
+                <div class="flex items-center mb-4">
+                  <span class="text-3xl mr-3">🌐</span>
+                  <h3 class="text-xl font-bold">Jaringan & Internet</h3>
+                </div>
+                <p class="text-sm opacity-90 leading-relaxed">
+                  Memahami bagaimana perangkat terhubung dan berkomunikasi dalam jaringan lokal maupun global. Siswa akan belajar tentang protokol internet, keamanan siber, dan teknologi cloud yang mendukung era digital saat ini.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Call to Action -->
+      <section class="text-center py-16">
+        <div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-12 text-white">
+          <h2 class="text-3xl font-bold mb-4">Siap Memulai Perjalanan Informatika?</h2>
+          <p class="text-xl mb-8 opacity-90">Keempat materi ini akan membuka wawasan kalian tentang dunia teknologi dan mempersiapkan kalian untuk masa depan digital</p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <div class="bg-white bg-opacity-20 px-6 py-3 rounded-full">
+              <span class="font-semibold">💡 Berpikir Logis</span>
+            </div>
+            <div class="bg-white bg-opacity-20 px-6 py-3 rounded-full">
+              <span class="font-semibold">🚀 Problem Solving</span>
+            </div>
+            <div class="bg-white bg-opacity-20 px-6 py-3 rounded-full">
+              <span class="font-semibold">🌟 Kreativitas Digital</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+      <div class="max-w-6xl mx-auto px-4 text-center">
+        <p class="text-lg mb-2">Informatika Kelas 12 - Fase F</p>
+        <p class="text-gray-400">@pak_zunny</p>
+      </div>
+    </footer>
+
+    <script>
+      // Smooth scrolling untuk navigasi
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Animasi saat scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      // Observe semua section
+      document.querySelectorAll("section").forEach((section) => {
+        section.style.opacity = "0";
+        section.style.transform = "translateY(30px)";
+        section.style.transition = "all 0.6s ease";
+        observer.observe(section);
+      });
+    </script>
+    <script>
+      (function () {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement("script");
+            d.innerHTML =
+              "window.__CF$cv$params={r:'985ab19a36658b16',t:'MTc1ODk3Mjg4Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName("head")[0].appendChild(d);
+          }
+        }
+        if (document.body) {
+          var a = document.createElement("iframe");
+          a.height = 1;
+          a.width = 1;
+          a.style.position = "absolute";
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = "none";
+          a.style.visibility = "hidden";
+          document.body.appendChild(a);
+          if ("loading" !== document.readyState) c();
+          else if (window.addEventListener) document.addEventListener("DOMContentLoaded", c);
+          else {
+            var e = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (b) {
+              e(b);
+              "loading" !== document.readyState && ((document.onreadystatechange = e), c());
+            };
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
